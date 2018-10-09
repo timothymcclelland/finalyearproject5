@@ -9,14 +9,13 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Register">
+        <activity android:name=".log_in">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
         <activity android:name=".Anonymous" />
         <activity android:name=".content" />
         <activity android:name=".comment"></activity>
