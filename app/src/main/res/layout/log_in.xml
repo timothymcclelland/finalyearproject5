@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:layout_width="213dp"
@@ -42,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:hint="email"
+            android:hint="@string/hint_email"
             android:inputType="textEmailAddress"
             android:paddingBottom="15dp"
             android:textColorHint="@color/colorAccent" />
@@ -52,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:hint="password"
+            android:hint="@string/hint_password"
             android:inputType="textPassword"
             android:paddingBottom="15dp"
             android:textColorHint="@color/colorAccent" />
@@ -64,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="7dp"
-            android:text="Login"
+            android:text="@string/button_login"
             android:textSize="10pt"
             android:textAllCaps="false"
             android:textColor="@color/buttonTextColor" />
@@ -76,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="7dp"
-            android:text="Login with user ID"
+            android:text="@string/button_anonymous"
             android:textSize="10pt"
             android:textAllCaps="false"
             android:textColor="@color/buttonTextColor" />
@@ -86,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Don't have account? Sign Up"
+            android:text="@string/sign_up_text"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorAccent" />

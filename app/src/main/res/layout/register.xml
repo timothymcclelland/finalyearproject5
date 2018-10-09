@@ -7,6 +7,90 @@
     android:orientation="vertical"
     tools:context=".Register">
 
-    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:layout_width="213dp"
+            android:layout_height="230dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/app_icon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="full name"
+                android:inputType="textPersonName"
+                android:paddingBottom="15dp"
+                android:textColorHint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="@string/hint_email"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="15dp"
+                android:textColorHint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword"
+                android:paddingBottom="15dp"
+                android:textColorHint="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/buttonRegister"
+                android:background="@color/colorButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:text="@string/button_register"
+                android:textSize="10pt"
+                android:textAllCaps="false"
+                android:textColor="@color/buttonTextColor" />
+
+            <TextView
+                android:id="@+id/textViewSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="@string/log_in_text"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

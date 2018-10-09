@@ -8,6 +8,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0'
+        //code from firebase.com to initialise google services plugin
         classpath 'com.google.gms:google-services:4.1.0'
         
 
@@ -19,6 +20,7 @@ buildscript {
 allprojects {
     repositories {
         google()
+        //firebase.com intialisation of Google's Maven repository
         jcenter()
     }
 }
