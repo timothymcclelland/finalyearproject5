@@ -38,16 +38,6 @@
             android:paddingRight="15dp">
 
             <EditText
-                android:id="@+id/editTextName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="full name"
-                android:inputType="textPersonName"
-                android:paddingBottom="15dp"
-                android:textColorHint="@color/colorAccent" />
-
-            <EditText
                 android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,6 +67,7 @@
                 android:text="@string/button_register"
                 android:textSize="10pt"
                 android:textAllCaps="false"
+                android:onClick="registerUser"
                 android:textColor="@color/buttonTextColor" />
 
             <TextView
