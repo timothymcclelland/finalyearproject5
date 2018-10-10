@@ -21,7 +21,9 @@
         <activity android:name=".anonymous" />
         <activity android:name=".content" />
         <activity android:name=".comment" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Register"/>
+
     </application>
 
 </manifest>

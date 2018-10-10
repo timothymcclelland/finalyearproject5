@@ -92,7 +92,8 @@
             android:text="@string/sign_up_text"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:clickable="true" />
 
     </LinearLayout>
 
