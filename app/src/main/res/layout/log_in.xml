@@ -80,7 +80,8 @@
             android:text="@string/button_anonymous"
             android:textSize="10pt"
             android:textAllCaps="false"
-            android:textColor="@color/buttonTextColor" />
+            android:textColor="@color/buttonTextColor"
+            android:onClick="anonymousLogIn"/>
 
         <TextView
             android:id="@+id/textViewSignup"

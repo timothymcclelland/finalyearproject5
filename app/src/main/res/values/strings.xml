@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Walk with God</string>
-    <string name="button_anonymous">Login with user ID</string>
+    <string name="button_anonymous">Login anonymously</string>
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
     <string name="hint_email">email</string>
