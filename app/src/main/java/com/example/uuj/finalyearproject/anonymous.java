@@ -1,5 +1,6 @@
 package com.example.uuj.finalyearproject;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +52,8 @@ public class anonymous extends AppCompatActivity{
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful())
                     Log.w("Auth:",task.getException());
+                Intent intent = new Intent(anonymous.this, content.class);
+                startActivity(intent);
             }
         });
     }

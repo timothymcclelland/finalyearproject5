@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,13 +19,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class log_in extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView registerButton;
+    private TextView registerText;
+
+    private FirebaseAuth auth;
+    FirebaseAuth.AuthStateListener authListener;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
-        registerButton = findViewById(R.id.textViewSignup);
-        registerButton.setOnClickListener(this);
     }
 
     public void onClick(View arg0) {
