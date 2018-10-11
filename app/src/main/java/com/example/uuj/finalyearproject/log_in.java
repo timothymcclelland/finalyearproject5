@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class log_in extends AppCompatActivity implements View.OnClickListener {
 
+    anonymous anonymousLogin = new anonymous();
+
     private TextView registerText;
 
     private FirebaseAuth auth;
@@ -27,6 +29,8 @@ public class log_in extends AppCompatActivity implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
+
+        System.out.print(anonymousLogin);
     }
 
     public void onClick(View arg0) {
