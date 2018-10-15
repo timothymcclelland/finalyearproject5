@@ -7,4 +7,7 @@
     <string name="hint_password">password</string>
     <string name="sign_up_text">Don\'t have an account? Register</string>
     <string name="log_in_text">Already have an account? Login</string>
+    <string name="forgotpassword_text">Forgot Password? Reset</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset_password_text">Please enter the email address linked with your account to receive password reset link.</string>
 </resources>

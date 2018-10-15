@@ -14,8 +14,8 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:layout_width="213dp"
-            android:layout_height="230dp"
+            android:layout_width="181dp"
+            android:layout_height="184dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
@@ -70,6 +70,17 @@
             android:textAllCaps="false"
             android:onClick="userLogin"
             android:textColor="@color/buttonTextColor" />
+
+        <TextView
+            android:id="@+id/forgotpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="@string/forgotpassword_text"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorAccent"
+            android:clickable="true" />
 
         <Button
             android:id="@+id/buttonAnonymous"
