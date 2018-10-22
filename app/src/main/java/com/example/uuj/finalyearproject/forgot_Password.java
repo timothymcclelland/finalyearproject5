@@ -3,7 +3,7 @@ package com.example.uuj.finalyearproject;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class forgotpassword extends AppCompatActivity {
+public class forgot_Password extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
