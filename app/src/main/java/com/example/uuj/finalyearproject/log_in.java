@@ -78,6 +78,7 @@ public class log_in extends AppCompatActivity{
          });
     }
 
+    //code taken from https://medium.com/@peterekeneeze/add-firebase-authentication-to-your-app-in-7minutes-c13df58994bd
     public void LoginUser(){
         String Email = emailText.getText().toString().trim();
         String Password = passwordText.getText().toString().trim();
@@ -98,6 +99,7 @@ public class log_in extends AppCompatActivity{
                 });
     }
 
+    //code taken from https://firebase.google.com/docs/auth/android/anonymous-auth?utm_source=studio
     private void signInAnonymously() {
         // [START signin_anonymously]
         mAuth.signInAnonymously()
