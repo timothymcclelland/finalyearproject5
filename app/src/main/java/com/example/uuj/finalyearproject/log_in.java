@@ -72,7 +72,7 @@ public class log_in extends AppCompatActivity {
         forgotPasswordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(log_in.this, forgot_password.class);
+                Intent myIntent = new Intent(log_in.this, reset_password.class);
                 startActivity(myIntent);
             }
         });
