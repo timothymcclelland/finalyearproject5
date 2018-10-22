@@ -22,7 +22,7 @@
         <activity android:name=".content" />
         <activity android:name=".comment" />
         <activity android:name=".Register" />
-        <activity android:name=".forgot_Password"></activity>
+        <activity android:name=".forgot_password"/>
     </application>
 
 </manifest>

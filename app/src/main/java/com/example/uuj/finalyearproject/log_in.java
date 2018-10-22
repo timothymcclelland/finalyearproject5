@@ -17,7 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class log_in extends AppCompatActivity{
+public class log_in extends AppCompatActivity {
 
     private static final String TAG = "AnonymousAuth";
 
@@ -41,7 +41,7 @@ public class log_in extends AppCompatActivity{
         emailText = findViewById(R.id.editTextEmail);
         passwordText = findViewById(R.id.editTextPassword);
         registerText = findViewById(R.id.textViewSignup);
-        forgotPasswordText = findViewById(R.id.forgotpassword);
+        forgotPasswordText = findViewById(R.id.forgot_password);
 
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,15 +51,7 @@ public class log_in extends AppCompatActivity{
             }
         });
 
-        forgotPasswordText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(log_in.this, forgot_Password.class);
-                startActivity(myIntent);
-            }
-        });
-
-         loginButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (v == loginButton){
@@ -76,6 +68,14 @@ public class log_in extends AppCompatActivity{
                  }
              }
          });
+
+        forgotPasswordText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(log_in.this, forgot_password.class);
+                startActivity(myIntent);
+            }
+        });
     }
 
     //code taken from https://medium.com/@peterekeneeze/add-firebase-authentication-to-your-app-in-7minutes-c13df58994bd
@@ -90,9 +90,9 @@ public class log_in extends AppCompatActivity{
                             currentUser = mAuth.getCurrentUser();
                             finish();
                             startActivity(new Intent(getApplicationContext(),
-                                    Register.class));
+                                    content.class));
                         }else {
-                            Toast.makeText(log_in.this, "couldn't login",
+                            Toast.makeText(log_in.this, "Unable to login. Please try again or reset password",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -111,7 +111,7 @@ public class log_in extends AppCompatActivity{
                             Log.d(TAG, "signInAnonymously:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             startActivity(new Intent(getApplicationContext(),
-                                    Register.class));
+                                    content.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInAnonymously:failure", task.getException());

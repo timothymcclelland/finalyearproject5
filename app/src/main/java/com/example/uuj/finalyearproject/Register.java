@@ -62,11 +62,11 @@ public class Register extends AppCompatActivity {
         String Email = email.getText().toString().trim();
         String Password = password.getText().toString().trim();
         if (TextUtils.isEmpty(Email)){
-            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Email Required", Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(Password)){
-            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Password Required", Toast.LENGTH_SHORT).show();
             return;
         }
         mAuth.createUserWithEmailAndPassword(Email, Password)
@@ -78,12 +78,12 @@ public class Register extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 //User is successfully registered and logged in
                                 //start Profile Activity here
-                                Toast.makeText(Register.this, "registration successful",
+                                Toast.makeText(Register.this, "Registration successful",
                                         Toast.LENGTH_SHORT).show();
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), log_in.class));
+                                startActivity(new Intent(getApplicationContext(), content.class));
                             }else{
-                                Toast.makeText(Register.this, "Couldn't register, try again",
+                                Toast.makeText(Register.this, "Unable to register, please try again",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }catch (Exception e){

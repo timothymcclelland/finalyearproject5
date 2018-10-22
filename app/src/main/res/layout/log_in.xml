@@ -68,18 +68,19 @@
             android:text="@string/button_login"
             android:textSize="10pt"
             android:textAllCaps="false"
-            android:onClick="userLogin"
-            android:textColor="@color/buttonTextColor" />
+            android:textColor="@color/buttonTextColor"
+            android:onClick="onClick"/>
 
         <TextView
-            android:id="@+id/forgotpassword"
+            android:id="@+id/forgot_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="@string/forgotpassword_text"
+            android:text="@string/forgot_password_text"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorAccent"
+            android:onClick="onClick"
             android:clickable="true" />
 
         <Button
@@ -92,8 +93,8 @@
             android:text="@string/button_anonymous"
             android:textSize="10pt"
             android:textAllCaps="false"
-            android:textColor="@color/buttonTextColor"
-            android:onClick="anonymousLogin"/>
+            android:onClick="onClick"
+            android:textColor="@color/buttonTextColor" />
 
         <TextView
             android:id="@+id/textViewSignup"
@@ -104,6 +105,7 @@
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorAccent"
+            android:onClick="onClick"
             android:clickable="true" />
 
     </LinearLayout>
