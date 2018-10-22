@@ -19,16 +19,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class log_in extends AppCompatActivity{
 
-    anonymous anonymousLogin = new anonymous();
-
     private TextView registerText;
     private TextView forgotPasswordText;
     private EditText emailText;
     private EditText passwordText;
     private Button loginButton;
     private Button anonymousButton;
-
+    private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
+    private static final String TAG = "AnonymousAuth";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +41,7 @@ public class log_in extends AppCompatActivity{
         passwordText = findViewById(R.id.editTextPassword);
         registerText = findViewById(R.id.textViewSignup);
         forgotPasswordText = findViewById(R.id.forgotpassword);
+        currentUser = mAuth.getCurrentUser();
 
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,48 +58,64 @@ public class log_in extends AppCompatActivity{
                 startActivity(myIntent);
             }
         });
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v == loginButton){
+                    LoginUser();
+                }
+            }
+        });
+
+        anonymousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v == anonymousButton){
+                    anonymousLogin();
+                }
+            }
+        });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-
-    public void RegisterUser(){
-        String Email = email.getText().toString().trim();
-        String Password = password.getText().toString().trim();
-        if (TextUtils.isEmpty(Email)){
-            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
-            return;
+        public void LoginUser(){
+            String Email = emailText.getText().toString().trim();
+            String Password = passwordText.getText().toString().trim();
+            mAuth.signInWithEmailAndPassword(Email, Password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                currentUser = mAuth.getCurrentUser();
+                                finish();
+                                startActivity(new Intent(getApplicationContext(),
+                                        content.class));
+                            }else {
+                                Toast.makeText(log_in.this, "Incorrect login details. Please try again",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
         }
-        if (TextUtils.isEmpty(Password)){
-            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        mAuth.createUserWithEmailAndPassword(Email, Password)
+
+    private void anonymousLogin() {
+        // [START signin_anonymously]
+        mAuth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        try {
-                            //check if successful
-                            if (task.isSuccessful()) {
-                                //User is successfully registered and logged in
-                                //start Profile Activity here
-                                Toast.makeText(MainActivity.this, "registration successful",
-                                        Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                            }else{
-                                Toast.makeText(MainActivity.this, "Couldn't register, try again",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }catch (Exception e){
-                            e.printStackTrace();
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInAnonymously:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                            Toast.makeText(log_in.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+        // [END signin_anonymously]
     }
 }
