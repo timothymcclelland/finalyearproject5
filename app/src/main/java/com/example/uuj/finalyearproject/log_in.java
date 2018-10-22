@@ -23,16 +23,23 @@ public class log_in extends AppCompatActivity{
 
     private TextView registerText;
     private TextView forgotPasswordText;
+    private EditText emailText;
+    private EditText passwordText;
+    private Button loginButton;
+    private Button anonymousButton;
 
-    private FirebaseAuth auth;
-    FirebaseAuth.AuthStateListener authListener;
+    private FirebaseAuth mAuth;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
 
-        System.out.print(anonymousLogin);
+        mAuth = FirebaseAuth.getInstance();
 
+        loginButton = findViewById(R.id.buttonLogin);
+        anonymousButton = findViewById(R.id.buttonAnonymous);
+        emailText = findViewById(R.id.editTextEmail);
+        passwordText = findViewById(R.id.editTextPassword);
         registerText = findViewById(R.id.textViewSignup);
         forgotPasswordText = findViewById(R.id.forgotpassword);
 
@@ -51,5 +58,48 @@ public class log_in extends AppCompatActivity{
                 startActivity(myIntent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+
+    public void RegisterUser(){
+        String Email = email.getText().toString().trim();
+        String Password = password.getText().toString().trim();
+        if (TextUtils.isEmpty(Email)){
+            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(Password)){
+            Toast.makeText(this, "A Field is Empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mAuth.createUserWithEmailAndPassword(Email, Password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        try {
+                            //check if successful
+                            if (task.isSuccessful()) {
+                                //User is successfully registered and logged in
+                                //start Profile Activity here
+                                Toast.makeText(MainActivity.this, "registration successful",
+                                        Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            }else{
+                                Toast.makeText(MainActivity.this, "Couldn't register, try again",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 }

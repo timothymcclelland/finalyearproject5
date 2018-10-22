@@ -21,7 +21,6 @@
         <activity android:name=".anonymous" />
         <activity android:name=".content" />
         <activity android:name=".comment" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".forgotpassword"></activity>
     </application>
