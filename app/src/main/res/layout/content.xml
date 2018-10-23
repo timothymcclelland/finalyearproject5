@@ -1,76 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:orientation="vertical" />
-
-            <ListView
-                android:id="@+id/lvJsonItem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <EditText
-                android:id="@+id/editTextEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="@string/hint_email"
-                android:inputType="textEmailAddress"
-                android:paddingBottom="15dp"
-                android:textColorHint="@color/colorAccent" />
-
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="@string/hint_password"
-                android:inputType="textPassword"
-                android:paddingBottom="15dp"
-                android:textColorHint="@color/colorAccent" />
-
-            <Button
-                android:id="@+id/buttonLogin"
-                android:background="@color/colorButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:text="@string/button_login"
-                android:textSize="10pt"
-                android:textAllCaps="false"
-                android:textColor="@color/buttonTextColor" />
-
-            <Button
-                android:id="@+id/buttonAnonymous"
-                android:background="@color/colorButtonTwo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:text="@string/button_anonymous"
-                android:textSize="10pt"
-                android:textAllCaps="false"
-                android:textColor="@color/buttonTextColor" />
-
-            <TextView
-                android:id="@+id/textViewSignup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="@string/sign_up_text"
-                android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorAccent"
-                android:clickable="true" />
-
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_gravity="start"
+        design:menu="@menu/bottom_nav_items"
+        design:itemBackground/>
 </LinearLayout>
