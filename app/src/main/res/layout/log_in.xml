@@ -71,7 +71,7 @@
             android:textColor="@color/buttonTextColor" />
 
         <TextView
-            android:id="@+id/forgot_password"
+            android:id="@+id/forgotPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"

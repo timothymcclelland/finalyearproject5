@@ -67,7 +67,6 @@
                 android:text="@string/button_register"
                 android:textSize="10pt"
                 android:textAllCaps="false"
-                android:onClick="registerUser"
                 android:textColor="@color/buttonTextColor" />
 
             <TextView

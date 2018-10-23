@@ -41,7 +41,7 @@ public class log_in extends AppCompatActivity {
         emailText = findViewById(R.id.editTextEmail);
         passwordText = findViewById(R.id.editTextPassword);
         registerText = findViewById(R.id.textViewSignup);
-        forgotPasswordText = findViewById(R.id.forgot_password);
+        forgotPasswordText = findViewById(R.id.forgotPassword);
 
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +72,8 @@ public class log_in extends AppCompatActivity {
         forgotPasswordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(log_in.this, reset_password.class);
-                startActivity(myIntent);
+                Intent myIntent2 = new Intent(log_in.this, reset.class);
+                startActivity(myIntent2);
             }
         });
     }
