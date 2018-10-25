@@ -8,8 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 public class content extends AppCompatActivity {
+
     private Toolbar toolbar;
-    private BottomNavigationView bottomNav;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,18 @@ public class content extends AppCompatActivity {
         toolbar.findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        bottomNav.findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        switch(menuItem.getItemId()){
+                            case R.id.Post_button:
+                        }
+                        return true;
+                    }
+                });
     }
 }
