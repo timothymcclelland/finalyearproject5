@@ -7,14 +7,12 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorButtonTwo">
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tabs"
-                android:background="@color/colorButtonTwo">
+                android:id="@+id/tabs">
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>

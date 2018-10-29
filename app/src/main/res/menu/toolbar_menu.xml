@@ -5,11 +5,13 @@
     <item
         android:id="@+id/action_sort"
         android:title="Sort"
+        android:icon="@mipmap/ic_sort"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_filter"
         app:showAsAction="always"
+        android:icon="@mipmap/ic_filter"
         android:title="Filter"/>
 
     <item
@@ -21,5 +23,6 @@
     <item
         android:id="@+id/action_sign_out"
         app:showAsAction="always"
+        android:icon="@drawable/icons8-exit-50"
         android:title="Sign Out"/>
 </menu>
