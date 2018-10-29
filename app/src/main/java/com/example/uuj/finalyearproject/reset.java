@@ -24,13 +24,16 @@ public class reset extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_password);
+        setContentView(R.layout.reset_password);
 
+        //Referencing Java to XML resources
         edtEmail = (EditText) findViewById(R.id.editTextEmailReset);
         btnResetPassword = (Button) findViewById(R.id.buttonReset);
 
         mAuth = FirebaseAuth.getInstance();
 
+        /*When Button to reset password is clicked, it gets text from edtEmil editText field and makes
+        it a string which is then used within the sendPasswordResetEmail method as the email to send the reset password link to*/
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +45,7 @@ public class reset extends AppCompatActivity {
                     return;
                 }
 
+                //method to send reset password link to user
                 mAuth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

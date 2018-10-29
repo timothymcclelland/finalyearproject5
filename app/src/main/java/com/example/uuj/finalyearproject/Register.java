@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Register extends AppCompatActivity {
 
+    //Class member variables
     private TextView loginText;
     private EditText email;
     private EditText password;
@@ -31,12 +32,14 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
+        //Referencing Java to XML resources
         loginText = findViewById(R.id.textViewSignin);
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
         register = findViewById(R.id.buttonRegister);
         mAuth = FirebaseAuth.getInstance();
 
+        //register button runs RegisterUser method
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +49,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        //loginText textview links to log_in activity
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +61,7 @@ public class Register extends AppCompatActivity {
     }
 
     //code taken from https://medium.com/@peterekeneeze/add-firebase-authentication-to-your-app-in-7minutes-c13df58994bd
+    //RegisterUser method creates a user account in Firebase authentication with the email and password they enter
     public void RegisterUser(){
         String Email = email.getText().toString().trim();
         String Password = password.getText().toString().trim();

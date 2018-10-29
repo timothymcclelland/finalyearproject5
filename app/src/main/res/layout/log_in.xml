@@ -7,12 +7,14 @@
     android:orientation="vertical"
     tools:context=".log_in">
 
+    <!-- Two Relative layouts used within Linear Layout to create professional page structure -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@color/colorPrimary">
 
+        <!-- ImageView used to contain App Icon-->
         <ImageView
             android:layout_width="181dp"
             android:layout_height="184dp"

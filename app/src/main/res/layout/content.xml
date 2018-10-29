@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- coordinator layout used required to use toolbar -->
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,10 +19,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar_layout">
 
+            <!-- including toolbar layout file -->
             <include layout="@layout/toolbar" ></include>
 
         </RelativeLayout>
 
+        <!-- main content of screen and associated methods -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,11 +32,12 @@
             android:layout_alignParentStart="true"
             android:layout_marginTop="0dp">
 
+            <!-- including layout_content file -->
             <include layout="@layout/layout_content"></include>
-
 
         </RelativeLayout>
 
+        <!--floating action button to add post -->
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/float_post"
             android:layout_width="wrap_content"
@@ -42,7 +46,6 @@
             app:backgroundTint="@color/colorButtonTwo"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:src="@mipmap/ic_launcher_round"/>
     </RelativeLayout>
 

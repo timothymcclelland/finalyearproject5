@@ -21,6 +21,7 @@ public class log_in extends AppCompatActivity {
 
     private static final String TAG = "AnonymousAuth";
 
+    //Class member variables
     private TextView registerText;
     private TextView forgotPasswordText;
     private EditText emailText;
@@ -34,8 +35,10 @@ public class log_in extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
 
+        //Firebase authentication instance called to enable login and anonymous sign in methods to connect with authentication system
         mAuth = FirebaseAuth.getInstance();
 
+        //Referencing Java to XML resources
         loginButton = findViewById(R.id.buttonLogin);
         anonymousButton = findViewById(R.id.buttonAnonymous);
         emailText = findViewById(R.id.editTextEmail);
@@ -43,6 +46,7 @@ public class log_in extends AppCompatActivity {
         registerText = findViewById(R.id.textViewSignup);
         forgotPasswordText = findViewById(R.id.forgotPassword);
 
+        //registerText textview links to Register activity
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +55,7 @@ public class log_in extends AppCompatActivity {
             }
         });
 
+        //loginButton runs LoginUser method
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,15 +65,17 @@ public class log_in extends AppCompatActivity {
             }
         });
 
-         anonymousButton.setOnClickListener(new View.OnClickListener() {
+        //anonymousButton runs signInAnonymously method
+        anonymousButton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  if(v == anonymousButton){
                      signInAnonymously();
                  }
              }
-         });
+        });
 
+        //forgotPasswordText textview links to reset activity
         forgotPasswordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +86,7 @@ public class log_in extends AppCompatActivity {
     }
 
     //code taken from https://medium.com/@peterekeneeze/add-firebase-authentication-to-your-app-in-7minutes-c13df58994bd
+    //method used to log in user with email and password
     public void LoginUser(){
         String Email = emailText.getText().toString().trim();
         String Password = passwordText.getText().toString().trim();
@@ -100,6 +108,7 @@ public class log_in extends AppCompatActivity {
     }
 
     //code taken from https://firebase.google.com/docs/auth/android/anonymous-auth?utm_source=studio
+    //method used to sign in user with a randomly generated user ID
     private void signInAnonymously() {
         // [START signin_anonymously]
         mAuth.signInAnonymously()

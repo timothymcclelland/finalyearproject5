@@ -23,10 +23,13 @@ public class content extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        //Referencing Java to XML resources
+        //Reference toolbar as action bar and hiding title in toolbar
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        //Floating action button reference
         FloatingActionButton postButton = (FloatingActionButton)findViewById(R.id.float_post);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,10 +39,12 @@ public class content extends AppCompatActivity {
         });
     }
 
+    //add post to feed
     public void postContent() {
 
     }
 
+    //create menu items
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mMenuInflater = getMenuInflater();
@@ -47,6 +52,7 @@ public class content extends AppCompatActivity {
         return true;
     }
 
+    //Toolbar menu items corresponding method calls
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -64,16 +70,19 @@ public class content extends AppCompatActivity {
         }
     }
 
+    //Sign out method taken directly from FirebaseAuth methods
     public void signOut(){
         mAuth.signOut();
         finish();
         startActivity(new Intent(this, log_in.class));
     }
 
+    //sort content based on date in ascending or descending order
     public void sort(){
 
     }
 
+    //filter content based on category
     public void filter(){
 
     }
