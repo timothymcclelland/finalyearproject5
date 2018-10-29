@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_sort"
-        android:title="Sort"
+        android:title="@string/sort_toolbar"
         android:icon="@mipmap/ic_sort"
         app:showAsAction="always" />
 
@@ -12,7 +12,7 @@
         android:id="@+id/action_filter"
         app:showAsAction="always"
         android:icon="@mipmap/ic_filter"
-        android:title="Filter"/>
+        android:title="@string/filter_toolbar" />
 
     <item
         android:id="@+id/action_icon"
@@ -23,6 +23,6 @@
     <item
         android:id="@+id/action_sign_out"
         app:showAsAction="always"
-        android:icon="@drawable/icons8-exit-50"
-        android:title="Sign Out"/>
+        android:icon="@mipmap/ic_exit"
+        android:title="@string/sign_out_toolbar"/>
 </menu>
