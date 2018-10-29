@@ -10,5 +10,4 @@
     <string name="forgot_password_text">Forgot Password? Reset</string>
     <string name="reset_password">Reset Password</string>
     <string name="reset_password_text">Please enter the email address linked with your account to receive password reset link.</string>
-    <string name="post_button">Post</string>
 </resources>
