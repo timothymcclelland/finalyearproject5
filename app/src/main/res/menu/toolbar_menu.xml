@@ -16,12 +16,6 @@
         android:title="@string/filter_toolbar" />
 
     <item
-        android:id="@+id/action_icon"
-        app:showAsAction="always"
-        android:title="@string/app_name"
-        android:icon="@mipmap/app_icon"/>
-
-    <item
         android:id="@+id/action_sign_out"
         app:showAsAction="always"
         android:icon="@mipmap/ic_exit"
