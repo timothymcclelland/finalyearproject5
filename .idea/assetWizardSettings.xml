@@ -23,7 +23,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="112" />
+                                                <entry key="color" value="fc0d05" />
+                                                <entry key="scalingPercent" value="85" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -34,7 +35,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_exit_to_app_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_flag_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -46,10 +47,10 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="backgroundLayerName" value="exit_background" />
+                                      <entry key="backgroundLayerName" value="flag_background" />
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="foregroundLayerName" value="exit_foreground" />
-                                      <entry key="outputName" value="ic_exit" />
+                                      <entry key="foregroundLayerName" value="flag_foreground" />
+                                      <entry key="outputName" value="ic_flag" />
                                     </map>
                                   </option>
                                 </PersistentState>
