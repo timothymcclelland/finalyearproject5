@@ -61,31 +61,6 @@ public class content extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        FirebaseRecyclerOptions<post> options =
-                new FirebaseRecyclerOptions.Builder<post>()
-                        .setQuery(, post.class)
-                        .build();
-
-        FirebaseRecyclerOptions personsOptions = new FirebaseRecyclerOptions.Builder<News>().setQuery(personsQuery, News.class).build();
-
-        mPeopleRVAdapter = new FirebaseRecyclerAdapter<News, NewsActivity.NewsViewHolder>(personsOptions) {
-            @Override
-            protected void onBindViewHolder(NewsActivity.NewsViewHolder holder, final int position, final News model) {
-                holder.setTitle(model.getTitle());
-                holder.setDesc(model.getDesc());
-                holder.setImage(getBaseContext(), model.getImage());
-
-                holder.mView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        final String url = model.getUrl();
-                        Intent intent = new Intent(getApplicationContext(), NewsWebView.class);
-                        intent.putExtra("id", url);
-                        startActivity(intent);
-                    }
-                });
-            }
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
