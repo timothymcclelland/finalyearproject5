@@ -34,7 +34,7 @@ public class content extends AppCompatActivity {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postContent();
+                startActivity(new Intent(content.this, add_post.class));
             }
         });
     }

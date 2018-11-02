@@ -21,6 +21,7 @@
         <activity android:name=".content" />
         <activity android:name=".Register" />
         <activity android:name=".reset" />
+        <activity android:name=".add_post"></activity>
     </application>
 
 </manifest>

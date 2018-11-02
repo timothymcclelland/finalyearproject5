@@ -16,4 +16,5 @@
     <string name="comment">Comment</string>
     <string name="flag">Report</string>
     <string name="post_hint">Share a thought</string>
+    <string name="post">Post</string>
 </resources>
