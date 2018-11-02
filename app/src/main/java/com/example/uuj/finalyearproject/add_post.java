@@ -1,5 +1,6 @@
 package com.example.uuj.finalyearproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class add_post extends AppCompatActivity {
 
         private EditText addPost;
-        private Button postButton;
+        private Button buttonPost;
 
         private DatabaseReference databaseReference;
 
@@ -22,25 +23,24 @@ public class add_post extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_post);
 
-        addPost.findViewById(R.id.postEditText);
-        postButton.findViewById(R.id.postButton);
+        addPost = (EditText) findViewById(R.id.postEditText);
+        buttonPost = (Button) findViewById(R.id.postButton);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Post");
 
-        postButton.setOnClickListener(new View.OnClickListener() {
+        buttonPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postActivity();
+
+                String post_content = addPost.getText().toString().trim();
+
+                DatabaseReference newPost = databaseReference.push();
+
+                newPost.child("Post").setValue(post_content);
+
+                startActivity(new Intent(add_post.this, content.class));
             }
         });
 
-    }
-
-    private void postActivity() {
-        String post_content = addPost.getText().toString().trim();
-
-        if(TextUtils.isEmpty(post_content)){
-            
-        }
     }
 }
