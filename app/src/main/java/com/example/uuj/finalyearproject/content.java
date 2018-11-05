@@ -22,14 +22,18 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter_LifecycleAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class content extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private RecyclerView viewRecycler;
     private DatabaseReference mDatabase;
+    private String currentUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class content extends AppCompatActivity {
         viewRecycler.setLayoutManager(new LinearLayoutManager(this));
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Post");
+        currentUser = mAuth.getCurrentUser().getUid();
 
         //Referencing Java to XML resources
         //Reference toolbar as action bar and hiding title in toolbar
@@ -59,25 +64,39 @@ public class content extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
+
+        FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>().setQuery(mDatabase.child(currentUser), post.class).build();
+
+        FirebaseRecyclerAdapter<post, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<post, PostViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull post model) {
+                holder.postInfo.setText(model.getPost());
+            }
+
+            @NonNull
+            @Override
+            public PostViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.post_view, viewGroup, false);
+                PostViewHolder holder = new PostViewHolder(view);
+                return holder;
+            }
+        };
+
+        viewRecycler.setAdapter(firebaseRecyclerAdapter);
+
+        firebaseRecyclerAdapter.startListening();
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
-        View view;
+
+        TextView postInfo;
 
         public PostViewHolder(View itemView) {
             super(itemView);
 
-            itemView = view;
-        }
-
-        public void setPost(String post){
-            if(!post.toString().isEmpty() ) {
-
-                TextView post_post = (TextView) view.findViewById(R.id.postText);
-                post_post.setText(post);
-            }
+            postInfo = itemView.findViewById(R.id.postText);
         }
     }
 
