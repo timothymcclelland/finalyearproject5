@@ -2,20 +2,20 @@ package com.example.uuj.finalyearproject;
 
 public class post {
 
-    private String Post;
+    public String post;
 
     public post(){
 
     }
     public post(String post) {
-        Post = post;
+        this.post = post;
     }
 
     public String getPost() {
-        return Post;
+        return post;
     }
 
     public void setPost(String post) {
-        Post = post;
+        this.post = post;
     }
 }
