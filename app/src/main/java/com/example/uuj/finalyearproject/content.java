@@ -83,10 +83,13 @@ public class content extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
+        //RecyclerOptions required to configure the RecyclerAdapter
         FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>().setQuery(mDatabase.child(currentUser), post.class).build();
 
+        //RecyclerAdapter object
         FirebaseRecyclerAdapter<post, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<post, PostViewHolder>(options) {
             @Override
+            //below method used to update the recyclerview holder
             protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull post model) {
                 holder.postInfo.setText(model.getPost());
             }
@@ -105,6 +108,7 @@ public class content extends AppCompatActivity {
         firebaseRecyclerAdapter.startListening();
     }
 
+    //ViewHolder used to display each item in the recyclerView
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
         TextView postInfo;

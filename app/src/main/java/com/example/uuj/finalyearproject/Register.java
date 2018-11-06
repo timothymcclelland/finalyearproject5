@@ -65,10 +65,12 @@ public class Register extends AppCompatActivity {
     public void RegisterUser(){
         String Email = email.getText().toString().trim();
         String Password = password.getText().toString().trim();
+        //Checks if email EditText is empty and displays message
         if (TextUtils.isEmpty(Email)){
             Toast.makeText(this, "Email Required", Toast.LENGTH_SHORT).show();
             return;
         }
+        //Checks if password EditText is empty and displays message
         if (TextUtils.isEmpty(Password)){
             Toast.makeText(this, "Password Required", Toast.LENGTH_SHORT).show();
             return;
@@ -87,6 +89,7 @@ public class Register extends AppCompatActivity {
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), content.class));
                             }else{
+                                //User unsuccessful in registering, message displayed
                                 Toast.makeText(Register.this, "Unable to register, please try again",
                                         Toast.LENGTH_SHORT).show();
                             }

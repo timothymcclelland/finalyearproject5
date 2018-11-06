@@ -30,6 +30,7 @@ public class reset extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.editTextEmailReset);
         btnResetPassword = (Button) findViewById(R.id.buttonReset);
 
+        //reference to Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
 
         /*When Button to reset password is clicked, it gets text from edtEmil editText field and makes
@@ -38,8 +39,10 @@ public class reset extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //converts EditText to string
                 String email = edtEmail.getText().toString().trim();
 
+                //checks if EditText is empty and displays a message if it is to make user aware
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter your email!", Toast.LENGTH_SHORT).show();
                     return;
@@ -50,11 +53,15 @@ public class reset extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+                                //checks if email has been sent to user and displays a message to let the user know
                                 if (task.isSuccessful()) {
                                     Toast.makeText(reset.this, "Check email to reset your password!", Toast.LENGTH_SHORT).show();
                                     finish();
+                                    //once task has completed successfully, user is sent back to log_in activity screen to attempt to login with their new password
                                     startActivity(new Intent(getApplicationContext(), log_in.class));
                                 } else {
+                                    //message displayed if reset email has not sent successfully. This may relate to wrong email being entered or user not being
+                                    // connected to the internet
                                     Toast.makeText(reset.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
                                 }
                             }
