@@ -22,6 +22,15 @@
             android:layout_alignParentRight="true" />
 
         <TextView
+            android:id="@+id/post_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Category"
+            android:layout_margin="5dp"
+            android:textSize="8sp"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
             android:id="@+id/postText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

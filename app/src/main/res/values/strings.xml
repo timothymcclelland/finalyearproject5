@@ -17,4 +17,17 @@
     <string name="flag">Report</string>
     <string name="post_hint">Share a thought</string>
     <string name="post">Post</string>
+    <string name="Category">Category</string>
+    <string-array name="category_array">
+        <item>Work</item>
+        <item>Education</item>
+        <item>Relationships</item>
+        <item>Family Life</item>
+        <item>Mental Health</item>
+        <item>Life Threatening Issues</item>
+        <item>Biblical Guidance</item>
+        <item>Testimonials</item>
+        <item>Prayer Requests</item>
+        <item>Bible Verses</item>
+    </string-array>
 </resources>

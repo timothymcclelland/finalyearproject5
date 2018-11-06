@@ -11,6 +11,13 @@
         android:layout_height="wrap_content"
         android:text="@string/post_hint"/>
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/category_spinner">
+
+    </Spinner>
+
     <EditText
         android:layout_margin="15dp"
         android:id="@+id/postEditText"

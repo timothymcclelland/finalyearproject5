@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -41,7 +42,7 @@ public class content extends AppCompatActivity {
 
         mSharedPref = getSharedPreferences("SortSettings", MODE_PRIVATE);
         String mSorting = mSharedPref.getString("Sort", "Ascending");
-        
+
         if(mSorting.equals("Ascending")){
             mLayoutManager = new LinearLayoutManager(this);
             mLayoutManager.setReverseLayout(true);
@@ -107,10 +108,12 @@ public class content extends AppCompatActivity {
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
         TextView postInfo;
+        TextView category;
 
         public PostViewHolder(View itemView) {
             super(itemView);
 
+            category = itemView.findViewById(R.id.post_category);
             postInfo = itemView.findViewById(R.id.postText);
         }
     }
@@ -177,4 +180,6 @@ public class content extends AppCompatActivity {
     public void filter(){
 
     }
+
+
 }
