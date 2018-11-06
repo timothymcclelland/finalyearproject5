@@ -1,9 +1,12 @@
 package com.example.uuj.finalyearproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class content extends AppCompatActivity {
 
+    private LinearLayoutManager mLayoutManager;
+    private SharedPreferences mSharedPref;
     private FirebaseAuth mAuth;
     private RecyclerView viewRecycler;
     private DatabaseReference mDatabase;
@@ -34,9 +39,25 @@ public class content extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content);
 
+        mSharedPref = getSharedPreferences("SortSettings", MODE_PRIVATE);
+        String mSorting = mSharedPref.getString("Sort", "Ascending");
+        
+        if(mSorting.equals("Ascending")){
+            mLayoutManager = new LinearLayoutManager(this);
+            mLayoutManager.setReverseLayout(true);
+            mLayoutManager.setStackFromEnd(true);
+        }else if(mSorting.equals("Descending")){
+            mLayoutManager = new LinearLayoutManager(this);
+            mLayoutManager.setReverseLayout(false);
+            mLayoutManager.setStackFromEnd(false);
+        }
+
+
         viewRecycler = (RecyclerView) findViewById(R.id.recyclerView);
         viewRecycler.setHasFixedSize(true);
-        viewRecycler.setLayoutManager(new LinearLayoutManager(this));
+        viewRecycler.setLayoutManager(mLayoutManager);
+
+
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Post");
         currentUser = mAuth.getCurrentUser().getUid();
@@ -129,7 +150,27 @@ public class content extends AppCompatActivity {
 
     //sort content based on date in ascending or descending order
     public void sort(){
+        String[] sortOptions = {"Ascending", "Descending"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sort by")
+                .setItems(sortOptions, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 0 means Ascending and 1 means descending
+                        if (which==0){
+                            //sort ascending
+                            //Edit Shared Preferences
+                            SharedPreferences.Editor editor = mSharedPref.edit();
+                            editor.putString("Sort", "Ascending"); //where sort is key & ascending is value
+                            editor.apply(); //apply/save value in Shared Preferences
+                            recreate();
+                        }
+                        else if(which==1){
 
+                        }
+                    }
+                });
+        builder.show();
     }
 
     //filter content based on category
