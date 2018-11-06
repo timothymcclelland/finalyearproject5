@@ -16,10 +16,19 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/post"
+            android:text="@string/date"
             android:layout_margin="5dp"
             android:textSize="8sp"
             android:layout_alignParentRight="true" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time"
+            android:layout_margin="5dp"
+            android:textSize="8sp"
+            android:layout_toLeftOf="@id/date" />
 
         <TextView
             android:id="@+id/post_category"

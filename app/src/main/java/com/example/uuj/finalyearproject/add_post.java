@@ -10,13 +10,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class add_post extends AppCompatActivity {
 
         private EditText addPost;
+        private Spinner spinner;
         private Button buttonPost;
+        private String date;
+        private String time;
 
         private DatabaseReference databaseReference;
 
@@ -25,10 +34,11 @@ public class add_post extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_post);
 
-        Spinner category_Spinner = findViewById(R.id.category_spinner);
+        spinner = (Spinner) findViewById(R.id.category_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category_array, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        category_Spinner.setAdapter(adapter);
+        spinner.setAdapter(adapter);
+
 
         addPost = (EditText) findViewById(R.id.postEditText);
         buttonPost = (Button) findViewById(R.id.postButton);
@@ -39,12 +49,23 @@ public class add_post extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Calendar calendarDate = Calendar.getInstance();
+                SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+                date = currentDate.format(calendarDate.getTime());
+
+                Calendar calendarTime = Calendar.getInstance();
+                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+                time = currentTime.format(calendarTime.getTime());
+
                 String post_content = addPost.getText().toString().trim();
+                String categorySelected = spinner.getSelectedItem().toString();
 
                 DatabaseReference newPost = databaseReference.push();
 
                 newPost.child("Post").setValue(post_content);
-
+                newPost.child("Category").setValue(categorySelected);
+                newPost.child("Time").setValue(time);
+                newPost.child("Date").setValue(date);
                 startActivity(new Intent(add_post.this, content.class));
             }
         });

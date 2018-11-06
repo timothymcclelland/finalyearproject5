@@ -18,6 +18,8 @@
     <string name="post_hint">Share a thought</string>
     <string name="post">Post</string>
     <string name="Category">Category</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
     <string-array name="category_array">
         <item>Work</item>
         <item>Education</item>
