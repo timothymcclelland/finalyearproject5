@@ -12,6 +12,7 @@
         android:id="@+id/post_content_layout"
         android:orientation="vertical">
 
+        <!-- Display date of post -->
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
             android:textSize="8sp"
             android:layout_alignParentRight="true" />
 
+        <!--Display time of post-->
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
@@ -30,6 +32,7 @@
             android:textSize="8sp"
             android:layout_toLeftOf="@id/date" />
 
+        <!--Display category of post-->
         <TextView
             android:id="@+id/post_category"
             android:layout_width="wrap_content"
@@ -39,6 +42,7 @@
             android:textSize="8sp"
             android:layout_alignParentLeft="true" />
 
+        <!--Display post text-->
         <TextView
             android:id="@+id/postText"
             android:layout_width="wrap_content"
@@ -47,6 +51,7 @@
             android:layout_marginRight="5dp"
             android:layout_below="@+id/date"/>
 
+        <!-- used to create a separation line between Textviews above and buttons below-->
         <View
             android:id="@+id/viewBottom"
             android:layout_width="match_parent"
@@ -57,8 +62,9 @@
             android:layout_marginTop="10dp"
             android:background="@color/colorPrimaryDark" />
 
+        <!--clickable comment icon-->
         <ImageView
-            android:id="@+id/likeButton"
+            android:id="@+id/commentButton"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_below="@+id/viewBottom"
@@ -68,15 +74,17 @@
             android:layout_marginBottom="10dp"
             android:src="@mipmap/ic_comment_round" />
 
+        <!--Comment Icon text "Comment"-->
         <TextView
-            android:id="@+id/likeView"
+            android:id="@+id/commentView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewBottom"
             android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/likeButton"
+            android:layout_toRightOf="@+id/commentButton"
             android:text="@string/comment" />
 
+        <!--Clickable 'report' icon, flag icon used-->
         <ImageView
             android:id="@+id/reportButton"
             android:layout_width="40dp"
@@ -89,6 +97,7 @@
             android:layout_marginBottom="10dp"
             android:src="@mipmap/ic_flag" />
 
+        <!--Flag Icon text "Report"-->
         <TextView
             android:id="@+id/report"
             android:layout_width="wrap_content"

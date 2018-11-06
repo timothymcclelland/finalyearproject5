@@ -5,26 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--used to instruct user to input text that they want to post-->
     <TextView
         android:layout_margin="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/post_hint"/>
 
+    <!--referenced in add_post.java-->
     <Spinner
         android:layout_margin="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/category_spinner">
-
     </Spinner>
 
+    <!-- container for post text-->
     <EditText
         android:layout_margin="15dp"
         android:id="@+id/postEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <!--submits post to database and should also appear in content activity screen-->
     <Button
         android:layout_margin="15dp"
         android:layout_width="wrap_content"

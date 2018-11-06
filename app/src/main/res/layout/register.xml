@@ -13,6 +13,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimary">
 
+        <!-- App Icon contained as imageview -->
         <ImageView
             android:layout_width="213dp"
             android:layout_height="230dp"
@@ -37,6 +38,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
+            <!-- Email Address EditText container -->
             <EditText
                 android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
@@ -47,6 +49,7 @@
                 android:paddingBottom="15dp"
                 android:textColorHint="@color/colorAccent" />
 
+            <!-- Password EditText container -->
             <EditText
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
@@ -57,6 +60,7 @@
                 android:paddingBottom="15dp"
                 android:textColorHint="@color/colorAccent" />
 
+            <!-- Register Button links to RegisterUser method which registers the user -->
             <Button
                 android:id="@+id/buttonRegister"
                 android:background="@color/colorButton"
@@ -69,6 +73,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/buttonTextColor" />
 
+            <!-- TextView links to log_in.xml activity -->
             <TextView
                 android:id="@+id/textViewSignin"
                 android:layout_width="match_parent"

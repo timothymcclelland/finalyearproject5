@@ -39,7 +39,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
-
+        <!-- Email Address EditText container -->
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
@@ -50,6 +50,7 @@
             android:paddingBottom="15dp"
             android:textColorHint="@color/colorAccent" />
 
+        <!-- Password EditText container -->
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
@@ -60,6 +61,7 @@
             android:paddingBottom="15dp"
             android:textColorHint="@color/colorAccent" />
 
+        <!--Links to LoginUser method in log_in.java-->
         <Button
             android:id="@+id/buttonLogin"
             android:background="@color/colorButton"
@@ -72,6 +74,7 @@
             android:textAllCaps="false"
             android:textColor="@color/buttonTextColor" />
 
+        <!--text link to forgot password activity-->
         <TextView
             android:id="@+id/forgotPassword"
             android:layout_width="match_parent"
@@ -83,6 +86,7 @@
             android:textColor="@color/colorAccent"
             android:clickable="true" />
 
+        <!--Button links to signInAnonymously method in log_in.java-->
         <Button
             android:id="@+id/buttonAnonymous"
             android:background="@color/colorButtonTwo"
@@ -95,6 +99,7 @@
             android:textAllCaps="false"
             android:textColor="@color/buttonTextColor" />
 
+        <!--text link to register activity-->
         <TextView
             android:id="@+id/textViewSignup"
             android:layout_width="match_parent"
