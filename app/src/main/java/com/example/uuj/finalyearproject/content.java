@@ -17,9 +17,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseListOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,42 +83,43 @@ public class content extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        //RecyclerOptions required to configure the RecyclerAdapter
-        FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>().setQuery(mDatabase.child(currentUser), post.class).build();
+        //RecyclerOptions
+        FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>()
+                .setQuery(mDatabase, post.class)
+                .build();
 
         //RecyclerAdapter object
-        FirebaseRecyclerAdapter<post, PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<post, PostViewHolder>(options) {
+        FirebaseRecyclerAdapter<post, PostViewHolder> adapter = new FirebaseRecyclerAdapter<post, PostViewHolder>(options) {
             @Override
-            //below method used to update the recyclerview holder
-            protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull post model) {
-                holder.postInfo.setText(model.getPost());
+            protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull post model)
+            {
+                holder.post_Text.setText(model.getPost());
+                holder.category_Text.setText(model.getCategory());
             }
 
             @NonNull
             @Override
-            public PostViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            public PostViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
+            {
                 View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.post_view, viewGroup, false);
-                PostViewHolder holder = new PostViewHolder(view);
-                return holder;
+                PostViewHolder viewHolder = new PostViewHolder(view);
+                return viewHolder;
             }
         };
-
-        viewRecycler.setAdapter(firebaseRecyclerAdapter);
-
-        firebaseRecyclerAdapter.startListening();
+        viewRecycler.setAdapter(adapter);
+        adapter.startListening();
     }
 
     //ViewHolder used to display each item in the recyclerView
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
-        TextView postInfo;
-        TextView category;
+        TextView post_Text, category_Text;
 
         public PostViewHolder(View itemView) {
             super(itemView);
 
-            category = itemView.findViewById(R.id.post_category);
-            postInfo = itemView.findViewById(R.id.postText);
+            post_Text = itemView.findViewById(R.id.post_text);
+            category_Text = itemView.findViewById(R.id.post_category);
         }
     }
 

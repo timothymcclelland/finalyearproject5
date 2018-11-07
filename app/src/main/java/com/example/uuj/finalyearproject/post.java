@@ -7,15 +7,15 @@ public class post {
     public String time;
     public String category;
 
+    public post(){
+
+    }
+
     public post(String post, String date, String time, String category) {
         this.post = post;
         this.date = date;
         this.time = time;
         this.category = category;
-    }
-
-    public post(){
-
     }
 
     public String getPost() {
