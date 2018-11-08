@@ -32,7 +32,7 @@ public class content extends AppCompatActivity {
     private SharedPreferences mSharedPref;
     private FirebaseAuth mAuth;
     private RecyclerView viewRecycler;
-    private DatabaseReference mDatabase;
+    private DatabaseReference databaseReference;
     private String currentUser;
 
     @Override
@@ -58,10 +58,7 @@ public class content extends AppCompatActivity {
         viewRecycler.setHasFixedSize(true);
         viewRecycler.setLayoutManager(mLayoutManager);
 
-
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Post");
-        currentUser = mAuth.getCurrentUser().getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
 
         //Referencing Java to XML resources
         //Reference toolbar as action bar and hiding title in toolbar
@@ -77,15 +74,13 @@ public class content extends AppCompatActivity {
                 startActivity(new Intent(content.this, add_post.class));
             }
         });
+        DisplayPosts();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
+    private void DisplayPosts() {
         //RecyclerOptions
         FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>()
-                .setQuery(mDatabase, post.class)
+                .setQuery(databaseReference, post.class)
                 .build();
 
         //RecyclerAdapter object

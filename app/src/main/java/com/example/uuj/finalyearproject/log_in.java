@@ -3,6 +3,7 @@ package com.example.uuj.finalyearproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -90,21 +91,32 @@ public class log_in extends AppCompatActivity {
     public void LoginUser(){
         String Email = emailText.getText().toString().trim();
         String Password = passwordText.getText().toString().trim();
-        mAuth.signInWithEmailAndPassword(Email, Password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            currentUser = mAuth.getCurrentUser();
-                            finish();
-                            startActivity(new Intent(getApplicationContext(),
-                                    content.class));
-                        }else {
-                            Toast.makeText(log_in.this, "Unable to login. Please try again or reset password",
-                                    Toast.LENGTH_SHORT).show();
+
+        if(TextUtils.isEmpty(Email))
+        {
+            Toast.makeText(this, "Email Required", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(Password))
+        {
+            Toast.makeText(this, "Password Required", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mAuth.signInWithEmailAndPassword(Email, Password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                currentUser = mAuth.getCurrentUser();
+                                finish();
+                                startActivity(new Intent(getApplicationContext(),
+                                        content.class));
+                            } else {
+                                Toast.makeText(log_in.this, "Unable to login. Please try again or reset password",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     //code taken from https://firebase.google.com/docs/auth/android/anonymous-auth?utm_source=studio

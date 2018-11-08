@@ -69,34 +69,35 @@ public class Register extends AppCompatActivity {
         if (TextUtils.isEmpty(Email)){
             Toast.makeText(this, "Email Required", Toast.LENGTH_SHORT).show();
             return;
-        }
+        } else  if
         //Checks if password EditText is empty and displays message
-        if (TextUtils.isEmpty(Password)){
+        (TextUtils.isEmpty(Password)){
             Toast.makeText(this, "Password Required", Toast.LENGTH_SHORT).show();
             return;
-        }
-        mAuth.createUserWithEmailAndPassword(Email, Password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        try {
-                            //check if successful
-                            if (task.isSuccessful()) {
-                                //User is successfully registered and logged in
-                                //start Profile Activity here
-                                Toast.makeText(Register.this, "Registration successful",
-                                        Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(getApplicationContext(), content.class));
-                            }else{
-                                //User unsuccessful in registering, message displayed
-                                Toast.makeText(Register.this, "Unable to register, please try again",
-                                        Toast.LENGTH_SHORT).show();
+        } else {
+            mAuth.createUserWithEmailAndPassword(Email, Password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            try {
+                                //check if successful
+                                if (task.isSuccessful()) {
+                                    //User is successfully registered and logged in
+                                    //start Profile Activity here
+                                    Toast.makeText(Register.this, "Registration successful",
+                                            Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    startActivity(new Intent(getApplicationContext(), content.class));
+                                } else {
+                                    //User unsuccessful in registering, message displayed
+                                    Toast.makeText(Register.this, "Unable to register, please try again",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        }catch (Exception e){
-                            e.printStackTrace();
                         }
-                    }
-                });
+                    });
+        }
     }
 }

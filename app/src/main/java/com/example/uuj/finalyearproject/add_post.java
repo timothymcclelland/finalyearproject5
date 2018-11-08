@@ -3,12 +3,15 @@ package com.example.uuj.finalyearproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,6 +30,8 @@ public class add_post extends AppCompatActivity {
         //Database variable
         private DatabaseReference databaseReference;
 
+        private FirebaseAuth mAuth;
+        private String current_user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +50,10 @@ public class add_post extends AppCompatActivity {
         buttonPost = (Button) findViewById(R.id.postButton);
 
         /*Referencing database variable to Firebase Realtime Database child "Post" which will contain */
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Post");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
+
+        mAuth = FirebaseAuth.getInstance();
+        current_user_id = mAuth.getCurrentUser().getUid();
 
         //onClickListener method called to send to the Firebase Realtime database
         buttonPost.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +73,7 @@ public class add_post extends AppCompatActivity {
                 time = currentTime.format(calendarTime.getTime());
 
                 //formatting EditText variable to String to input in Firebase Database
-                String post_content = addPost.getText().toString().trim();
+                String post_content = addPost.getText().toString();
 
                 //formatting spinner item to get selected item and format it to string for input in Firebase Database
                 String categorySelected = spinner.getSelectedItem().toString();
@@ -75,6 +83,7 @@ public class add_post extends AppCompatActivity {
                 DatabaseReference newPost = databaseReference.push();
 
                 //Creating children in referenced Firebase database child and set the value that will appear in the database
+                newPost.child("User ID").setValue(current_user_id);
                 newPost.child("Post").setValue(post_content);
                 newPost.child("Category").setValue(categorySelected);
                 newPost.child("Time").setValue(time);
@@ -84,6 +93,5 @@ public class add_post extends AppCompatActivity {
                 startActivity(new Intent(add_post.this, content.class));
             }
         });
-
     }
 }

@@ -44,7 +44,7 @@ public class reset extends AppCompatActivity {
 
                 //checks if EditText is empty and displays a message if it is to make user aware
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter your email!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Email Required", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
