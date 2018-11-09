@@ -3,18 +3,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--sort toolbar item-->
     <item
         android:id="@+id/action_sort"
         android:title="@string/sort_toolbar"
         android:icon="@mipmap/ic_sort"
         app:showAsAction="always" />
 
+    <!--filter toolbar item-->
     <item
         android:id="@+id/action_filter"
         app:showAsAction="always"
         android:icon="@mipmap/ic_filter"
         android:title="@string/filter_toolbar" />
 
+    <!--Sign out toolbar item-->
     <item
         android:id="@+id/action_sign_out"
         app:showAsAction="always"

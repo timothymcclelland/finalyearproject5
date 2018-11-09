@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Primary App Background colour-->
     <color name="colorPrimary">#ffffff</color>
+
+    <!--used for color of status bar-->
     <color name="colorPrimaryDark">#808684</color>
+
+    <!--Used as text color and icon color for certain xml items-->
     <color name="colorAccent">#000000</color>
+
+    <!--Button and button text colors-->
     <color name="colorButton">#006dfc</color>
     <color name="buttonTextColor">#ffffff</color>
     <color name="colorButtonTwo">#c35af7</color>
