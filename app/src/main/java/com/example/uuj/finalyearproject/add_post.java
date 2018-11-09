@@ -27,11 +27,10 @@ public class add_post extends AppCompatActivity {
         private String date;
         private String time;
 
-        //Database variable
+        //Firebase Database variable
         private DatabaseReference databaseReference;
 
-        private FirebaseAuth mAuth;
-        private String current_user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +50,6 @@ public class add_post extends AppCompatActivity {
 
         /*Referencing database variable to Firebase Realtime Database child "Post" which will contain */
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
-
-        mAuth = FirebaseAuth.getInstance();
-        current_user_id = mAuth.getCurrentUser().getUid();
 
         //onClickListener method called to send to the Firebase Realtime database
         buttonPost.setOnClickListener(new View.OnClickListener() {
@@ -83,11 +79,10 @@ public class add_post extends AppCompatActivity {
                 DatabaseReference newPost = databaseReference.push();
 
                 //Creating children in referenced Firebase database child and set the value that will appear in the database
-                newPost.child("User ID").setValue(current_user_id);
-                newPost.child("Post").setValue(post_content);
-                newPost.child("Category").setValue(categorySelected);
-                newPost.child("Time").setValue(time);
-                newPost.child("Date").setValue(date);
+                newPost.child("post").setValue(post_content);
+                newPost.child("category").setValue(categorySelected);
+                newPost.child("time").setValue(time);
+                newPost.child("date").setValue(date);
 
                 //once OnClick method is completed, user will be taken back to the content activity screen
                 startActivity(new Intent(add_post.this, content.class));

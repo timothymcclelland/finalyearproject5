@@ -75,6 +75,7 @@ public class Register extends AppCompatActivity {
             Toast.makeText(this, "Password Required", Toast.LENGTH_SHORT).show();
             return;
         } else {
+            //method to create User with email and password in Firebase Authentication system
             mAuth.createUserWithEmailAndPassword(Email, Password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override

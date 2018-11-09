@@ -92,25 +92,30 @@ public class log_in extends AppCompatActivity {
         String Email = emailText.getText().toString().trim();
         String Password = passwordText.getText().toString().trim();
 
+        //Checks if email EditText is empty and displays message
         if(TextUtils.isEmpty(Email))
         {
             Toast.makeText(this, "Email Required", Toast.LENGTH_SHORT).show();
         }
+        //Checks if password EditText is empty and displays message
         else if(TextUtils.isEmpty(Password))
         {
             Toast.makeText(this, "Password Required", Toast.LENGTH_SHORT).show();
         }
         else {
+            //method to allow user to sign in to application with email and password that is stored in Firebase Authentication system
             mAuth.signInWithEmailAndPassword(Email, Password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            //Checks if sign in was successful and gets the users ID, then sends the user to content screen
                             if (task.isSuccessful()) {
                                 currentUser = mAuth.getCurrentUser();
                                 finish();
                                 startActivity(new Intent(getApplicationContext(),
                                         content.class));
                             } else {
+                                //Displays error message to user if their credentials are incorrect or inadequate
                                 Toast.makeText(log_in.this, "Unable to login. Please try again or reset password",
                                         Toast.LENGTH_SHORT).show();
                             }
