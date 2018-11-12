@@ -17,8 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 public class reset extends AppCompatActivity {
 
     //code for class taken directly from https://grokonez.com/android/firebase-authentication-send-reset-password-email-forgot-password-android
+
+    //Class member variables
     private EditText edtEmail;
     private Button btnResetPassword;
+
+    //Firebase Authentication variables
     private FirebaseAuth mAuth;
 
     @Override

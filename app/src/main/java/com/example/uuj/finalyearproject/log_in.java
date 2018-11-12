@@ -26,6 +26,8 @@ public class log_in extends AppCompatActivity {
     private EditText passwordText;
     private Button loginButton;
     private Button anonymousButton;
+
+    //Firebase variables
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
 
