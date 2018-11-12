@@ -22,8 +22,10 @@ public class Register extends AppCompatActivity {
     private TextView loginText;
     private EditText email;
     private EditText password;
-    private FirebaseAuth mAuth;
     private Button register;
+
+    //Firebase Authentication variable
+    private FirebaseAuth mAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

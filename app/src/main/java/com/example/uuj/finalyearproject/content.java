@@ -30,10 +30,14 @@ public class content extends AppCompatActivity {
     //Class member variables
     private LinearLayoutManager mLayoutManager;
     private SharedPreferences mSharedPref;
-    private FirebaseAuth mAuth;
     private RecyclerView viewRecycler;
-    private DatabaseReference databaseReference;
     private String currentUser;
+
+    //Firebase Authentication variable
+    private FirebaseAuth mAuth;
+
+    //Firebase Database variable
+    private DatabaseReference databaseReference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,7 @@ public class content extends AppCompatActivity {
         //Floating action button reference
         /*Once user has clicked the postButton and input their data in the add_post screen, this data will be displayed in the content screen by
         calling DisplayPosts method*/
+        //followed tutorial when implementing recyclerAdapter, https://www.youtube.com/watch?v=vD6Y_dVWJ5c
         FloatingActionButton postButton = (FloatingActionButton)findViewById(R.id.float_post);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override

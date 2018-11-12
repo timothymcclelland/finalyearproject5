@@ -1,5 +1,7 @@
 package com.example.uuj.finalyearproject;
 
+//followed tutorial on youtube in producing this class, https://www.youtube.com/watch?v=vD6Y_dVWJ5c
+
 //model class used to retrieve the data from the database and set it to the referenced variables for use by the RecyclerAdapter method
 public class post {
 

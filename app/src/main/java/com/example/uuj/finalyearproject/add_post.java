@@ -29,7 +29,7 @@ public class add_post extends AppCompatActivity {
         //Firebase Database variable
         private DatabaseReference databaseReference;
 
-
+    //followed tutorial when implementing recyclerAdapter, https://www.youtube.com/watch?v=vD6Y_dVWJ5c
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
