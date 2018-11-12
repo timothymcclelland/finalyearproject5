@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class content extends AppCompatActivity {
 
+    //Class member variables
     private LinearLayoutManager mLayoutManager;
     private SharedPreferences mSharedPref;
     private FirebaseAuth mAuth;
