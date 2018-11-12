@@ -74,18 +74,24 @@ public class add_post extends AppCompatActivity {
                 //formatting spinner item to get selected item and format it to string for input in Firebase Database
                 String categorySelected = spinner.getSelectedItem().toString();
 
-                //used https://www.youtube.com/watch?v=tOn5HsQPhUY as basis of how I should send my data to my Firebase database
-                //Creates reference to auto-generated child location in Firebase database
-                DatabaseReference newPost = databaseReference.push();
+                if(TextUtils.isEmpty(post_content))
+                {
+                    Toast.makeText(add_post.this, "Enter post text", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    //used https://www.youtube.com/watch?v=tOn5HsQPhUY as basis of how I should send my data to my Firebase database
+                    //Creates reference to auto-generated child location in Firebase database
+                    DatabaseReference newPost = databaseReference.push();
 
-                //Creating children in referenced Firebase database child and set the value that will appear in the database
-                newPost.child("post").setValue(post_content);
-                newPost.child("category").setValue(categorySelected);
-                newPost.child("time").setValue(time);
-                newPost.child("date").setValue(date);
+                    //Creating children in referenced Firebase database child and set the value that will appear in the database
+                    newPost.child("post").setValue(post_content);
+                    newPost.child("category").setValue(categorySelected);
+                    newPost.child("time").setValue(time);
+                    newPost.child("date").setValue(date);
 
-                //once OnClick method is completed, user will be taken back to the content activity screen
-                startActivity(new Intent(add_post.this, content.class));
+                    //once OnClick method is completed, user will be taken back to the content activity screen
+                    startActivity(new Intent(add_post.this, content.class));
+                }
             }
         });
     }
