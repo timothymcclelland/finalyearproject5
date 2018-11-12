@@ -20,6 +20,7 @@
     <string name="Category">Category</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
+    <string name="category_label">Category:</string>
 
     <!-- string array used for category spinner values -->
     <string-array name="category_array">

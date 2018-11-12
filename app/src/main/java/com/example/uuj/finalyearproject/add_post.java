@@ -59,13 +59,13 @@ public class add_post extends AppCompatActivity {
                 //code below used to create date attribute in referenced child(randomly created when post to database is made)
                 //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
                 Calendar calendarDate = Calendar.getInstance();
-                SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
                 date = currentDate.format(calendarDate.getTime());
 
                 //code below used to create date attribute in referenced child(randomly created when post to database is made)
                 //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
                 Calendar calendarTime = Calendar.getInstance();
-                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
                 time = currentTime.format(calendarTime.getTime());
 
                 //formatting EditText variable to String to input in Firebase Database

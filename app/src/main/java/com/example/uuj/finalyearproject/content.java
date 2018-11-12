@@ -103,6 +103,8 @@ public class content extends AppCompatActivity {
             {
                 holder.post_Text.setText(model.getPost());
                 holder.category_Text.setText(model.getCategory());
+                holder.date_Text.setText(model.getDate());
+                holder.time_Text.setText(model.getTime());
             }
 
             @NonNull
@@ -125,12 +127,15 @@ public class content extends AppCompatActivity {
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
         TextView post_Text, category_Text;
+        TextView date_Text, time_Text;
 
         public PostViewHolder(View itemView) {
             super(itemView);
 
             post_Text = itemView.findViewById(R.id.post_text);
             category_Text = itemView.findViewById(R.id.post_category);
+            date_Text = itemView.findViewById(R.id.post_date);
+            time_Text = itemView.findViewById(R.id.post_time);
         }
     }
 
@@ -168,6 +173,7 @@ public class content extends AppCompatActivity {
     }
 
     //sort content based on date in ascending or descending order
+    //followed youtube tutorial https://www.youtube.com/watch?v=fmkjH7tIyao for sorting content in recyclerview
     public void sort(){
         String[] sortOptions = {"Ascending", "Descending"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -185,7 +191,12 @@ public class content extends AppCompatActivity {
                             recreate();
                         }
                         else if(which==1){
-
+                            //sort descending
+                            //Edit Shared Preferences
+                            SharedPreferences.Editor editor = mSharedPref.edit();
+                            editor.putString("Sort", "Descending"); //where sort is key & descending is value
+                            editor.apply(); //apply/save value in Shared Preferences
+                            recreate();
                         }
                     }
                 });

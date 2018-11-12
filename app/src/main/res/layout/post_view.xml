@@ -18,8 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date"
+            android:layout_marginRight="5dp"
             android:layout_margin="5dp"
-            android:textSize="8sp"
+            android:textSize="12sp"
             android:layout_alignParentRight="true" />
 
         <!--Display time of post-->
@@ -29,8 +30,19 @@
             android:layout_height="wrap_content"
             android:text="@string/time"
             android:layout_margin="5dp"
-            android:textSize="8sp"
+            android:textSize="12sp"
             android:layout_toLeftOf="@id/post_date" />
+
+        <!--Label to identify category text-->
+        <TextView
+            android:id="@+id/category_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/category_label"
+            android:textSize="12sp"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentLeft="true"/>
 
         <!--Display category of post-->
         <TextView
@@ -38,15 +50,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Category"
-            android:layout_margin="5dp"
-            android:textSize="8sp"
-            android:layout_alignParentLeft="true" />
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="12sp"
+            android:layout_toRightOf="@id/category_label"/>
 
         <!--Display post text-->
         <TextView
             android:id="@+id/post_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_below="@+id/post_date"/>
@@ -57,8 +73,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/post_text"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:background="@color/colorPrimaryDark" />
 
@@ -70,17 +86,18 @@
             android:layout_below="@+id/view_bottom"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:src="@mipmap/ic_comment_round" />
 
         <!--Comment Icon text "Comment"-->
         <TextView
             android:id="@+id/commentView"
+            android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view_bottom"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/comment_button"
             android:text="@string/comment" />
 
@@ -94,16 +111,17 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:src="@mipmap/ic_flag" />
 
         <!--Flag Icon text "Report"-->
         <TextView
+            android:textSize="14sp"
             android:id="@+id/report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view_bottom"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_toLeftOf="@id/report_button"
             android:text="@string/flag" />
 
