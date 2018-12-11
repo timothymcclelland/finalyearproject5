@@ -44,6 +44,8 @@ public class content extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content);
 
+        mAuth = FirebaseAuth.getInstance();
+
         //Shared Preferences used to store the users selected sort by preference
         mSharedPref = getSharedPreferences("SortSettings", MODE_PRIVATE);
         String mSorting = mSharedPref.getString("Sort", "Ascending");
@@ -174,8 +176,8 @@ public class content extends AppCompatActivity {
     //Sign out method taken directly from FirebaseAuth methods
     public void signOut(){
         mAuth.signOut();
-        finish();
         startActivity(new Intent(this, log_in.class));
+        finish();
     }
 
     //sort content based on date in ascending or descending order
