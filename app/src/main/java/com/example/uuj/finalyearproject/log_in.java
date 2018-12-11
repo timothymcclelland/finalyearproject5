@@ -29,7 +29,6 @@ public class log_in extends AppCompatActivity {
 
     //Firebase variables
     private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,16 +106,18 @@ public class log_in extends AppCompatActivity {
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            //Checks if sign in was successful and gets the users ID, then sends the user to content screen
-                            if (task.isSuccessful()) {
-                                currentUser = mAuth.getCurrentUser();
-                                finish();
-                                startActivity(new Intent(getApplicationContext(),
-                                        content.class));
-                            } else {
-                                //Displays error message to user if their credentials are incorrect or inadequate
-                                Toast.makeText(log_in.this, "Unable to login. Please try again or reset password",
-                                        Toast.LENGTH_SHORT).show();
+                            try {
+                                //Checks if sign in was successful and gets the users ID, then sends the user to content screen
+                                if (task.isSuccessful()) {
+                                    startActivity(new Intent(getApplicationContext(),
+                                            content.class));
+                                } else {
+                                    //Displays error message to user if their credentials are incorrect or inadequate
+                                    Toast.makeText(log_in.this, "Unable to login. Please try again or reset password",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                    e.printStackTrace();
                             }
                         }
                     });
