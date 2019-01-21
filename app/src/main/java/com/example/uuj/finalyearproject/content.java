@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -136,6 +137,7 @@ public class content extends AppCompatActivity {
 
         TextView post_Text, category_Text;
         TextView date_Text, time_Text;
+        ImageButton comment_button, report_button;
 
         public PostViewHolder(View itemView) {
             super(itemView);
@@ -144,6 +146,8 @@ public class content extends AppCompatActivity {
             category_Text = itemView.findViewById(R.id.post_category);
             date_Text = itemView.findViewById(R.id.post_date);
             time_Text = itemView.findViewById(R.id.post_time);
+            comment_button = itemView.findViewById(R.id.post_comment_button);
+            report_button = itemView.findViewById(R.id.report_button);
         }
     }
 

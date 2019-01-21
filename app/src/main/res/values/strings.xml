@@ -21,6 +21,8 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="category_label">Category:</string>
+    <string name="commentsScreenTitle">Comments</string>
+    <string name="commentHint">Write a comment</string>
 
     <!-- string array used for category spinner values -->
     <string-array name="category_array">

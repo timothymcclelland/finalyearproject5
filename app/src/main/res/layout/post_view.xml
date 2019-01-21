@@ -79,7 +79,7 @@
             android:background="@color/colorPrimaryDark" />
 
         <!--clickable comment icon-->
-        <ImageView
+        <ImageButton
             android:id="@+id/comment_button"
             android:layout_width="40dp"
             android:layout_height="30dp"
@@ -102,7 +102,7 @@
             android:text="@string/comment" />
 
         <!--Clickable 'report' icon, flag icon used-->
-        <ImageView
+        <ImageButton
             android:id="@+id/report_button"
             android:layout_width="40dp"
             android:layout_height="30dp"

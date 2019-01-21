@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".commentScreen"></activity>
         <activity android:name=".log_in">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +22,7 @@
         <activity android:name=".content" />
         <activity android:name=".Register" />
         <activity android:name=".reset" />
-        <activity android:name=".add_post"></activity>
+        <activity android:name=".add_post" />
     </application>
 
 </manifest>
