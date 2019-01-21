@@ -39,8 +39,19 @@ public class edit_delete_post extends AppCompatActivity {
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String post_text = dataSnapshot.child()
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                if(dataSnapshot.exists())
+                {
+                    editPost = dataSnapshot.child("post").getValue().toString();
+                    String category_selected = dataSnapshot.child("category").getValue().toString();
+
+                    editPost.setText(post_text);
+
+                }
+
+
+
             }
 
             @Override
