@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -108,12 +109,22 @@ public class content extends AppCompatActivity {
         /* RecyclerAdapter is used to bind the data retrieved from the database for use by the PostViewHolder class to display it in the defined view*/
         FirebaseRecyclerAdapter<post, PostViewHolder> adapter = new FirebaseRecyclerAdapter<post, PostViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull post model)
+            protected void onBindViewHolder(@NonNull PostViewHolder holder, final int position, @NonNull post model)
             {
+                final String PostKey = getRef(position).getKey();
+
                 holder.post_Text.setText(model.getPost());
                 holder.category_Text.setText(model.getCategory());
                 holder.date_Text.setText(model.getDate());
                 holder.time_Text.setText(model.getTime());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent postIntent = new Intent(content.this, edit_delete_post.class);
+                        postIntent.putExtra("PostKey", PostKey);
+                        startActivity(postIntent);
+                    }
+                });
             }
 
             @NonNull
@@ -137,7 +148,6 @@ public class content extends AppCompatActivity {
 
         TextView post_Text, category_Text;
         TextView date_Text, time_Text;
-        ImageButton comment_button, report_button;
 
         public PostViewHolder(View itemView) {
             super(itemView);
@@ -146,8 +156,6 @@ public class content extends AppCompatActivity {
             category_Text = itemView.findViewById(R.id.post_category);
             date_Text = itemView.findViewById(R.id.post_date);
             time_Text = itemView.findViewById(R.id.post_time);
-            comment_button = itemView.findViewById(R.id.post_comment_button);
-            report_button = itemView.findViewById(R.id.report_button);
         }
     }
 

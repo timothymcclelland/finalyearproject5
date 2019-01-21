@@ -37,7 +37,7 @@
         />
 
     <!--Clickable 'post comment' icon, send icon used-->
-    <ImageButton
+    <ImageView
         android:id="@+id/post_comment_button"
         android:layout_width="40dp"
         android:layout_height="30dp"

@@ -23,6 +23,8 @@
     <string name="category_label">Category:</string>
     <string name="commentsScreenTitle">Comments</string>
     <string name="commentHint">Write a comment</string>
+    <string name="edit_post">Edit</string>
+    <string name="delete_post">Delete</string>
 
     <!-- string array used for category spinner values -->
     <string-array name="category_array">

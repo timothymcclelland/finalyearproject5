@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--used to instruct user to input text that they want to post-->
+    <TextView
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/post_hint"/>
+
+    <!--referenced in add_post.java-->
+    <Spinner
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_category_spinner">
+    </Spinner>
+
+    <!-- container for post text-->
+    <EditText
+        android:layout_margin="15dp"
+        android:id="@+id/edit_post_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--edit post-->
+    <Button
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editPostButton"
+        android:text="@string/edit_post"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/colorButton"/>
+
+    <!--delete post-->
+    <Button
+        android:id="@+id/deletePostButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:layout_margin="15dp"
+        android:text="@string/delete_post"
+        android:textColor="@color/colorPrimary" />
+
+</LinearLayout>
