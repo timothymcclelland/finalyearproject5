@@ -117,7 +117,8 @@ public class content extends AppCompatActivity {
                 holder.category_Text.setText(model.getCategory());
                 holder.date_Text.setText(model.getDate());
                 holder.time_Text.setText(model.getTime());
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+                holder.post_Text.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent postIntent = new Intent(content.this, edit_delete_post.class);

@@ -21,10 +21,13 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="category_label">Category:</string>
+    <string name="post_label">Post:</string>
     <string name="commentsScreenTitle">Comments</string>
     <string name="commentHint">Write a comment</string>
     <string name="edit_post">Edit</string>
     <string name="delete_post">Delete</string>
+    <string name="dialog_text">Edit Post:</string>
+    <string name="dialog_post_hint">Post</string>
 
     <!-- string array used for category spinner values -->
     <string-array name="category_array">

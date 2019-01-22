@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,6 +26,9 @@ public class add_post extends AppCompatActivity {
         private Button buttonPost;
         private String date;
         private String time;
+        private String currentUserID;
+
+        private FirebaseAuth mAuth;
 
         //Firebase Database variable
         private DatabaseReference databaseReference;
@@ -34,6 +38,9 @@ public class add_post extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_post);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
 
         //Spinner used to select category of post
         spinner = (Spinner) findViewById(R.id.category_spinner);
@@ -87,6 +94,7 @@ public class add_post extends AppCompatActivity {
                     newPost.child("category").setValue(categorySelected);
                     newPost.child("time").setValue(time);
                     newPost.child("date").setValue(date);
+                    newPost.child("user id").setValue(currentUserID);
 
                     //once OnClick method is completed, user will be taken back to the content activity screen
                     startActivity(new Intent(add_post.this, content.class));
