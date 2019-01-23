@@ -37,14 +37,14 @@
         />
 
     <!--Clickable 'post comment' icon, send icon used-->
-    <ImageView
+    <ImageButton
         android:id="@+id/post_comment_button"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:layout_alignBottom="@id/comment_text"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="9dp"
-        android:src="@mipmap/ic_post_comment" />
+        android:src="@mipmap/ic_add_comment" />
 
 </RelativeLayout>

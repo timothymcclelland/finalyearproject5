@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -126,6 +127,15 @@ public class content extends AppCompatActivity {
                         startActivity(postIntent);
                     }
                 });
+                
+                holder.commentButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent commentIntent = new Intent(content.this, commentScreen.class);
+                        commentIntent.putExtra("PostKey", PostKey);
+                        startActivity(commentIntent);
+                    }
+                });
             }
 
             @NonNull
@@ -147,16 +157,24 @@ public class content extends AppCompatActivity {
     //ViewHolder used to reference each post_view xml resource and allow repetition of these resources as required by the RecyclerAdapter
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
+        View mView;
+
         TextView post_Text, category_Text;
         TextView date_Text, time_Text;
+        ImageButton commentButton, reportButton;
 
         public PostViewHolder(View itemView) {
             super(itemView);
+
+            mView = itemView;
 
             post_Text = itemView.findViewById(R.id.post_text);
             category_Text = itemView.findViewById(R.id.post_category);
             date_Text = itemView.findViewById(R.id.post_date);
             time_Text = itemView.findViewById(R.id.post_time);
+            commentButton = mView.findViewById(R.id.comment_button);
+            reportButton = mView.findViewById(R.id.report_button);
+
         }
     }
 

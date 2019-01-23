@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".edit_delete_post"></activity>
+        <activity android:name=".edit_delete_post"/>
         <activity android:name=".commentScreen" />
         <activity android:name=".log_in">
             <intent-filter>
