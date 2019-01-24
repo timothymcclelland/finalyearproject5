@@ -7,11 +7,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,9 +37,10 @@ public class commentScreen extends AppCompatActivity {
     private EditText postCommentText;
     private String PostKey, current_UserID;
 
-    private DatabaseReference databaseReference, commentsRef;
+    private DatabaseReference commentsRef;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +51,8 @@ public class commentScreen extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         current_UserID = mAuth.getCurrentUser().getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts").child("user id");
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Users Posts").child(PostKey).child("Post Comments");
-
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
         CommentsRecyclerView = findViewById(R.id.commentRecyclerView);
         CommentsRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -60,13 +65,81 @@ public class commentScreen extends AppCompatActivity {
 
         postCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                validateComment();
+            public void onClick(View v)
+            {
+                databaseReference.child(current_UserID).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        validateComment();
+
+                        postCommentText.setText(null);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
             }
         });
+
     }
 
-    private void validateComment() {
+    protected void onStart()
+    {
+        super.onStart();
+
+        FirebaseRecyclerOptions<comments> options = new FirebaseRecyclerOptions.Builder<comments>()
+                .setQuery(commentsRef, comments.class)
+                .build();
+
+        FirebaseRecyclerAdapter<comments, CommentsViewHolder> adapter = new FirebaseRecyclerAdapter<comments, CommentsViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull CommentsViewHolder holder, int position, @NonNull comments model)
+            {
+                holder.comment_Text.setText(model.getComment());
+                holder.date_Text.setText(model.getDate());
+                holder.time_Text.setText(model.getTime());
+            }
+
+            @NonNull
+            @Override
+            public CommentsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
+            {
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.comments_layout, viewGroup, false);
+                CommentsViewHolder viewHolder = new CommentsViewHolder(view);
+                return viewHolder;
+            }
+        };
+
+        CommentsRecyclerView.setAdapter(adapter);
+
+        adapter.startListening();
+    }
+
+    public static class CommentsViewHolder extends RecyclerView.ViewHolder
+    {
+        View mView;
+
+        TextView comment_Text;
+        TextView date_Text, time_Text;
+
+        public CommentsViewHolder(@NonNull View itemView)
+        {
+            super(itemView);
+
+            mView = itemView;
+
+            comment_Text = mView.findViewById(R.id.user_comment_text);
+            time_Text = mView.findViewById(R.id.comment_date);
+            date_Text = mView.findViewById(R.id.comment_time);
+        }
+    }
+
+    private void validateComment(){
         String comment = postCommentText.getText().toString();
 
         if(TextUtils.isEmpty(comment))
@@ -79,34 +152,20 @@ public class commentScreen extends AppCompatActivity {
             //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
             Calendar calendarDate = Calendar.getInstance();
             SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
-            final String date = currentDate.format(calendarDate.getTime());
+            String date = currentDate.format(calendarDate.getTime());
 
             //code below used to create date attribute in referenced child(randomly created when post to database is made)
             //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
             Calendar calendarTime = Calendar.getInstance();
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
-            final String time = currentTime.format(calendarTime.getTime());
+            String time = currentTime.format(calendarTime.getTime());
 
-            final String CommentPostKey = current_UserID;
+            DatabaseReference newComment = commentsRef.push();
 
-            HashMap commentsMap = new HashMap();
-            commentsMap.put("user ID", current_UserID);
-            commentsMap.put("comment", comment);
-            commentsMap.put("date", date);
-            commentsMap.put("time", time);
-            commentsRef.child(CommentPostKey).updateChildren(commentsMap).addOnCompleteListener(new OnCompleteListener() {
-                @Override
-                public void onComplete(@NonNull Task task) {
-                    if (task.isSuccessful())
-                    {
-                        Toast.makeText(commentScreen.this, "Comment Added", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        Toast.makeText(commentScreen.this, "Error. Please try again.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            newComment.child("comment").setValue(comment);
+            newComment.child("date").setValue(date);
+            newComment.child("time").setValue(time);
+            newComment.child("user ID").setValue(current_UserID);
         }
     }
 }

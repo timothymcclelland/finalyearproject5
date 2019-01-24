@@ -70,7 +70,7 @@ public class content extends AppCompatActivity {
         /*assigning java RecyclerView instance to xml item and setting to fixed size so
         that width or height does not change based on the content in it
          */
-        viewRecycler = (RecyclerView) findViewById(R.id.recyclerView);
+        viewRecycler = findViewById(R.id.recyclerView);
         viewRecycler.setHasFixedSize(true);
         viewRecycler.setLayoutManager(mLayoutManager);
 
