@@ -1,8 +1,11 @@
+<!--Layout of dialog box that appears when user selects to edit their post-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <!--Text to instruct what user can do via the dialog box e.g. "Edit Post"-->
     <TextView
         android:id="@+id/dialog_text"
         android:inputType="textEmailAddress"
@@ -14,6 +17,8 @@
         android:layout_marginBottom="4dp"
         android:text="@string/dialog_text" />
 
+    <!--Edit Text containing current post chosen to edited.
+    User can then edit this to update their post-->
     <EditText
         android:id="@+id/post_edit_text"
         android:layout_width="match_parent"
@@ -24,6 +29,8 @@
         android:layout_marginBottom="4dp"
         android:hint="@string/dialog_post_hint" />
 
+    <!--Spinner uses category_array string resource.
+    Same spinner used in add_post-->
     <Spinner
         android:id="@+id/post_edit_category"
         android:layout_width="match_parent"

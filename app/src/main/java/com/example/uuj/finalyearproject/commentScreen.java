@@ -1,3 +1,9 @@
+/*followed the following tutorials in the creation of this java activity
+https://www.youtube.com/watch?v=Jnsrcbe9MCQ&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=41
+https://www.youtube.com/watch?v=oE-BObhBn2k&index=42&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_
+https://www.youtube.com/watch?v=hX5867tnXFk&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=43
+ */
+
 package com.example.uuj.finalyearproject;
 
 import android.os.TransactionTooLargeException;
@@ -37,22 +43,34 @@ public class commentScreen extends AppCompatActivity {
     private EditText postCommentText;
     private String PostKey, current_UserID;
 
-    private DatabaseReference commentsRef;
+    //Firebase Database variables
+    private DatabaseReference commentsRef, databaseReference;
 
+    //Firebase Authentication variable
     private FirebaseAuth mAuth;
-    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_screen);
 
+        //used to get position of specific post that a user has selected to comment on
         PostKey = getIntent().getExtras().get("PostKey").toString();
 
+        //methods below used to get current user ID from the Firebase Authentication system
         mAuth = FirebaseAuth.getInstance();
         current_UserID = mAuth.getCurrentUser().getUid();
+
+        /*Referencing database variables to Firebase Realtime Database children "User Post Reports" which
+         will contain all users' posts and their comments for each post*/
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Users Posts").child(PostKey).child("Post Comments");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
+
+        /*assigning java RecyclerView instance to xml item and setting to fixed size so
+        that width or height does not change based on the content in it and setting the stack of the contents to
+        start from the end
+        Also sort the comments in the commentScreen screen in ascending order by reversing the layout
+         */
         CommentsRecyclerView = findViewById(R.id.commentRecyclerView);
         CommentsRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -60,9 +78,11 @@ public class commentScreen extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         CommentsRecyclerView.setLayoutManager(linearLayoutManager);
 
+        //Referencing Java to XML variables in activity_comment_screen.xml
         postCommentText = findViewById(R.id.comment_text);
         postCommentButton = findViewById(R.id.post_comment_button);
 
+        //onClickListener method called to send data to the Firebase Realtime database
         postCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -88,14 +108,19 @@ public class commentScreen extends AppCompatActivity {
 
     }
 
+    /* onStart method calls recyclerview adapter to retrieve data from Firebase database and input into the layout defined
+    within comments_layout.xml*/
     protected void onStart()
     {
         super.onStart();
-
+        //RecyclerOptions set the options that the RecyclerAdapter will use to retrieve the data from the database
         FirebaseRecyclerOptions<comments> options = new FirebaseRecyclerOptions.Builder<comments>()
                 .setQuery(commentsRef, comments.class)
                 .build();
 
+          /*RecyclerAdapter uses the comments class and the getter and setter methods defined within to set the viewHolder data to the
+        data retrieved from the database*/
+        /* RecyclerAdapter is used to bind the data retrieved from the database for use by the CommentsViewHolder class to display it in the defined view*/
         FirebaseRecyclerAdapter<comments, CommentsViewHolder> adapter = new FirebaseRecyclerAdapter<comments, CommentsViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CommentsViewHolder holder, int position, @NonNull comments model)
@@ -107,6 +132,7 @@ public class commentScreen extends AppCompatActivity {
 
             @NonNull
             @Override
+            //method used to take data from database and display it in the comments_layout.xml layout
             public CommentsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
             {
                 View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.comments_layout, viewGroup, false);
@@ -114,12 +140,13 @@ public class commentScreen extends AppCompatActivity {
                 return viewHolder;
             }
         };
-
+        //sets the recyclerview to the recycleradapter defined above
         CommentsRecyclerView.setAdapter(adapter);
-
+        //initiates the recycleradapter to pull the data from the database
         adapter.startListening();
     }
 
+    //ViewHolder used to reference each comments_layout xml resource and allow repetition of these resources as required by the RecyclerAdapter
     public static class CommentsViewHolder extends RecyclerView.ViewHolder
     {
         View mView;
@@ -139,9 +166,12 @@ public class commentScreen extends AppCompatActivity {
         }
     }
 
+    /* method to validate the comment and then send the data entered to the Firebase Database*/
     private void validateComment(){
         String comment = postCommentText.getText().toString();
 
+         /*Toast message that displays if comment editText field is
+         left empty when user tries to add a comment*/
         if(TextUtils.isEmpty(comment))
         {
             Toast.makeText(this, "Please input a comment", Toast.LENGTH_SHORT).show();
@@ -160,8 +190,11 @@ public class commentScreen extends AppCompatActivity {
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
             String time = currentTime.format(calendarTime.getTime());
 
+            //used https://www.youtube.com/watch?v=tOn5HsQPhUY as basis of how I should send my data to my Firebase database
+            //Creates reference to auto-generated child location in Firebase database
             DatabaseReference newComment = commentsRef.push();
 
+            //Creating children in referenced Firebase database child and set the value that will appear in the database
             newComment.child("comment").setValue(comment);
             newComment.child("date").setValue(date);
             newComment.child("time").setValue(time);

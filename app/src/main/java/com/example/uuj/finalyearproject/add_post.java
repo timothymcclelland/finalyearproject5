@@ -28,6 +28,7 @@ public class add_post extends AppCompatActivity {
         private String time;
         private String currentUserID;
 
+        //Firebase Authentication variable
         private FirebaseAuth mAuth;
 
         //Firebase Database variable
@@ -39,6 +40,7 @@ public class add_post extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_post);
 
+        //methods below used to get current user ID from the Firebase Authentication system
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
 
@@ -54,10 +56,10 @@ public class add_post extends AppCompatActivity {
         addPost = (EditText) findViewById(R.id.postEditText);
         buttonPost = (Button) findViewById(R.id.postButton);
 
-        /*Referencing database variable to Firebase Realtime Database child "Post" which will contain */
+        /*Referencing database variable to Firebase Realtime Database child "Users Posts" which will contain all user's posts*/
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
 
-        //onClickListener method called to send to the Firebase Realtime database
+        //onClickListener method called to send data to the Firebase Realtime database
         buttonPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +82,8 @@ public class add_post extends AppCompatActivity {
                 //formatting spinner item to get selected item and format it to string for input in Firebase Database
                 String categorySelected = spinner.getSelectedItem().toString();
 
+                /*Toast message that displays if post_content editText field is
+                 left empty when user tries to add a new post*/
                 if(TextUtils.isEmpty(post_content))
                 {
                     Toast.makeText(add_post.this, "Enter post text", Toast.LENGTH_SHORT).show();

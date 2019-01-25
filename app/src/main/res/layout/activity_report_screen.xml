@@ -50,7 +50,7 @@
                 android:textColor="@color/colorAccent"
                 android:clickable="true" />
 
-            <!--referenced in add_post.java-->
+            <!--Spinner to select reason for report-->
             <Spinner
                 android:layout_margin="15dp"
                 android:layout_width="match_parent"
@@ -68,6 +68,7 @@
                 android:paddingBottom="15dp"
                 android:textColorHint="@color/colorAccent" />
 
+            <!--Clickable button submit report to database for investigation-->
             <Button
                 android:id="@+id/report_button"
                 android:background="@color/colorButton"

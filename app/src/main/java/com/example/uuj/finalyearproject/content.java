@@ -47,6 +47,8 @@ public class content extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content);
 
+        /*method below used to get instance of user that has just logged in
+        from the Firebase Authentication system*/
         mAuth = FirebaseAuth.getInstance();
 
         //Shared Preferences used to store the users selected sort by preference
@@ -119,6 +121,10 @@ public class content extends AppCompatActivity {
                 holder.date_Text.setText(model.getDate());
                 holder.time_Text.setText(model.getTime());
 
+                /*
+                onClickListener - when user clicks on post_Text they are sent to edit_delete_post screen.
+                PostKey used to retrieve data of specific post the user has selected to edit/delete.
+                 */
                 holder.post_Text.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -127,7 +133,11 @@ public class content extends AppCompatActivity {
                         startActivity(postIntent);
                     }
                 });
-                
+
+                /*
+                onClickListener - when user clicks on commentButton they are sent to commentScreen screen.
+                PostKey used to retrieve data of specific post the user has selected to comment on.
+                 */
                 holder.commentButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -137,6 +147,10 @@ public class content extends AppCompatActivity {
                     }
                 });
 
+                /*
+                onClickListener - when user clicks on reportButton they are sent to reportScreen screen.
+                PostKey used to retrieve data of specific post the user has selected to report on.
+                 */
                 holder.reportButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -165,6 +179,7 @@ public class content extends AppCompatActivity {
 
     //ViewHolder used to reference each post_view xml resource and allow repetition of these resources as required by the RecyclerAdapter
     public static class PostViewHolder extends RecyclerView.ViewHolder {
+
 
         View mView;
 
@@ -254,6 +269,4 @@ public class content extends AppCompatActivity {
     public void filter(){
 
     }
-
-
 }

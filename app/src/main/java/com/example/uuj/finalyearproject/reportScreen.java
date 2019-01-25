@@ -1,3 +1,7 @@
+/*used same principles as reset.java and commentScreen.java classes in the creation of this java class
+
+ */
+
 package com.example.uuj.finalyearproject;
 
 import android.content.Intent;
@@ -29,6 +33,7 @@ public class reportScreen extends AppCompatActivity {
         private String currentUserID;
         private String PostKey;
 
+        //Firebase Authentication variable
         private FirebaseAuth mAuth;
 
         //Firebase Database variable
@@ -39,27 +44,29 @@ public class reportScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_screen);
 
+        //methods below used to get current user ID from the Firebase Authentication system
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
 
+        //used to get position of specific post that a user has selected to report on
         PostKey = getIntent().getExtras().get("PostKey").toString();
 
-        //Spinner used to select category of post
+        //Spinner used to select reason of report
         spinner = (Spinner) findViewById(R.id.report_reason_spinner);
-        //spinner uses category array specified in strings.xml
+        //spinner uses report reason array specified in strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.report_reason_array, android.R.layout.simple_spinner_dropdown_item);
         //drop down style used
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        //Referencing Java to XML variables in add_post.xml
+        //Referencing Java to XML variables in activity_report_screen.xml
         report_information = (EditText) findViewById(R.id.editTextReportInformation);
         buttonReport = (Button) findViewById(R.id.report_button);
 
-        /*Referencing database variable to Firebase Realtime Database child "Post" which will contain */
+        /*Referencing database variable to Firebase Realtime Database child "User Post Reports" which will contain all user's reports for each comment*/
         databaseReference = FirebaseDatabase.getInstance().getReference().child("User Post Reports").child(PostKey).child("Post Reports");
 
-        //onClickListener method called to send to the Firebase Realtime database
+        //onClickListener method called to send data to the Firebase Realtime database
         buttonReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +89,8 @@ public class reportScreen extends AppCompatActivity {
                 //formatting spinner item to get selected item and format it to string for input in Firebase Database
                 String reportReasonSelected = spinner.getSelectedItem().toString();
 
+                 /*Toast message that displays if report_information_content editText field is
+                 left empty when user tries to submit a report*/
                 if(TextUtils.isEmpty(report_information_content))
                 {
                     Toast.makeText(reportScreen.this, "Enter report information", Toast.LENGTH_SHORT).show();

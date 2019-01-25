@@ -14,7 +14,7 @@
         android:textColor="@color/colorAccent"
         android:text="@string/commentsScreenTitle" />
 
-    <!-- recyclerview -->
+    <!--comments recyclerview -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/commentRecyclerView"
         android:layout_margin="5dp"
@@ -25,6 +25,7 @@
         android:layout_marginTop="14dp">
     </android.support.v7.widget.RecyclerView>
 
+    <!-- EditText for user to enter comment text-->
     <EditText
         android:id="@+id/comment_text"
         android:layout_width="match_parent"
