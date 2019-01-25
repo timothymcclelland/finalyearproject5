@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- similar page structure used in login_in and register pages to create consistent layout -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".reportScreen">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
+
+        <!-- App Icon contained as imageview -->
+        <ImageView
+            android:layout_width="181dp"
+            android:layout_height="184dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/app_icon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <!-- Instructions for user regarding resetting of their password -->
+            <TextView
+                android:id="@+id/report_instruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="@string/report_instruction_text"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorAccent"
+                android:clickable="true" />
+
+            <!--referenced in add_post.java-->
+            <Spinner
+                android:layout_margin="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/report_reason_spinner">
+            </Spinner>
+
+            <!-- EditText for user to enter report information-->
+            <EditText
+                android:id="@+id/editTextReportInformation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="@string/hint_report_information"
+                android:paddingBottom="15dp"
+                android:textColorHint="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/report_button"
+                android:background="@color/colorButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:text="@string/report_button_text"
+                android:textSize="10pt"
+                android:textAllCaps="false"
+                android:textColor="@color/buttonTextColor" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -28,6 +28,17 @@
     <string name="delete_post">Delete</string>
     <string name="dialog_text">Edit Post:</string>
     <string name="dialog_post_hint">Post</string>
+    <string name="report_button_text">Submit Report</string>
+    <string name="hint_report_information">Report Information</string>
+    <string name="report_instruction_text">Please provide reason for reporting user/comment along with information to be included in your report.</string>
+
+    <!-- string array used for report reason spinner values -->
+    <string-array name="report_reason_array">
+        <item>Inappropriate Language Used</item>
+        <item>Inappropriate Content</item>
+        <item>False statement/guidance</item>
+        <item>Harassment orientated</item>
+    </string-array>
 
     <!-- string array used for category spinner values -->
     <string-array name="category_array">

@@ -136,6 +136,15 @@ public class content extends AppCompatActivity {
                         startActivity(commentIntent);
                     }
                 });
+
+                holder.reportButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent reportIntent = new Intent(content.this, reportScreen.class);
+                        reportIntent.putExtra("PostKey", PostKey);
+                        startActivity(reportIntent);
+                    }
+                });
             }
 
             @NonNull
@@ -174,7 +183,6 @@ public class content extends AppCompatActivity {
             time_Text = itemView.findViewById(R.id.post_time);
             commentButton = mView.findViewById(R.id.comment_button);
             reportButton = mView.findViewById(R.id.report_button);
-
         }
     }
 
