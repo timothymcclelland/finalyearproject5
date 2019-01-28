@@ -25,8 +25,15 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class content extends AppCompatActivity {
 
@@ -36,19 +43,18 @@ public class content extends AppCompatActivity {
     private RecyclerView viewRecycler;
     private String currentUser;
 
+    private List<post> postList;
+
     //Firebase Authentication variable
     private FirebaseAuth mAuth;
 
     //Firebase Database variable
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, categoryRef;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content);
-
-        //filter o
-
 
         /*method below used to get instance of user that has just logged in
         from the Firebase Authentication system*/
@@ -81,6 +87,9 @@ public class content extends AppCompatActivity {
 
         //setting the database node in Firebase to Users Posts
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
+
+        //querying the database in Firebase for the category of Users Posts
+        categoryRef = FirebaseDatabase.getInstance().getReference().child("Users Posts").child("category");
 
         //Referencing Java to XML resources
         //Reference toolbar as action bar and hiding title in toolbar
@@ -270,16 +279,47 @@ public class content extends AppCompatActivity {
 
     //filter content based on category
     public void filter(){
-        String[] sortOptions = {"Ascending", "Descending"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Filter by Category")
-                .setItems(categoryOptions, new DialogInterface.OnClickListener() {
+                .setItems(R.array.category_array, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
-                            case
+                        if(which==0){
+                            Query workCategory = categoryRef.orderByChild("category").equalTo("Work");
+
+                            workCategory.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }else if(which==1){
+
+                        }else if(which==2){
+
+                        }else if(which==3){
+
+                        }else if(which==4){
+
+                        }else if(which==5){
+
+                        }else if(which==6){
+
+                        }else if(which==7){
+
+                        }else if(which==8){
+
+                        }else if(which==9){
+
                         }
                     }
-                })
+                });
+        builder.create();
+        builder.show();
     }
 }
