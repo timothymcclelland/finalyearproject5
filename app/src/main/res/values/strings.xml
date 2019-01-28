@@ -10,8 +10,8 @@
     <string name="forgot_password_text">Forgot Password? Reset</string>
     <string name="reset_password">Reset Password</string>
     <string name="reset_password_text">Please enter the email address linked with your account to receive password reset link.</string>
-    <string name="filter_toolbar">Filter</string>
-    <string name="sort_toolbar">Sort</string>
+    <string name="filter_toolbar">Filter by Category</string>
+    <string name="sort_toolbar">Sort by Order</string>
     <string name="sign_out_toolbar">Sign Out</string>
     <string name="comment">Comment</string>
     <string name="flag">Report</string>

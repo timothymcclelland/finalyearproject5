@@ -47,6 +47,9 @@ public class content extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content);
 
+        //filter o
+
+
         /*method below used to get instance of user that has just logged in
         from the Firebase Authentication system*/
         mAuth = FirebaseAuth.getInstance();
@@ -239,7 +242,7 @@ public class content extends AppCompatActivity {
     public void sort(){
         String[] sortOptions = {"Ascending", "Descending"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Sort by")
+        builder.setTitle("Sort by Order")
                 .setItems(sortOptions, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -267,6 +270,16 @@ public class content extends AppCompatActivity {
 
     //filter content based on category
     public void filter(){
-
+        String[] sortOptions = {"Ascending", "Descending"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Filter by Category")
+                .setItems(categoryOptions, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case
+                        }
+                    }
+                })
     }
 }
