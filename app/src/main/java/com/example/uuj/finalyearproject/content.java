@@ -12,6 +12,7 @@ import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -68,8 +69,8 @@ public class content extends AppCompatActivity {
         mSharedPref = getSharedPreferences("SortSettings", MODE_PRIVATE);
         String mSorting = mSharedPref.getString("Sort", "Ascending");
 
-        searchButton = findViewById(R.id.searchButton);
-        searchInputText = findViewById(R.id.searchEditText);
+        //searchButton = findViewById(R.id.searchButton);
+        //searchInputText = findViewById(R.id.searchEditText);
 
         /*sort the posts in the content screen in ascending order by reversing the layout and setting the stack of the contents to
         start from the end*/
@@ -112,24 +113,24 @@ public class content extends AppCompatActivity {
                 startActivity(new Intent(content.this, add_post.class));
             }
         });
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        DisplayPosts();
+        /*searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String searchBoxInput = searchInputText.getText().toString();
 
                 DisplayPosts(searchBoxInput);
             }
-        });
+        });*/
     }
 
     /* DisplayPosts method calls recyclerview adapter to retrieve data from Firebase database and input into the cardview defined
     within post_view.xml*/
-    private void DisplayPosts(String searchBoxInput) {
-        Query categoryQuery = databaseReference.orderByChild("category").startAt(searchBoxInput).endAt(searchBoxInput);
+    private void DisplayPosts() {
+        //Query categoryQuery = databaseReference.orderByChild("category").startAt(searchBoxInput).endAt(searchBoxInput);
         //RecyclerOptions set the options that the RecyclerAdapter will use to retrieve the data from the database
         FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>()
-                .setQuery(categoryQuery, post.class)
+                .setQuery(databaseReference, post.class)
                 .build();
 
         /*RecyclerAdapter uses the post class and the getter and setter methods defined within to set the viewHolder data to the
