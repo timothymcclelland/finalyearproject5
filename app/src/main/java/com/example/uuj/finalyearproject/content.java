@@ -18,6 +18,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,6 +52,8 @@ public class content extends AppCompatActivity {
 
     //Firebase Database variable
     private DatabaseReference databaseReference, categoryRef;
+    private Button searchButton;
+    private EditText searchInputText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,9 @@ public class content extends AppCompatActivity {
         //Shared Preferences used to store the users selected sort by preference
         mSharedPref = getSharedPreferences("SortSettings", MODE_PRIVATE);
         String mSorting = mSharedPref.getString("Sort", "Ascending");
+
+        searchButton = findViewById(R.id.searchButton);
+        searchInputText = findViewById(R.id.searchEditText);
 
         /*sort the posts in the content screen in ascending order by reversing the layout and setting the stack of the contents to
         start from the end*/
@@ -88,9 +95,6 @@ public class content extends AppCompatActivity {
         //setting the database node in Firebase to Users Posts
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
 
-        //querying the database in Firebase for the category of Users Posts
-        categoryRef = FirebaseDatabase.getInstance().getReference().child("Users Posts").child("category");
-
         //Referencing Java to XML resources
         //Reference toolbar as action bar and hiding title in toolbar
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -108,15 +112,24 @@ public class content extends AppCompatActivity {
                 startActivity(new Intent(content.this, add_post.class));
             }
         });
-        DisplayPosts();
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchBoxInput = searchInputText.getText().toString();
+
+                DisplayPosts(searchBoxInput);
+            }
+        });
     }
 
     /* DisplayPosts method calls recyclerview adapter to retrieve data from Firebase database and input into the cardview defined
     within post_view.xml*/
-    private void DisplayPosts() {
+    private void DisplayPosts(String searchBoxInput) {
+        Query categoryQuery = databaseReference.orderByChild("category").startAt(searchBoxInput).endAt(searchBoxInput);
         //RecyclerOptions set the options that the RecyclerAdapter will use to retrieve the data from the database
         FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>()
-                .setQuery(databaseReference, post.class)
+                .setQuery(categoryQuery, post.class)
                 .build();
 
         /*RecyclerAdapter uses the post class and the getter and setter methods defined within to set the viewHolder data to the
@@ -225,9 +238,6 @@ public class content extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_filter:
-                filter();
-                return true;
             case R.id.action_sort:
                 sort();
                 return true;
@@ -274,52 +284,6 @@ public class content extends AppCompatActivity {
                         }
                     }
                 });
-        builder.show();
-    }
-
-    //filter content based on category
-    public void filter(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Filter by Category")
-                .setItems(R.array.category_array, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(which==0){
-                            Query workCategory = categoryRef.orderByChild("category").equalTo("Work");
-
-                            workCategory.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-                        }else if(which==1){
-
-                        }else if(which==2){
-
-                        }else if(which==3){
-
-                        }else if(which==4){
-
-                        }else if(which==5){
-
-                        }else if(which==6){
-
-                        }else if(which==7){
-
-                        }else if(which==8){
-
-                        }else if(which==9){
-
-                        }
-                    }
-                });
-        builder.create();
         builder.show();
     }
 }
