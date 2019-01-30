@@ -1,11 +1,17 @@
 package com.example.uuj.finalyearproject;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuView;
@@ -24,9 +30,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +43,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +66,38 @@ public class content extends AppCompatActivity {
     private DatabaseReference databaseReference, categoryRef;
     private Button searchButton;
     private EditText searchInputText;
+    public static final String CHANNEL_ID = "notification_CHANNEL_ID";
+    public static final String CHANNEL_NAME = "notification_CHANNEL_NAME";
+    public static final String CHANNEL_DESCRIPTION = "notification_CHANNEL_DESCRIPTION";
+    private TextView textView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content);
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(CHANNEL_DESCRIPTION);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        textView = findViewById(R.id.token);
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(task.isSuccessful()){
+                            String token = task.getResult().getToken();
+                            saveToken(token);
+                        }else{
+                            textView.setText(task.getException().getMessage());
+                        }
+                    }
+                });
         /*method below used to get instance of user that has just logged in
         from the Firebase Authentication system*/
         mAuth = FirebaseAuth.getInstance();
@@ -69,8 +106,8 @@ public class content extends AppCompatActivity {
         mSharedPref = getSharedPreferences("SortSettings", MODE_PRIVATE);
         String mSorting = mSharedPref.getString("Sort", "Ascending");
 
-        //searchButton = findViewById(R.id.searchButton);
-        //searchInputText = findViewById(R.id.searchEditText);
+        searchButton = findViewById(R.id.searchButton);
+        searchInputText = findViewById(R.id.searchEditText);
 
         /*sort the posts in the content screen in ascending order by reversing the layout and setting the stack of the contents to
         start from the end*/
@@ -113,24 +150,43 @@ public class content extends AppCompatActivity {
                 startActivity(new Intent(content.this, add_post.class));
             }
         });
-        DisplayPosts();
-        /*searchButton.setOnClickListener(new View.OnClickListener() {
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String searchBoxInput = searchInputText.getText().toString();
 
                 DisplayPosts(searchBoxInput);
             }
-        });*/
+        });
     }
+
+    private void saveToken(String token) {
+        String email = mAuth.getCurrentUser().getEmail();
+        User user = new User(email, token);
+
+        DatabaseReference userTokenRef = FirebaseDatabase.getInstance().getReference("User Token");
+
+        userTokenRef.child(mAuth.getCurrentUser().getUid())
+                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(content.this, "Token Saved", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+
 
     /* DisplayPosts method calls recyclerview adapter to retrieve data from Firebase database and input into the cardview defined
     within post_view.xml*/
-    private void DisplayPosts() {
-        //Query categoryQuery = databaseReference.orderByChild("category").startAt(searchBoxInput).endAt(searchBoxInput);
+    private void DisplayPosts(String searchBoxInput) {
+        Query categoryQuery = databaseReference.orderByChild("category").startAt(searchBoxInput).endAt(searchBoxInput);
         //RecyclerOptions set the options that the RecyclerAdapter will use to retrieve the data from the database
         FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>()
-                .setQuery(databaseReference, post.class)
+                .setQuery(categoryQuery, post.class)
                 .build();
 
         /*RecyclerAdapter uses the post class and the getter and setter methods defined within to set the viewHolder data to the

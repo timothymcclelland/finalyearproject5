@@ -24,7 +24,7 @@
 
         </RelativeLayout>
 
-        <!--<EditText
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/searchEditText"
@@ -40,15 +40,24 @@
             android:background="@color/colorButton"
             android:layout_below="@id/searchEditText"
             android:layout_margin="5dp"
-            android:inputType="text"/>-->
+            android:inputType="text"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/token"
+            android:textColor="@color/colorPrimary"
+            android:background="@color/colorButton"
+            android:layout_below="@id/searchButton"
+            android:layout_margin="5dp"
+            android:inputType="text"/>
 
         <!--recyclerview for user posts-->
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/recyclerView"
-            android:layout_below="@id/toolbar_layout">
+            android:layout_below="@id/token">
         </android.support.v7.widget.RecyclerView>
 
         <!--floating action button to add post -->

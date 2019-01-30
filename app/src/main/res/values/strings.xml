@@ -34,6 +34,7 @@
     <string name="post_category">Category of Post</string>
     <string name="searchButtonText">Search</string>
     <string name="searchHintText">Filter by Category, date, time or post content</string>
+    <string name="notification">Notify</string>
 
     <!-- string array used for report reason spinner values -->
     <string-array name="report_reason_array">
