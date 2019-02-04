@@ -168,7 +168,7 @@ public class content extends AppCompatActivity {
         String email = mAuth.getCurrentUser().getEmail();
         User user = new User(email, token);
 
-        DatabaseReference userTokenRef = FirebaseDatabase.getInstance().getReference("User Token");
+        DatabaseReference userTokenRef = FirebaseDatabase.getInstance().getReference("users");
 
         userTokenRef.child(mAuth.getCurrentUser().getUid())
                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
