@@ -87,7 +87,7 @@ public class content extends AppCompatActivity {
 
         textView = findViewById(R.id.token);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("updates");
+        FirebaseMessaging.getInstance().subscribeToTopic("BibleVerses");
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
