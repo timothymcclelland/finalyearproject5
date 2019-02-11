@@ -112,6 +112,7 @@ public class content extends AppCompatActivity {
         mSharedPref = getSharedPreferences("SortSettings", MODE_PRIVATE);
         String mSorting = mSharedPref.getString("Sort", "Ascending");
 
+        //Java referencing to XML items
         searchButton = findViewById(R.id.searchButton);
         searchInputText = findViewById(R.id.searchEditText);
 
@@ -157,6 +158,7 @@ public class content extends AppCompatActivity {
             }
         });
 
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,6 +168,7 @@ public class content extends AppCompatActivity {
             }
         });
     }
+
 
     private void saveToken(String token) {
         String email = mAuth.getCurrentUser().getEmail();
