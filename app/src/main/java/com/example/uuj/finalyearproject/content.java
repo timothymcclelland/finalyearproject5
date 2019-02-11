@@ -6,6 +6,9 @@ import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -175,7 +178,7 @@ public class content extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(content.this, "Token Saved", Toast.LENGTH_LONG).show();
+                    
                 }
             }
         });
@@ -304,9 +307,26 @@ public class content extends AppCompatActivity {
             case R.id.action_sign_out:
                 signOut();
                 return true;
+            case R.id.action_link:
+                bibleLink();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void bibleLink() {
+        //package name for YouVersion Bible App
+        //package name found using Package Name Viewer 2.0 App
+        String app_name = "com.sirma.mobile.bible.android";
+        Intent openBibleApp = getPackageManager().getLaunchIntentForPackage(app_name);
+
+        //method to check if user has YouVersion Bibe App installed on device and open it if they do
+        //if not then it will give them the option to go the the play store to install it
+        if(openBibleApp == null) {
+            openBibleApp = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id="+app_name));
+        }
+        startActivity(openBibleApp);
     }
 
     //Sign out method taken directly from FirebaseAuth methods
