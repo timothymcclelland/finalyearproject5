@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,9 +33,13 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.snapshot.BooleanNode;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -47,12 +52,14 @@ public class content extends AppCompatActivity {
     private RecyclerView viewRecycler;
     private Button searchButton;
     private EditText searchInputText;
+    Boolean LikeChecker = false;
+    String currentUserID;
 
     //Firebase Authentication variable
     private FirebaseAuth mAuth;
 
     //Firebase Database variable
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, likesRef;
 
     //Notification variables to display notification
     public static final String CHANNEL_ID = "notification_CHANNEL_ID";
@@ -97,6 +104,8 @@ public class content extends AppCompatActivity {
         /*method below used to get instance of user that has just logged in
         from the Firebase Authentication system*/
         mAuth = FirebaseAuth.getInstance();
+        //method below used to get user id of user logged in
+        currentUserID = mAuth.getCurrentUser().getUid();
 
         //Shared Preferences used to store the users selected sort by preference
         mSharedPref = getSharedPreferences("SortSettings", MODE_PRIVATE);
@@ -129,6 +138,9 @@ public class content extends AppCompatActivity {
 
         //setting the database node in Firebase to Users Posts
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
+
+
+        likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
 
         //Referencing Java to XML resources
         //Reference toolbar as action bar and hiding title in toolbar
@@ -199,6 +211,8 @@ public class content extends AppCompatActivity {
                 holder.date_Text.setText(model.getDate());
                 holder.time_Text.setText(model.getTime());
 
+                holder.setLikeButton(PostKey);
+
                 /*
                 onClickListener - when user clicks on post_Text they are sent to edit_delete_post screen.
                 PostKey used to retrieve data of specific post the user has selected to edit/delete.
@@ -222,6 +236,37 @@ public class content extends AppCompatActivity {
                         Intent commentIntent = new Intent(content.this, commentScreen.class);
                         commentIntent.putExtra("PostKey", PostKey);
                         startActivity(commentIntent);
+                    }
+                });
+
+                holder.likeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LikeChecker = true;
+
+                        likesRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if(LikeChecker.equals(true))
+                                {
+                                    if(dataSnapshot.child(PostKey).hasChild(currentUserID))
+                                    {
+                                        likesRef.child(PostKey).child(currentUserID).removeValue();
+                                        LikeChecker = false;
+                                    }
+                                    else
+                                    {
+                                        likesRef.child(PostKey).child(currentUserID).setValue(true);
+                                        LikeChecker = false;
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 });
 
@@ -263,7 +308,11 @@ public class content extends AppCompatActivity {
 
         TextView post_Text, category_Text;
         TextView date_Text, time_Text;
-        ImageButton commentButton, reportButton;
+        TextView numberOfLikes;
+        ImageButton commentButton, reportButton, likeButton;
+        int likeCounter;
+        String currentUserId;
+        DatabaseReference LikesRef;
 
         public PostViewHolder(View itemView) {
             super(itemView);
@@ -276,6 +325,36 @@ public class content extends AppCompatActivity {
             time_Text = itemView.findViewById(R.id.post_time);
             commentButton = mView.findViewById(R.id.comment_button);
             reportButton = mView.findViewById(R.id.report_button);
+            likeButton = mView.findViewById(R.id.like_button);
+            numberOfLikes = mView.findViewById(R.id.likeView);
+            LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+            currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+
+        public void setLikeButton(final String PostKey)
+        {
+            LikesRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(PostKey).hasChild(currentUserId))
+                    {
+                        likeCounter = (int) dataSnapshot.child(PostKey).getChildrenCount();
+                        likeButton.setImageResource(R.mipmap.ic_like);
+                        numberOfLikes.setText(Integer.toString(likeCounter));
+                    }
+                    else
+                    {
+                        likeCounter = (int) dataSnapshot.child(PostKey).getChildrenCount();
+                        likeButton.setImageResource(R.mipmap.ic_unlike);
+                        numberOfLikes.setText(Integer.toString(likeCounter));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 

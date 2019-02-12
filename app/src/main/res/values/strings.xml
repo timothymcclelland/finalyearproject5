@@ -36,6 +36,9 @@
     <string name="searchHintText">Filter by Category, date, time or post content</string>
     <string name="notification">Notify</string>
     <string name="bible_link">Open Bible App</string>
+    <string name="like">Like</string>
+    <string name="likes">0 likes</string>
+    <string name="share">Share</string>
 
     <!-- string array used for report reason spinner values -->
     <string-array name="report_reason_array">
