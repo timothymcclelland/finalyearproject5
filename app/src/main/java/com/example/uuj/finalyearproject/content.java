@@ -1,27 +1,20 @@
 package com.example.uuj.finalyearproject;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,27 +24,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+//Firebase imports
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class content extends AppCompatActivity {
 
@@ -59,27 +45,28 @@ public class content extends AppCompatActivity {
     private LinearLayoutManager mLayoutManager;
     private SharedPreferences mSharedPref;
     private RecyclerView viewRecycler;
-    private String currentUser;
-
-    private List<post> postList;
+    private Button searchButton;
+    private EditText searchInputText;
 
     //Firebase Authentication variable
     private FirebaseAuth mAuth;
 
     //Firebase Database variable
-    private DatabaseReference databaseReference, categoryRef;
-    private Button searchButton;
-    private EditText searchInputText;
+    private DatabaseReference databaseReference;
+
+    //Notification variables to display notification
     public static final String CHANNEL_ID = "notification_CHANNEL_ID";
     public static final String CHANNEL_NAME = "notification_CHANNEL_NAME";
     public static final String CHANNEL_DESCRIPTION = "notification_CHANNEL_DESCRIPTION";
-    private TextView textView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content);
 
+        //method to create notification channel
+        //minimum must O to allow for notification channel to be created
+        //channel will only be created for devices on Android Oreo (8) or newer
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription(CHANNEL_DESCRIPTION);
@@ -88,10 +75,10 @@ public class content extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
 
-        textView = findViewById(R.id.token);
-
+        //method to allow for users to sign up to for receiving Bible Verses notifications
         FirebaseMessaging.getInstance().subscribeToTopic("BibleVerses");
 
+        //gets users device registration token and uses this token in saveToken method
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
@@ -100,7 +87,7 @@ public class content extends AppCompatActivity {
                             String token = task.getResult().getToken();
                             saveToken(token);
                         }else{
-                            textView.setText(task.getException().getMessage());
+
                         }
                     }
                 });
@@ -158,10 +145,12 @@ public class content extends AppCompatActivity {
             }
         });
 
-
+        /*followed tutorial when implementing search facility to filter data based on category
+        https://www.youtube.com/watch?v=sbOdwk4C_9s&t=1051s*/
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //converts input text to string to search data in DisplayPosts method
                 String searchBoxInput = searchInputText.getText().toString();
 
                 DisplayPosts(searchBoxInput);
@@ -169,31 +158,26 @@ public class content extends AppCompatActivity {
         });
     }
 
-
+    //method to store users auto generated device registration token when they first use the app
+    //used https://www.youtube.com/watch?v=6Od5PqDktGo&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh&index=5 as guidance
     private void saveToken(String token) {
         String email = mAuth.getCurrentUser().getEmail();
         User user = new User(email, token);
 
+        //stores token and email address in users node in Firebase RealTime Database
         DatabaseReference userTokenRef = FirebaseDatabase.getInstance().getReference("users");
 
+        //retrieves unique id of currently logged in user
         userTokenRef.child(mAuth.getCurrentUser().getUid())
-                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    
-                }
-            }
-        });
+                .setValue(user);
     }
-
-
 
     /* DisplayPosts method calls recyclerview adapter to retrieve data from Firebase database and input into the cardview defined
     within post_view.xml*/
     private void DisplayPosts(String searchBoxInput) {
+        //database query to return results within recyclerview based on the category searched by the user
         Query categoryQuery = databaseReference.orderByChild("category").startAt(searchBoxInput).endAt(searchBoxInput);
-        //RecyclerOptions set the options that the RecyclerAdapter will use to retrieve the data from the database
+        //RecyclerOptions set the options that the RecyclerAdapter will use to retrieve the data from the database based on the query defined above, categoryQuery
         FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>()
                 .setQuery(categoryQuery, post.class)
                 .build();

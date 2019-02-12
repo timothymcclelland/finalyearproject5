@@ -7,6 +7,7 @@ import android.support.v4.app.NotificationManagerCompat;
 
 public class notificationHelper {
 
+    //method that creates and displays notification based on content entered
     public static void displayNotification(Context context, String title, String body){
         NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context, content.CHANNEL_ID)
                 .setSmallIcon(R.mipmap.app_icon)

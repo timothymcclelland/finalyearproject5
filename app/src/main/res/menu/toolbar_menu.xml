@@ -3,7 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--Bible Icon-->
+    <!--Bible App Icon toolbar item-->
     <item
         android:id="@+id/action_link"
         app:showAsAction="always"
