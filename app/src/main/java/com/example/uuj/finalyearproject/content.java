@@ -64,6 +64,9 @@ public class content extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content);
 
+        //used https://www.youtube.com/watch?v=B-G9283Ssd4&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh in the creation of all notification related methods
+
+
         //method to create notification channel
         //minimum must O to allow for notification channel to be created
         //channel will only be created for devices on Android Oreo (8) or newer
