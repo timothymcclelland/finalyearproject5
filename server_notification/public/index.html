@@ -1,5 +1,10 @@
+<!--Used following tutorial series' in creation of this html page:
+https://www.youtube.com/watch?v=B-G9283Ssd4&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh
+https://www.youtube.com/watch?v=tAN244LVW-s&list=PLk7v1Z2rk4hgNu5zXbGctiCWYebxjdeey-->
+
 <!DOCTYPE html>
 <html>
+    <!--Scripts and CSS required to run this page-->
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
@@ -9,6 +14,7 @@
 
     <body class="bg-dark">
 
+    <!--Login Form-->
         <div id="login-card" class="card">
             <div class="card-body">
                 <h1>Walk With God Notification Login</h1>
@@ -29,9 +35,9 @@
         </div>
 
         <script src="app.js"></script>
-        
+
+    <!--Firebase Authentication Script-->
         <script>
-        
             firebase.auth().onAuthStateChanged(function(user){
                 if(user){
                     window.location.href = "admin.html";

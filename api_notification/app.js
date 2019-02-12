@@ -1,3 +1,11 @@
+/*Used following tutorial series' in creation of this html page:
+https://www.youtube.com/watch?v=B-G9283Ssd4&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh
+https://www.youtube.com/watch?v=tAN244LVW-s&list=PLk7v1Z2rk4hgNu5zXbGctiCWYebxjdeey*/
+
+//file used for generation of access token and posting request via localhost server
+//localised api
+//use of googleapis, body-parser, express and request dependencies
+
 var {google} = require('googleapis');
 var MESSAGING_SCOPE = "https://www.googleapis.com/auth/firebase.messaging";
 var SCOPES = [MESSAGING_SCOPE];
@@ -52,6 +60,7 @@ app.listen(port, function(){
     console.log("Server listening "+ port);
 });
 
+//function to generate access token
 function getAccessToken(){
     return new Promise(function(resolve, reject){
         var key = require("./service-account.json");

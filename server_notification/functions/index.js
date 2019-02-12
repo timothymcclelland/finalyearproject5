@@ -1,3 +1,13 @@
+/*Used following tutorial series' in creation of this html page:
+https://www.youtube.com/watch?v=B-G9283Ssd4&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh
+https://www.youtube.com/watch?v=tAN244LVW-s&list=PLk7v1Z2rk4hgNu5zXbGctiCWYebxjdeey*/
+
+//file used for generation of access token and posting request via localhost server
+//deploying of notification server in firebase functions
+//api hosted by firebase functions
+//use of googleapis, body-parser, express and request dependencies
+
+
 const functions = require('firebase-functions');
 var {google} = require('googleapis');
 var MESSAGING_SCOPE = "https://www.googleapis.com/auth/firebase.messaging";
@@ -48,6 +58,7 @@ router.post('/send', function(req, res){
 
 app.use('/api', router);
 
+//function to generate access token
 function getAccessToken(){
     return new Promise(function(resolve, reject){
         var key = require("./service-account.json");

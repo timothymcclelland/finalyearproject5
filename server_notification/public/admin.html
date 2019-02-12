@@ -1,6 +1,11 @@
+<!--Used following tutorial series' in creation of this html page:
+https://www.youtube.com/watch?v=B-G9283Ssd4&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh
+https://www.youtube.com/watch?v=tAN244LVW-s&list=PLk7v1Z2rk4hgNu5zXbGctiCWYebxjdeey-->
+
 <!DOCTYPE html>
 <html class="h-100">
 
+    <!--Scripts and CSS required to run this page-->
     <head>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>            
@@ -11,7 +16,7 @@
     </head>
     
     <body class="h-100">
-        
+        <!--Screen user will see once they have logged in successfully.-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
@@ -33,6 +38,7 @@
             </div>
         </nav>
 
+        <!--Allow selection of emails to send the notification to, along with title and body of the notification-->
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -61,9 +67,13 @@
       
 
         <script src="app.js"></script>
-        
+
+        <!--script to read users from Firebase RealTime Database
+        Button click - Send, will send the notification to the selected user devices.
+        Uses firebase cloud messaging.
+        Use of legacy server key to authorise the project from which the notification will be being sent-->
         <script>
-        
+
             var db = firebase.database().ref("users");
 
             db.once("value").then(function(snapshot){
@@ -119,6 +129,8 @@
 
         </script>
 
+        <!--Logout Button with corresponding Firebase logout method
+        Firebase Authentication methods to identify if user is already logged in or not-->
         <script>
             firebase.auth().onAuthStateChanged(function(user){
                 if(!user){

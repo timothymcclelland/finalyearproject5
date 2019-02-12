@@ -1,3 +1,4 @@
+//alter hosting json so that notification is sent from source below using api function
 {
     "hosting": {
       "public": "public",
