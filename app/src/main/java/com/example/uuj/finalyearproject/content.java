@@ -210,9 +210,18 @@ public class content extends AppCompatActivity {
                 holder.category_Text.setText(model.getCategory());
                 holder.date_Text.setText(model.getDate());
                 holder.time_Text.setText(model.getTime());
-
                 holder.setLikeButton(PostKey);
 
+                holder.shareButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String message = "Test";
+                        Intent share = new Intent(Intent.ACTION_SEND);
+                        share.setType("text/plain");
+                        share.putExtra(Intent.EXTRA_TEXT, message);
+                        startActivity(Intent.createChooser(share, "Title of the dialog the system will open"));
+                    }
+                });
                 /*
                 onClickListener - when user clicks on post_Text they are sent to edit_delete_post screen.
                 PostKey used to retrieve data of specific post the user has selected to edit/delete.
@@ -309,7 +318,7 @@ public class content extends AppCompatActivity {
         TextView post_Text, category_Text;
         TextView date_Text, time_Text;
         TextView numberOfLikes;
-        ImageButton commentButton, reportButton, likeButton;
+        ImageButton commentButton, reportButton, likeButton, shareButton;
         int likeCounter;
         String currentUserId;
         DatabaseReference LikesRef;
@@ -329,6 +338,7 @@ public class content extends AppCompatActivity {
             numberOfLikes = mView.findViewById(R.id.likeView);
             LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
             currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            shareButton = mView.findViewById(R.id.share_button);
         }
 
         public void setLikeButton(final String PostKey)
