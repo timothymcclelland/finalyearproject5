@@ -39,6 +39,7 @@
     <string name="like">Like</string>
     <string name="likes">0 likes</string>
     <string name="share">Share</string>
+    <string name="setTextSize">Set Text Size</string>
 
     <!-- string array used for report reason spinner values -->
     <string-array name="report_reason_array">

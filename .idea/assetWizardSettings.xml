@@ -63,7 +63,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_add_a_photo_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/editor/ic_format_size_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -99,10 +99,10 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="backgroundLayerName" value="add_image_background" />
+                                      <entry key="backgroundLayerName" value="set_TextSize_background" />
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="foregroundLayerName" value="add_image_foreground" />
-                                      <entry key="outputName" value="ic_add_image" />
+                                      <entry key="foregroundLayerName" value="set_TextSize_foreground" />
+                                      <entry key="outputName" value="ic_aset_TextSize" />
                                     </map>
                                   </option>
                                 </PersistentState>

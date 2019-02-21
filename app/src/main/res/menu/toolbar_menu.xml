@@ -24,4 +24,9 @@
         android:icon="@mipmap/ic_exit"
         android:title="@string/sign_out_toolbar"/>
 
+    <item
+        android:id="@+id/action_seekbar"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_aset_TextSize"
+        android:title="@string/setTextSize"/>
 </menu>

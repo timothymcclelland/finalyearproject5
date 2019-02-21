@@ -1,0 +1,15 @@
+<!--Layout of dialog box that appears when user selects to edit their post-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <SeekBar
+        android:id="@+id/dialog_seekbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+    </SeekBar>
+
+</LinearLayout>
