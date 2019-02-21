@@ -99,10 +99,10 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="backgroundLayerName" value="set_TextSize_background" />
+                                      <entry key="backgroundLayerName" value="set_textsize_background" />
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="foregroundLayerName" value="set_TextSize_foreground" />
-                                      <entry key="outputName" value="ic_aset_TextSize" />
+                                      <entry key="foregroundLayerName" value="set_textsize_foreground" />
+                                      <entry key="outputName" value="ic_set_textsize" />
                                     </map>
                                   </option>
                                 </PersistentState>

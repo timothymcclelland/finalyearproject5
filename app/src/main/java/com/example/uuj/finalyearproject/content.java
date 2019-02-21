@@ -111,8 +111,6 @@ public class content extends AppCompatActivity {
         mSharedPref = getSharedPreferences("SortSettings", MODE_PRIVATE);
         String mSorting = mSharedPref.getString("Sort", "Ascending");
 
-
-
         //Java referencing to XML items
         searchButton = findViewById(R.id.searchButton);
         searchInputText = findViewById(R.id.searchEditText);
@@ -140,7 +138,6 @@ public class content extends AppCompatActivity {
 
         //setting the database node in Firebase to Users Posts
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
-
 
         likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
 
@@ -199,12 +196,14 @@ public class content extends AppCompatActivity {
                 .setQuery(categoryQuery, post.class)
                 .build();
 
+
+
         /*RecyclerAdapter uses the post class and the getter and setter methods defined within to set the viewHolder data to the
         data retrieved from the database*/
         /* RecyclerAdapter is used to bind the data retrieved from the database for use by the PostViewHolder class to display it in the defined view*/
         FirebaseRecyclerAdapter<post, PostViewHolder> adapter = new FirebaseRecyclerAdapter<post, PostViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull PostViewHolder holder, final int position, @NonNull post model)
+            protected void onBindViewHolder(@NonNull final PostViewHolder holder, final int position, @NonNull final post model)
             {
                 final String PostKey = getRef(position).getKey();
 
@@ -214,14 +213,16 @@ public class content extends AppCompatActivity {
                 holder.time_Text.setText(model.getTime());
                 holder.setLikeButton(PostKey);
 
+
                 holder.shareButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String message = "Test";
-                        Intent share = new Intent(Intent.ACTION_SEND);
-                        share.setType("text/plain");
-                        share.putExtra(Intent.EXTRA_TEXT, message);
-                        startActivity(Intent.createChooser(share, "Title of the dialog the system will open"));
+                        String message = model.post;
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+                        sendIntent.setType("text/plain");
+                        startActivity(sendIntent);
                     }
                 });
                 /*
@@ -391,16 +392,9 @@ public class content extends AppCompatActivity {
             case R.id.action_link:
                 bibleLink();
                 return true;
-            case R.id.action_seekbar:
-                setTextSize();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void setTextSize() {
-        
     }
 
     private void bibleLink() {
