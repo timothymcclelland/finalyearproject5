@@ -392,9 +392,16 @@ public class content extends AppCompatActivity {
             case R.id.action_link:
                 bibleLink();
                 return true;
+            case R.id.action_churchLocator:
+                openChurchLocator();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void openChurchLocator() {
+        startActivity(new Intent(content.this, GoogleMapsActivity.class));
     }
 
     private void bibleLink() {

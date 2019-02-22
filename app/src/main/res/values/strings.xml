@@ -40,6 +40,10 @@
     <string name="likes">0 likes</string>
     <string name="share">Share</string>
     <string name="setTextSize">Set Text Size</string>
+    <string name="title_activity_google_maps">Map</string>
+    <string name="churchLocator">Church Locator</string>
+    <string name="church_search">Find a church...</string>
+    <string name="find_churches">Find Nearby Churches</string>
 
     <!-- string array used for report reason spinner values -->
     <string-array name="report_reason_array">
@@ -62,4 +66,5 @@
         <item>Prayer Requests</item>
         <item>Bible Verses</item>
     </string-array>
+
 </resources>

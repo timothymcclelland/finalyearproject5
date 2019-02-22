@@ -3,6 +3,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/action_churchLocator"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_church_locator_icon"
+        android:title="@string/churchLocator"/>
+
     <!--Bible App Icon toolbar item-->
     <item
         android:id="@+id/action_link"
