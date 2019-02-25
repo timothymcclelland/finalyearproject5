@@ -6,10 +6,10 @@ https://www.youtube.com/watch?v=hX5867tnXFk&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu
 
 package com.example.uuj.finalyearproject;
 
-import android.os.TransactionTooLargeException;
+//android and java imports
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -20,11 +20,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
+//firebase imports
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,12 +33,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-
 public class commentScreen extends AppCompatActivity {
 
+    /*followed tutorials from:
+    https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
+    https://www.youtube.com/watch?v=tOn5HsQPhUY
+    https://www.youtube.com/watch?v=hX5867tnXFk&index=43&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_
+    https://www.youtube.com/watch?v=8ZHFV69GmlM&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=40
+    in the creation of this class
+    */
+
+    //Class member variables
     private RecyclerView CommentsRecyclerView;
     private ImageButton postCommentButton;
     private EditText postCommentText;
@@ -91,6 +97,7 @@ public class commentScreen extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                        //comment is validated to ensure that text has been entered
                         validateComment();
 
                         postCommentText.setText(null);
@@ -154,6 +161,7 @@ public class commentScreen extends AppCompatActivity {
         TextView comment_Text;
         TextView date_Text, time_Text;
 
+        //referencing variables to xml
         public CommentsViewHolder(@NonNull View itemView)
         {
             super(itemView);

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- xml layout of the post pulled from firebase database to show in recyclerview on content/java screen-->
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

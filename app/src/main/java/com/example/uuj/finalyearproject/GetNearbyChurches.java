@@ -1,26 +1,32 @@
 package com.example.uuj.finalyearproject;
 
+//android imports
 import android.os.AsyncTask;
 
+//google imports
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+//java imports
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 public class GetNearbyChurches extends AsyncTask<Object, String, String>
 {
+    //used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj tutorial set in the creation of this class
 
+    //Class member variables
     private String googleplaceData, url;
     private GoogleMap nMap;
 
     @Override
     protected String doInBackground(Object... objects) {
 
+        //referencing variables to java objects
         nMap= (GoogleMap) objects[0];
         url = (String) objects[1];
 
@@ -43,6 +49,7 @@ public class GetNearbyChurches extends AsyncTask<Object, String, String>
         displayNearChurches(nearbyChurchesList);
     }
 
+    //method to display nearby churches based on user's current location
     private void displayNearChurches(List<HashMap<String, String>> nearbyChurchesList)
     {
         for(int i=0; i<nearbyChurchesList.size(); i++)

@@ -3,6 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--Location icon toolbar item-->
     <item
         android:id="@+id/action_churchLocator"
         app:showAsAction="always"

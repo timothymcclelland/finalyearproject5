@@ -1,5 +1,6 @@
 package com.example.uuj.finalyearproject;
 
+//android imports
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//Firebase imports
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,8 +33,8 @@ public class reset extends AppCompatActivity {
         setContentView(R.layout.reset_password);
 
         //Referencing Java to XML resources
-        edtEmail = (EditText) findViewById(R.id.editTextEmailReset);
-        btnResetPassword = (Button) findViewById(R.id.buttonReset);
+        edtEmail = findViewById(R.id.editTextEmailReset);
+        btnResetPassword = findViewById(R.id.buttonReset);
 
         //reference to Firebase Authentication
         mAuth = FirebaseAuth.getInstance();

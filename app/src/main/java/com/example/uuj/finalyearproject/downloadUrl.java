@@ -1,5 +1,6 @@
 package com.example.uuj.finalyearproject;
 
+//java imports
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +10,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class downloadUrl {
+
+    //used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj tutorial set in the creation of this class
+
+
     public String readURl(String placeUrl) throws IOException
     {
         String Data = "";

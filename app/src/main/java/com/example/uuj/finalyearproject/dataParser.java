@@ -1,14 +1,19 @@
 package com.example.uuj.finalyearproject;
 
+//JSON related imports
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+//java imports
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class dataParser {
+
+    //used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj tutorial set in the creation of this class
+
     private HashMap<String, String> getChurch(JSONObject googlePlaceJSON)
     {
         HashMap<String, String> googlePlaceMap = new HashMap<>();

@@ -1,11 +1,11 @@
 package com.example.uuj.finalyearproject;
 
+//android and google imports
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,12 +26,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-//Firebase imports
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+//firebase imports
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,12 +39,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.snapshot.BooleanNode;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class content extends AppCompatActivity {
+
+    /* followed videos 19-24 in the creation of the Firebase Recyclerview, PostView Holder and recycler adapter
+    link to video series, https://www.youtube.com/playlist?list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_
+     */
 
     //Class member variables
     private LinearLayoutManager mLayoutManager;
@@ -75,7 +78,7 @@ public class content extends AppCompatActivity {
 
 
         //method to create notification channel
-        //minimum must O to allow for notification channel to be created
+        //minimum SDK version must be 'O' to allow for notification channel to be created
         //channel will only be created for devices on Android Oreo (8) or newer
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
@@ -101,9 +104,11 @@ public class content extends AppCompatActivity {
                         }
                     }
                 });
+
         /*method below used to get instance of user that has just logged in
         from the Firebase Authentication system*/
         mAuth = FirebaseAuth.getInstance();
+
         //method below used to get user id of user logged in
         currentUserID = mAuth.getCurrentUser().getUid();
 
@@ -139,11 +144,12 @@ public class content extends AppCompatActivity {
         //setting the database node in Firebase to Users Posts
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
 
+        //setting the database node in Firebase to the likes node
         likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
 
         //Referencing Java to XML resources
         //Reference toolbar as action bar and hiding title in toolbar
-        Toolbar mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mytoolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -151,7 +157,7 @@ public class content extends AppCompatActivity {
         /*Once user has clicked the postButton and input their data in the add_post screen, this data will be displayed in the content screen by
         calling DisplayPosts method*/
         //followed tutorial when implementing recyclerAdapter, https://www.youtube.com/watch?v=vD6Y_dVWJ5c
-        FloatingActionButton postButton = (FloatingActionButton)findViewById(R.id.float_post);
+        FloatingActionButton postButton = findViewById(R.id.float_post);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,7 +193,8 @@ public class content extends AppCompatActivity {
     }
 
     /* DisplayPosts method calls recyclerview adapter to retrieve data from Firebase database and input into the cardview defined
-    within post_view.xml*/
+    within post_view.xml
+    followed */
     private void DisplayPosts(String searchBoxInput) {
         //database query to return results within recyclerview based on the category searched by the user
         Query categoryQuery = databaseReference.orderByChild("category").startAt(searchBoxInput).endAt(searchBoxInput);
@@ -205,18 +212,21 @@ public class content extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull final PostViewHolder holder, final int position, @NonNull final post model)
             {
+                //gets position of post user is interacting with from firebase database
                 final String PostKey = getRef(position).getKey();
 
+                //gets and displays the relevant data within the reyclerview item from model class that links to firebase database content
                 holder.post_Text.setText(model.getPost());
                 holder.category_Text.setText(model.getCategory());
                 holder.date_Text.setText(model.getDate());
                 holder.time_Text.setText(model.getTime());
                 holder.setLikeButton(PostKey);
 
-
+                //used https://developer.android.com/training/sharing/send website in creation of share button functionality
                 holder.shareButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //string that is share gets the firebase database Users Post child 'post' of the selected post item
                         String message = model.post;
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
@@ -225,6 +235,7 @@ public class content extends AppCompatActivity {
                         startActivity(sendIntent);
                     }
                 });
+
                 /*
                 onClickListener - when user clicks on post_Text they are sent to edit_delete_post screen.
                 PostKey used to retrieve data of specific post the user has selected to edit/delete.
@@ -251,6 +262,11 @@ public class content extends AppCompatActivity {
                     }
                 });
 
+                 /*
+                onClickListener - when user clicks on likeButton, the method will check if the button has already been liked and if it has, it will be unliked and vice versa.
+                PostKey used to retrieve data of specific post the user has selected to like.
+                used tutorial from, https://www.youtube.com/watch?v=111GZQ0WsME&index=39&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_ in the creation of this onClickListener
+                 */
                 holder.likeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -326,6 +342,7 @@ public class content extends AppCompatActivity {
         String currentUserId;
         DatabaseReference LikesRef;
 
+        //referencing variables to xml
         public PostViewHolder(View itemView) {
             super(itemView);
 
@@ -344,6 +361,9 @@ public class content extends AppCompatActivity {
             shareButton = mView.findViewById(R.id.share_button);
         }
 
+        /*method to set the count on the number of likes based on number of users clicking on the like button
+        and also change the like button to be filled or unfilled based on whether it has been liked or unliked by the current user*/
+        //used tutorial from, https://www.youtube.com/watch?v=111GZQ0WsME&index=39&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_, in the implementation of this method
         public void setLikeButton(final String PostKey)
         {
             LikesRef.addValueEventListener(new ValueEventListener() {
@@ -351,14 +371,20 @@ public class content extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.child(PostKey).hasChild(currentUserId))
                     {
+                        //collects the number of likes on the post from the firebase database Post Key
                         likeCounter = (int) dataSnapshot.child(PostKey).getChildrenCount();
+                        //sets the like button to the dark heart to indicate the post being liked
                         likeButton.setImageResource(R.mipmap.ic_like);
+                        //sets the likeCounter integer value to a string to be displayed to the user
                         numberOfLikes.setText(Integer.toString(likeCounter));
                     }
                     else
                     {
+                        //collects the number of likes on the post from the firebase database Post Key
                         likeCounter = (int) dataSnapshot.child(PostKey).getChildrenCount();
+                        //sets the like button to the dark heart to indicate the post being liked
                         likeButton.setImageResource(R.mipmap.ic_unlike);
+                        //sets the likeCounter integer value to a string to be displayed to the user
                         numberOfLikes.setText(Integer.toString(likeCounter));
                     }
                 }
@@ -400,10 +426,13 @@ public class content extends AppCompatActivity {
         }
     }
 
+    //method to take user to the google maps activity
     private void openChurchLocator() {
         startActivity(new Intent(content.this, GoogleMapsActivity.class));
     }
 
+    //method to take user to YouVersion App once they click on the Bible Icon
+    //used https://developer.android.com/training/basics/intents/sending.html as guidance in creating this method
     private void bibleLink() {
         //package name for YouVersion Bible App
         //package name found using Package Name Viewer 2.0 App

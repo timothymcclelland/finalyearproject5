@@ -1,5 +1,6 @@
 package com.example.uuj.finalyearproject;
 
+//android and google imports
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,9 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+//firebase imports
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -37,6 +39,8 @@ public class Register extends AppCompatActivity {
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
         register = findViewById(R.id.buttonRegister);
+
+        //reference to Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
 
         //register button runs RegisterUser method

@@ -1,36 +1,32 @@
 package com.example.uuj.finalyearproject;
 
+//android imports
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
+//google imports
 import com.google.android.gms.common.ConnectionResult;
-
-import com.google.android.gms.location.LocationListener;
-
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -38,11 +34,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+//java imports
 import java.io.IOException;
 import java.util.List;
 
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
+    //used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj tutorial set in the creation of this class
+
+    //Class member variables
     private GoogleMap mMap;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
@@ -57,6 +57,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_maps);
 
+        //Checks if SDK version is greater than or equal to Android Marshmallow for permission to be available
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkUserLocationPermission();
         }
@@ -148,10 +149,12 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
      * installed Google Play services and returned to the app.
      */
 
+    //method to get default location of user. this is the current location of the user as and when they open this activity and click the GPS icon
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        //checks if device has allowed permission to access its GPS(location)
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -168,6 +171,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     public boolean checkUserLocationPermission(){
+        //checks if device has allowed permission to access its GPS(location)
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=PackageManager.PERMISSION_GRANTED){
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
             {
@@ -208,6 +212,8 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
     }
 
+    //method to get location on activity startup
+    //GoogleApiClient is the main object to allow the app to access the maps and location services of google
     protected synchronized void buildGoogleApiClient(){
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -216,6 +222,9 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                 .build();
     }
 
+    //method called when location of user changes
+    //gets the longitude and latitude of user and sets the marker on their location
+    //enable camera movement based on longitude and latitude and enable zoom in on location for greater detail
     @Override
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();
@@ -242,6 +251,8 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
     }
 
+    //method called when device is connected to get the current location
+    //method to get accurate location of user as they move around
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
@@ -249,8 +260,10 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         locationRequest.setFastestInterval(1100);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
+        //checks if device has allowed permission to access its GPS(location)
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==PackageManager.PERMISSION_GRANTED)
         {
+            //get user location continually as they move
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         }
     }
@@ -260,6 +273,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     }
 
+    //method called when device is unable to connect to get current location
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
