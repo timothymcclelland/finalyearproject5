@@ -67,6 +67,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
     }
 
+    //onClick method referencing xml onClick buttons
     public void onClick(View view)
     {
         String church = "church";
@@ -75,6 +76,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         switch (view.getId())
         {
+            //search field and button
             case R.id.search:
                 EditText churchField = findViewById(R.id.location_search);
                 String churchAddress = churchField.getText().toString();
@@ -82,13 +84,17 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                 List<Address> addressList = null;
                 MarkerOptions churchMarkerOptions = new MarkerOptions();
 
+                //checks if editText field is not empty and then uses the search result to search the map based on Geocode or location name entered by user
                 if (!TextUtils.isEmpty(churchAddress)) {
                     Geocoder geocoder = new Geocoder(GoogleMapsActivity.this);
 
                     try {
+                        //search functionality to return a maximum of 10 results based on search
                         addressList = geocoder.getFromLocationName(churchAddress, 10);
 
+                        //checks that addressList is not null before returning results and looping through them
                         if (addressList != null) {
+                            //loop through items in addressList and set marker based on selected item's latitude, longitude and title
                             for (int i = 0; i < addressList.size(); i++) {
                                 Address churchAdd = addressList.get(i);
                                 LatLng latLng = new LatLng(churchAdd.getLatitude(), churchAdd.getLongitude());
@@ -101,12 +107,14 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                                 mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
                             }
                         } else {
-                            Toast.makeText(GoogleMapsActivity.this, "Location can not be found", Toast.LENGTH_SHORT).show();
+                            //Toast message if church cannot be found
+                            Toast.makeText(GoogleMapsActivity.this, "Church can not be found", Toast.LENGTH_SHORT).show();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } else {
+                    //Toast message if address has not been entered
                     Toast.makeText(GoogleMapsActivity.this, "Please enter a church name", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -170,6 +178,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
     }
 
+    //method to check if the user permission has been granted or not
     public boolean checkUserLocationPermission(){
         //checks if device has allowed permission to access its GPS(location)
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=PackageManager.PERMISSION_GRANTED){
@@ -189,6 +198,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
     }
 
+    //method to handle request permission result from checkUserLocationPermission method
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode)

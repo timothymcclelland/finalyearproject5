@@ -19,8 +19,9 @@ public class GetNearbyChurches extends AsyncTask<Object, String, String>
 {
     //used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj tutorial set in the creation of this class
 
+
     //Class member variables
-    private String googleplaceData, url;
+    private String googlePlaceData, url;
     private GoogleMap nMap;
 
     @Override
@@ -30,16 +31,18 @@ public class GetNearbyChurches extends AsyncTask<Object, String, String>
         nMap= (GoogleMap) objects[0];
         url = (String) objects[1];
 
+        //creating object of downloadUrl and passing value from downloadUrl method
         downloadUrl downloadUrl = new downloadUrl();
         try {
-            googleplaceData = downloadUrl.readURl(url);
+            googlePlaceData = downloadUrl.readURl(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return googleplaceData;
+        return googlePlaceData;
     }
 
+    //method to display the church data in the nearbyChurchesList list using the displayNearbyChurches method
     @Override
     protected void onPostExecute(String s) {
         List<HashMap<String, String>> nearbyChurchesList = null;
@@ -49,7 +52,7 @@ public class GetNearbyChurches extends AsyncTask<Object, String, String>
         displayNearChurches(nearbyChurchesList);
     }
 
-    //method to display nearby churches based on user's current location
+    //method to display nearby churches from the list created in dataParser.java, based on user's current location
     private void displayNearChurches(List<HashMap<String, String>> nearbyChurchesList)
     {
         for(int i=0; i<nearbyChurchesList.size(); i++)
