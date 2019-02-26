@@ -1,78 +1,106 @@
 package com.example.uuj.finalyearproject;
 
 //android imports
+
 import android.os.AsyncTask;
 
-//google imports
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-//java imports
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class GetNearbyChurches extends AsyncTask<Object, String, String>
 {
     //used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj tutorial set in the creation of this class
 
-
     //Class member variables
-    private String googlePlaceData, url;
-    private GoogleMap nMap;
+    String url;
+    GoogleMap nMap;
+    InputStream inputStream;
+    BufferedReader bufferedReader;
+    StringBuilder stringBuilder;
+    String data;
+
+    public GetNearbyChurches(GoogleMapsActivity googleMapsActivity) {
+    }
 
     @Override
     protected String doInBackground(Object... objects) {
 
         //referencing variables to java objects
-        nMap= (GoogleMap) objects[0];
-        url = (String) objects[1];
+        nMap = (GoogleMap)objects[0];
+        url = (String)objects[1];
 
-        //creating object of downloadUrl and passing value from downloadUrl method
-        downloadUrl downloadUrl = new downloadUrl();
-        try {
-            googlePlaceData = downloadUrl.readURl(url);
-        } catch (IOException e) {
+        try
+        {
+            URL myUrl = new URL(url);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) myUrl.openConnection();
+            httpURLConnection.connect();
+            inputStream = httpURLConnection.getInputStream();
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line = "";
+            stringBuilder = new StringBuilder();
+
+            while((line = bufferedReader.readLine())!=null)
+            {
+                stringBuilder.append(line);
+            }
+
+            data = stringBuilder.toString();
+
+        } catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
 
-        return googlePlaceData;
+        return data;
     }
 
     //method to display the church data in the nearbyChurchesList list using the displayNearbyChurches method
     @Override
     protected void onPostExecute(String s) {
-        List<HashMap<String, String>> nearbyChurchesList = null;
-        dataParser dataParser = new dataParser();
-        nearbyChurchesList = dataParser.parse(s);
+        try {
+            JSONObject jsonObject = new JSONObject(s);
+            JSONArray jsonArray = jsonObject.getJSONArray("results");
 
-        displayNearChurches(nearbyChurchesList);
-    }
+            for(int i =0; i<jsonArray.length(); i++)
+            {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                JSONObject loctationObj = jsonObj.getJSONObject("geometry").getJSONObject("location");
 
-    //method to display nearby churches from the list created in dataParser.java, based on user's current location
-    private void displayNearChurches(List<HashMap<String, String>> nearbyChurchesList)
-    {
-        for(int i=0; i<nearbyChurchesList.size(); i++)
-        {
-            MarkerOptions markerOptions = new MarkerOptions();
+                String latitude = loctationObj.getString("lat");
+                String longitude = loctationObj.getString("lng");
 
-            HashMap<String, String> googleNearbyChurch = nearbyChurchesList.get(i);
-            String nameOfChurch = googleNearbyChurch.get("church_name");
-            String vicinity = googleNearbyChurch.get("vicinity");
-            double lat = Double.parseDouble(googleNearbyChurch.get("lat"));
-            double lng = Double.parseDouble(googleNearbyChurch.get("lng"));
+                JSONObject nameObject = jsonArray.getJSONObject(i);
 
-            LatLng latLng = new LatLng(lat,lng);
-            markerOptions.position(latLng);
-            markerOptions.title(nameOfChurch + " : " + vicinity);
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                String name_of_Church = nameObject.getString("name");
+                String vicinity = nameObject.getString("vicinity");
 
-            nMap.addMarker(markerOptions);
-            nMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            nMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+                LatLng latLng = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.title(vicinity);
+                markerOptions.position(latLng);
+
+                nMap.addMarker(markerOptions);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
