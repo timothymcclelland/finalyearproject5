@@ -67,6 +67,33 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
     }
 
+    //method to get default location of user. this is the current location of the user as and when they open this activity and click the GPS icon
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        //checks if device has allowed permission to access its GPS(location)
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+            googleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+
+            googleApiClient.connect();
+
+            mMap.setMyLocationEnabled(true);
+        }
+    }
+
     //onClick method referencing xml onClick buttons
     public void onClick(View view)
     {
@@ -157,26 +184,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
      * installed Google Play services and returned to the app.
      */
 
-    //method to get default location of user. this is the current location of the user as and when they open this activity and click the GPS icon
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        //checks if device has allowed permission to access its GPS(location)
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
-            buildGoogleApiClient();
-
-            mMap.setMyLocationEnabled(true);
-        }
-    }
 
     //method to check if the user permission has been granted or not
     public boolean checkUserLocationPermission(){
@@ -225,11 +233,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     //method to get location on activity startup
     //GoogleApiClient is the main object to allow the app to access the maps and location services of google
     protected synchronized void buildGoogleApiClient(){
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
+
     }
 
     //method called when location of user changes
@@ -265,7 +269,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     //method to get accurate location of user as they move around
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        locationRequest = new LocationRequest();
+        locationRequest = new LocationRequest().create();
         locationRequest.setInterval(1100);
         locationRequest.setFastestInterval(1100);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
