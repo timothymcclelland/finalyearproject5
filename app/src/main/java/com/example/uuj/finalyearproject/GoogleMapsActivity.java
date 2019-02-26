@@ -1,6 +1,7 @@
 package com.example.uuj.finalyearproject;
 
 //android imports
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -19,12 +20,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//google imports
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,9 +35,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-//java imports
 import java.io.IOException;
 import java.util.List;
+
+//google imports
+//java imports
 
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -241,28 +244,22 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     //enable camera movement based on longitude and latitude and enable zoom in on location for greater detail
     @Override
     public void onLocationChanged(Location location) {
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
 
-        lastLocation = location;
-        if(currentUserLocationMarker !=null){
-            currentUserLocationMarker.remove();
+        if(location ==null){
+            Toast.makeText(getApplicationContext(), "Location not found", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            LatLng latLng = new LatLng((location.getLatitude()),location.getLongitude());
+
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLng, 16);
+            mMap.animateCamera(update);
+
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("User Current Location");
+            mMap.addMarker(markerOptions);
         }
 
-        LatLng latLng = new LatLng((location.getLatitude()),location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("User Current Location");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        currentUserLocationMarker = mMap.addMarker(markerOptions);
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomBy(12));
-
-        if(googleApiClient !=null)
-        {
-            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
-        }
     }
 
     //method called when device is connected to get the current location
