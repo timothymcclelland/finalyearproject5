@@ -83,20 +83,33 @@
             android:layout_marginBottom="5dp"
             android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <!--ImageView commented out as unable to get image storage and download functionality working
+        <!-used to display post image
 
-            <!--clickable like icon-->
+            <ImageView
+                android:id:="@+id/post_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="3dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"/>
+
+                -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--clickable like icon-->
             <ImageButton
                 android:id="@+id/like_button"
                 android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:layout_below="@+id/view_bottom"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="3dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="3dp"
                 android:layout_marginBottom="5dp"
                 android:src="@mipmap/ic_unlike" />
 
@@ -107,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view_bottom"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="3dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/comment_button"
                 android:text="@string/likes" />
@@ -118,9 +131,9 @@
                 android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:layout_below="@+id/view_bottom"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="3dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="3dp"
                 android:layout_marginBottom="5dp"
                 android:src="@mipmap/ic_post_comment" />
 
@@ -142,9 +155,9 @@
                 android:layout_height="30dp"
                 android:layout_below="@+id/view_bottom"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="3dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="3dp"
                 android:layout_marginBottom="5dp"
                 android:src="@mipmap/ic_share" />
 
@@ -166,9 +179,9 @@
                 android:layout_height="30dp"
                 android:layout_below="@+id/view_bottom"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="3dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="3dp"
                 android:layout_marginBottom="5dp"
                 android:src="@mipmap/ic_report" />
 

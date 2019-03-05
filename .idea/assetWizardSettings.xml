@@ -99,10 +99,10 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="backgroundLayerName" value="set_search_icon_background" />
-                                      <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="foregroundLayerName" value="set_search_icon_foreground" />
-                                      <entry key="outputName" value="ic_search_icon" />
+                                      <entry key="backgroundLayerName" value="app_icon_background" />
+                                      <entry key="foregroundImage" value="C:\Users\Timothy\AndroidStudioProjects\finalyearproject\app\src\main\res\mipmap-xhdpi\app_icon.png" />
+                                      <entry key="foregroundLayerName" value="app_icon_foreground" />
+                                      <entry key="outputName" value="ic_app_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>

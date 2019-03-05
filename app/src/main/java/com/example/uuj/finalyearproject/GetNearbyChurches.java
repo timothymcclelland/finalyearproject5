@@ -1,7 +1,6 @@
 package com.example.uuj.finalyearproject;
 
 //android imports
-
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -20,9 +19,21 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+//google imports
+//json imports
+//java imports
+
 public class GetNearbyChurches extends AsyncTask<Object, String, String>
 {
-    //used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj tutorial set in the creation of this class
+    /*used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj &
+    https://www.youtube.com/watch?v=oOVRNxPtfeQ&list=PLF0BIlN2vd8und4ajF-bdFI3jWyPTXxB5
+    tutorial sets in the creation of this class*/
+
+    /*used https://developers.google.com/places/web-service/intro &
+    https://developers.google.com/maps/documentation/android-sdk/intro as guidance in the creation of this class*/
+
+    /*account set up on https://console.cloud.google.com/google/maps-apis/overview?project=finalyearproject-c85ba&folder=&organizationId=
+    for access to maps SDK, places API and other APIs included with the google maps functionality*/
 
     //Class member variables
     String url;
@@ -32,9 +43,14 @@ public class GetNearbyChurches extends AsyncTask<Object, String, String>
     StringBuilder stringBuilder;
     String data;
 
+    //empty constructor required for GoogleMapsActivity.java to call this class
     public GetNearbyChurches(GoogleMapsActivity googleMapsActivity) {
     }
 
+    /*method used to open the connection to the google maps search in the background
+    and search google maps based on the url (which includes the users location and data requested), that is to be read by the bufferedReader and then turned into a string.
+    This string data will then be used by the onPostExecute method to process the data and return the results which will then be processed and presented to the user
+    within the GoogleMapsActivity.java findNearbyChurches method*/
     @Override
     protected String doInBackground(Object... objects) {
 
@@ -71,7 +87,9 @@ public class GetNearbyChurches extends AsyncTask<Object, String, String>
         return data;
     }
 
-    //method to display the church data in the nearbyChurchesList list using the displayNearbyChurches method
+    //method to transform the church data using the json objects from the jsonArray
+    /*the data is then used to set the markers for the identified church locations based on the name of the church
+    and latitude/longitude of the location of the church*/
     @Override
     protected void onPostExecute(String s) {
         try {
@@ -94,7 +112,7 @@ public class GetNearbyChurches extends AsyncTask<Object, String, String>
                 LatLng latLng = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
 
                 MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.title(vicinity);
+                markerOptions.title(name_of_Church);
                 markerOptions.position(latLng);
 
                 nMap.addMarker(markerOptions);

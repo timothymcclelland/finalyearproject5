@@ -23,10 +23,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-//firebase imports
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,10 +31,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+//import below commented out as unable to get image storage and download functionality working
+//import com.squareup.picasso.Picasso;
+
 public class edit_delete_post extends AppCompatActivity {
 
     //Class member variables
     private TextView editPostContent, editPostCategory;
+    //code below commented out as unable to get image storage and download functionality working
+    //private ImageView editPostImage;
     private Button editButton, deleteButton;
     private String PostKey, currentUserID, userID;
 
@@ -64,6 +69,8 @@ public class edit_delete_post extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts").child(PostKey);
 
         //Referencing Java to XML variables in activity_edit_delete_post.xml
+        //code below commented out as unable to get image storage and download functionality working
+        //editPostImage = findViewById(R.id.edit_delete_post_image);
         editPostContent = findViewById(R.id.edit_delete_post_text);
         editPostCategory = findViewById(R.id.edit_delete_post_category);
         editButton = findViewById(R.id.editPostButton);
@@ -83,8 +90,12 @@ public class edit_delete_post extends AppCompatActivity {
                 {
                     final String post = dataSnapshot.child("post").getValue().toString();
                     final String category = dataSnapshot.child("category").getValue().toString();
+                    //code below commented out as unable to get image storage and download functionality working
+                    //image = dataSnapshot.child("image").getValue().toString();
                     userID = dataSnapshot.child("user id").getValue().toString();
 
+                    //code below commented out as unable to get image storage and download functionality working
+                    //Picasso.get(edit_delete_post.this).load(image).into(editPostImage);
                     editPostContent.setText(post);
                     editPostCategory.setText(category);
 
@@ -155,6 +166,7 @@ public class edit_delete_post extends AppCompatActivity {
         final String time = currentTime.format(calendarTime.getTime());
 
         //onClickListener method called when user selects "Update" to send data to the Firebase Realtime database
+        //method to update image has not included due to complexity
         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

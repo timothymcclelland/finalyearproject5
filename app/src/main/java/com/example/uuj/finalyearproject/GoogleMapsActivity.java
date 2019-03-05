@@ -1,7 +1,6 @@
 package com.example.uuj.finalyearproject;
 
 //android imports
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -17,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//google maps imports
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -31,15 +31,21 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+//java imports
 import java.io.IOException;
 import java.util.List;
 
-//google imports
-//java imports
-
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    //used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj tutorial set in the creation of this class
+    /*used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj &
+    https://www.youtube.com/watch?v=oOVRNxPtfeQ&list=PLF0BIlN2vd8und4ajF-bdFI3jWyPTXxB5
+    tutorial sets in the creation of this class*/
+
+    /*used https://developers.google.com/places/web-service/intro &
+    https://developers.google.com/maps/documentation/android-sdk/intro as guidance in the creation of this class*/
+
+    /*account set up on https://console.cloud.google.com/google/maps-apis/overview?project=finalyearproject-c85ba&folder=&organizationId=
+    for access to maps SDK, places API and other APIs included with the google maps functionality*/
 
     //Class member variables
     private GoogleMap mMap;
@@ -87,12 +93,13 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
     }
 
+    //method to append the json data from the google maps URL search and display the collected location results on the map
     public void findNearbyChurches(View v) {
         StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        stringBuilder.append("&location="+latLngCurrent.latitude+","+latLngCurrent.longitude);
-        stringBuilder.append("&radius="+1000);
-        stringBuilder.append("&keyword="+"church");
-        stringBuilder.append("&key="+getResources().getString(R.string.google_places_api_key));
+        stringBuilder.append("&location=" + latLngCurrent.latitude + "," + latLngCurrent.longitude);
+        stringBuilder.append("&radius=" + 10000);
+        stringBuilder.append("&keyword=" + "church");
+        stringBuilder.append("&key=" + getResources().getString(R.string.google_places_api_key));
 
         String url = stringBuilder.toString();
 
@@ -102,11 +109,10 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         GetNearbyChurches getNearbyChurches = new GetNearbyChurches(this);
         getNearbyChurches.execute(dataTransfer);
-
-
     }
 
-    //onClick method referencing xml onClick buttons
+    //onClick method referencing xml search button in activity_google_maps.xml
+    //method to search map for a church based on text entered
     public void searchNearbyChurches(View view) {
         EditText churchField = findViewById(R.id.location_search);
         String churchAddress = churchField.getText().toString();
@@ -149,6 +155,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
     }
 
+    //auto-generated comment code when creating Google Maps activity
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -161,16 +168,16 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     //method called when location of user changes
     //gets the longitude and latitude of user and sets the marker on their location
-    //enable camera movement based on longitude and latitude and enable zoom in on location for greater detail
+    //enable camera movement based on longitude and latitude and enables zoom to show location in greater detail
     @Override
     public void onLocationChanged(Location location) {
 
         if (location == null) {
             Toast.makeText(getApplicationContext(), "Location not found", Toast.LENGTH_SHORT).show();
         } else {
-            latLngCurrent = new LatLng(location.getLatitude(),location.getLongitude());
+            latLngCurrent = new LatLng(location.getLatitude(), location.getLongitude());
 
-            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLngCurrent, 16);
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLngCurrent, 10);
             mMap.animateCamera(update);
 
             MarkerOptions markerOptions = new MarkerOptions();
@@ -185,7 +192,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     //method to get accurate location of user as they move around
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        locationRequest = new LocationRequest().create();
+        locationRequest = new LocationRequest();
         locationRequest.setInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
@@ -196,6 +203,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
     }
 
+    //method called when device GPS is temporarily disconnected
     @Override
     public void onConnectionSuspended(int i) {
 
@@ -206,4 +214,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
 }
+

@@ -1,6 +1,5 @@
 package com.example.uuj.finalyearproject;
 
-//android and google imports
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
@@ -26,12 +25,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
-//firebase imports
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +40,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+//import below commented out as unable to get image storage and download functionality working
+//import com.squareup.picasso.Picasso;
 
 public class content extends AppCompatActivity {
 
@@ -220,6 +221,8 @@ public class content extends AppCompatActivity {
                 holder.category_Text.setText(model.getCategory());
                 holder.date_Text.setText(model.getDate());
                 holder.time_Text.setText(model.getTime());
+                //code below commented out as unable to get image storage and download functionality working
+                //holder.post_image(getApplicationContext(), model.getPostImage());
                 holder.setLikeButton(PostKey);
 
                 //used https://developer.android.com/training/sharing/send website in creation of share button functionality
@@ -337,6 +340,8 @@ public class content extends AppCompatActivity {
         TextView post_Text, category_Text;
         TextView date_Text, time_Text;
         TextView numberOfLikes;
+        //code below commented out as unable to get image storage and download functionality working
+        //ImageView post_image;
         ImageButton commentButton, reportButton, likeButton, shareButton;
         int likeCounter;
         String currentUserId;
@@ -346,12 +351,19 @@ public class content extends AppCompatActivity {
         public PostViewHolder(View itemView) {
             super(itemView);
 
+            //code below commented out as unable to get image storage and download functionality working
+            //String postimage;
+
             mView = itemView;
 
             post_Text = itemView.findViewById(R.id.post_text);
             category_Text = itemView.findViewById(R.id.post_category);
             date_Text = itemView.findViewById(R.id.post_date);
             time_Text = itemView.findViewById(R.id.post_time);
+            //code below commented out as unable to get image storage and download functionality working
+            //postimage = itemView.findViewById(R.id.post_image);
+            //code below used to load image into xml item
+            //Picasso.get(ctx).load(postimage).into(post_image);
             commentButton = mView.findViewById(R.id.comment_button);
             reportButton = mView.findViewById(R.id.report_button);
             likeButton = mView.findViewById(R.id.like_button);
