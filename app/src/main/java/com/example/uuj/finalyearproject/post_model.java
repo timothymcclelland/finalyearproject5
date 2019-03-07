@@ -3,7 +3,7 @@ package com.example.uuj.finalyearproject;
 //followed tutorial on youtube in producing this class, https://www.youtube.com/watch?v=vD6Y_dVWJ5c
 
 //model class used to retrieve the data from the database and set it to the referenced variables for use by the RecyclerAdapter method
-public class post {
+public class post_model {
 
     //class variables referenced in Firebase Database
     public String post;
@@ -14,12 +14,12 @@ public class post {
     //public String postImage;
 
     //default constructor
-    public post(){
+    public post_model(){
 
     }
 
-    //post constructor class
-    public post(String post, String date, String time,String category/*String postImage*,
+    //post_model constructor class
+    public post_model(String post, String date, String time, String category/*String postImage*,
     //code below commented out as unable to get image storage and download functionality working*/) {
         this.post = post;
         this.date = date;
@@ -29,12 +29,12 @@ public class post {
         this.category = category;
     }
 
-    //getter method for post variable
+    //getter method for post_model variable
     public String getPost() {
         return post;
     }
 
-    //setter method for post variable
+    //setter method for post_model variable
     public void setPost(String post) {
         this.post = post;
     }

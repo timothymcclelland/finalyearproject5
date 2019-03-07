@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--followed https://www.youtube.com/watch?v=uJJY8LkXx0I&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=26 in the creation of this xml layout-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -41,7 +43,7 @@
         android:id="@+id/edit_delete_post_text"
         android:textSize="16sp"/>
 
-    <!--edit post button-->
+    <!--edit post_model button-->
     <Button
         android:layout_margin="15dp"
         android:layout_width="wrap_content"
@@ -51,7 +53,7 @@
         android:textColor="@color/colorPrimary"
         android:background="@color/colorButton"/>
 
-    <!--delete post button-->
+    <!--delete post_model button-->
     <Button
         android:layout_marginLeft="15dp"
         android:id="@+id/deletePostButton"

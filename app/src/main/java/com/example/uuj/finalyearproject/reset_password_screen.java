@@ -16,9 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class reset extends AppCompatActivity {
+public class reset_password_screen extends AppCompatActivity {
 
-    //code for class taken directly from https://grokonez.com/android/firebase-authentication-send-reset-password-email-forgot-password-android
+    //code for class taken from https://grokonez.com/android/firebase-authentication-send-reset-password-email-forgot-password-android and altered for my application
 
     //Class member variables
     private EditText edtEmail;
@@ -30,7 +30,7 @@ public class reset extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reset_password);
+        setContentView(R.layout.reset_password_screen);
 
         //Referencing Java to XML resources
         edtEmail = findViewById(R.id.editTextEmailReset);
@@ -39,8 +39,8 @@ public class reset extends AppCompatActivity {
         //reference to Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
 
-        /*When Button to reset password is clicked, it gets text from edtEmil editText field and makes
-        it a string which is then used within the sendPasswordResetEmail method as the email to send the reset password link to*/
+        /*When Button to reset_password_screen password is clicked, it gets text from edtEmil editText field and makes
+        it a string which is then used within the sendPasswordResetEmail method as the email to send the reset_password_screen password link to*/
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,27 +48,27 @@ public class reset extends AppCompatActivity {
                 //converts EditText to string
                 String email = edtEmail.getText().toString().trim();
 
-                //checks if EditText is empty and displays a message if it is to make user aware
+                //checks if EditText is empty and displays a message if it is to make user_model aware
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Email Required", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                //method to send reset password link to user
+                //method to send reset_password_screen password link to user_model
                 mAuth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                //checks if email has been sent to user and displays a message to let the user know
+                                //checks if email has been sent to user_model and displays a message to let the user_model know
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(reset.this, "Check email to reset your password!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(reset_password_screen.this, "Check email to reset_password_screen your password!", Toast.LENGTH_SHORT).show();
                                     finish();
-                                    //once task has completed successfully, user is sent back to log_in activity screen to attempt to login with their new password
-                                    startActivity(new Intent(getApplicationContext(), log_in.class));
+                                    //once task has completed successfully, user_model is sent back to log_in_screen activity screen to attempt to login with their new password
+                                    startActivity(new Intent(getApplicationContext(), log_in_screen.class));
                                 } else {
-                                    //message displayed if reset email has not sent successfully. This may relate to wrong email being entered or user not being
+                                    //message displayed if reset_password_screen email has not sent successfully. This may relate to wrong email being entered or user_model not being
                                     // connected to the internet
-                                    Toast.makeText(reset.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(reset_password_screen.this, "Fail to send reset_password_screen password email!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

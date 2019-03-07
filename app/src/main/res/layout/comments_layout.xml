@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--followed https://www.youtube.com/watch?v=oE-BObhBn2k&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=42 in the creation of this xml layout-->
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--Layout for each comment recyclerview item on activity_comment_screen-->
+    <!--Layout for each comment recyclerview item on comment_screen-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
 
-            <!--Comment made by user-->
+            <!--Comment made by user_model-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

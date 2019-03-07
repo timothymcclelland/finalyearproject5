@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- similar page structure used in login_in and register_screen pages to create consistent layout -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Register">
+    tools:context=".report_screen">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,8 +15,8 @@
 
         <!-- App Icon contained as imageview -->
         <ImageView
-            android:layout_width="213dp"
-            android:layout_height="230dp"
+            android:layout_width="181dp"
+            android:layout_height="184dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
@@ -37,51 +38,48 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
-            <!-- Email Address EditText container -->
+            <!-- Instructions for user_model regarding resetting of their password -->
+            <TextView
+                android:id="@+id/report_instruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="@string/report_instruction_text"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorAccent"
+                android:clickable="true" />
+
+            <!--Spinner to select reason for report-->
+            <Spinner
+                android:layout_margin="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/report_reason_spinner">
+            </Spinner>
+
+            <!-- EditText for user_model to enter report information-->
             <EditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/editTextReportInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:hint="@string/hint_email"
-                android:inputType="textEmailAddress"
+                android:hint="@string/hint_report_information"
                 android:paddingBottom="15dp"
                 android:textColorHint="@color/colorAccent" />
 
-            <!-- Password EditText container -->
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:hint="@string/hint_password"
-                android:inputType="textPassword"
-                android:paddingBottom="15dp"
-                android:textColorHint="@color/colorAccent" />
-
-            <!-- Register Button links to RegisterUser method which registers the user -->
+            <!--Clickable button submit report to database for investigation-->
             <Button
-                android:id="@+id/buttonRegister"
+                android:id="@+id/report_button"
                 android:background="@color/colorButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="7dp"
-                android:text="@string/button_register"
+                android:text="@string/report_button_text"
                 android:textSize="10pt"
                 android:textAllCaps="false"
                 android:textColor="@color/buttonTextColor" />
-
-            <!-- TextView links to log_in.xml activity -->
-            <TextView
-                android:id="@+id/textViewSignin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="@string/log_in_text"
-                android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorAccent" />
 
         </LinearLayout>
 

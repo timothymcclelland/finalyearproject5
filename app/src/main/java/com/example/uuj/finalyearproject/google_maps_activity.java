@@ -16,7 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//google maps imports
+//google maps related imports
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -35,7 +35,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
-public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class google_maps_activity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     /*used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj &
     https://www.youtube.com/watch?v=oOVRNxPtfeQ&list=PLF0BIlN2vd8und4ajF-bdFI3jWyPTXxB5
@@ -56,7 +56,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_google_maps);
+        setContentView(R.layout.google_maps_screen);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -64,7 +64,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
     }
 
-    //method to get default location of user. this is the current location of the user as and when they open this activity and click the GPS icon
+    //method to get default location of user_model. this is the current location of the user_model as and when they open this activity and click the GPS icon
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -76,7 +76,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
+            // to handle the case where the user_model grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
 
             //method to get location on activity startup
@@ -107,12 +107,11 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         dataTransfer[0] = mMap;
         dataTransfer[1] = url;
 
-        GetNearbyChurches getNearbyChurches = new GetNearbyChurches(this);
-        getNearbyChurches.execute(dataTransfer);
+        get_nearby_churches getnearbychurches = new get_nearby_churches(this);
+        getnearbychurches.execute(dataTransfer);
     }
 
-    //onClick method referencing xml search button in activity_google_maps.xml
-    //method to search map for a church based on text entered
+    //onClick method referencing xml search button in google_maps_screen//method to search map for a church based on text entered
     public void searchNearbyChurches(View view) {
         EditText churchField = findViewById(R.id.location_search);
         String churchAddress = churchField.getText().toString();
@@ -120,9 +119,9 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         List<Address> addressList = null;
         MarkerOptions churchMarkerOptions = new MarkerOptions();
 
-        //checks if editText field is not empty and then uses the search result to search the map based on Geocode or location name entered by user
+        //checks if editText field is not empty and then uses the search result to search the map based on Geocode or location name entered by user_model
         if (!TextUtils.isEmpty(churchAddress)) {
-            Geocoder geocoder = new Geocoder(GoogleMapsActivity.this);
+            Geocoder geocoder = new Geocoder(google_maps_activity.this);
 
             try {
                 //search functionality to return a maximum of 10 results based on search
@@ -144,14 +143,14 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                     }
                 } else {
                     //Toast message if church cannot be found
-                    Toast.makeText(GoogleMapsActivity.this, "Church can not be found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(google_maps_activity.this, "Church can not be found", Toast.LENGTH_SHORT).show();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             //Toast message if address has not been entered
-            Toast.makeText(GoogleMapsActivity.this, "Please enter a church name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(google_maps_activity.this, "Please enter a church name", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -161,13 +160,13 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
      * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * If Google Play services is not installed on the device, the user_model will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user_model has
      * installed Google Play services and returned to the app.
      */
 
-    //method called when location of user changes
-    //gets the longitude and latitude of user and sets the marker on their location
+    //method called when location of user_model changes
+    //gets the longitude and latitude of user_model and sets the marker on their location
     //enable camera movement based on longitude and latitude and enables zoom to show location in greater detail
     @Override
     public void onLocationChanged(Location location) {
@@ -182,14 +181,14 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLngCurrent);
-            markerOptions.title("User Current Location");
+            markerOptions.title("user_model Current Location");
             mMap.addMarker(markerOptions);
         }
 
     }
 
     //method called when device is connected to get the current location
-    //method to get accurate location of user as they move around
+    //method to get accurate location of user_model as they move around
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
@@ -198,7 +197,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         //checks if device has allowed permission to access its GPS(location)
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            //get user location continually as they move
+            //get user_model location continually as they move
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         }
     }

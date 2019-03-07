@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- toolbar menu items to be used in content screen toolbar-->
+<!-- toolbar menu items to be used in content_screen screen toolbar-->
+<!--followed https://www.youtube.com/playlist?list=PLc2rvfiptPSRCMzAoxGQ2dF4G6zqDvo_v in the creation of the actionBar menu toolbar-->
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 

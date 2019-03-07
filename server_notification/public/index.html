@@ -38,8 +38,8 @@ https://www.youtube.com/watch?v=tAN244LVW-s&list=PLk7v1Z2rk4hgNu5zXbGctiCWYebxjd
 
     <!--Firebase Authentication Script-->
         <script>
-            firebase.auth().onAuthStateChanged(function(user){
-                if(user){
+            firebase.auth().onAuthStateChanged(function(user_model){
+                if(user_model){
                     window.location.href = "admin.html";
                 }
             });

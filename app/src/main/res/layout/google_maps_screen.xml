@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+    <!--used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj &
+    https://www.youtube.com/watch?v=oOVRNxPtfeQ&list=PLF0BIlN2vd8und4ajF-bdFI3jWyPTXxB5
+    tutorial sets in the creation of this class-->
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!--Search editText space for user to search for their own church, links to onClick method in GoogleMapsActivity.java-->
+    <!--Search editText space for user_model to search for their own church, links to onClick method in google_maps_activity.java-->
     <EditText
         android:id="@+id/location_search"
         android:layout_width="320dp"
@@ -14,7 +19,7 @@
         android:hint="@string/church_search"
         />
 
-    <!--Search button used for onClick method in GoogleMapsActivity.java-->
+    <!--Search button used for onClick method in google_maps_activity.java-->
     <ImageButton
         android:id="@+id/search"
         android:layout_width="wrap_content"
@@ -34,7 +39,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="45dp"
-    tools:context=".GoogleMapsActivity" />
+    tools:context=".google_maps_activity" />
 
 
     <RelativeLayout
@@ -43,7 +48,7 @@
         android:layout_marginBottom="5dp"
         android:layout_height="wrap_content">
 
-        <!--Button to find nearby churches based on location, links to onClick method in GoogleMapsActivity.java-->
+        <!--Button to find nearby churches based on location, links to onClick method in google_maps_activity.java-->
         <Button
             android:id="@+id/nearby_churches"
             android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.example.uuj.finalyearproject;
 
+//android imports
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
@@ -26,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+//firebase & google imports
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,10 +43,11 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+//picasso imports
 //import below commented out as unable to get image storage and download functionality working
 //import com.squareup.picasso.Picasso;
 
-public class content extends AppCompatActivity {
+public class content_screen extends AppCompatActivity {
 
     /* followed videos 19-24 in the creation of the Firebase Recyclerview, PostView Holder and recycler adapter
     link to video series, https://www.youtube.com/playlist?list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_
@@ -73,14 +76,12 @@ public class content extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content);
+        setContentView(R.layout.content_screen);
 
         //used https://www.youtube.com/watch?v=B-G9283Ssd4&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh in the creation of all notification related methods
 
-
         //method to create notification channel
-        //minimum SDK version must be 'O' to allow for notification channel to be created
-        //channel will only be created for devices on Android Oreo (8) or newer
+        //minimum SDK version must be 'O' (Android Oreo) to allow for notification channel to be created
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription(CHANNEL_DESCRIPTION);
@@ -106,11 +107,11 @@ public class content extends AppCompatActivity {
                     }
                 });
 
-        /*method below used to get instance of user that has just logged in
+        /*method below used to get instance of user_model that has just logged in
         from the Firebase Authentication system*/
         mAuth = FirebaseAuth.getInstance();
 
-        //method below used to get user id of user logged in
+        //method below used to get user_model id of user_model logged in
         currentUserID = mAuth.getCurrentUser().getUid();
 
         //Shared Preferences used to store the users selected sort by preference
@@ -121,13 +122,13 @@ public class content extends AppCompatActivity {
         searchButton = findViewById(R.id.searchButton);
         searchInputText = findViewById(R.id.searchEditText);
 
-        /*sort the posts in the content screen in ascending order by reversing the layout and setting the stack of the contents to
+        /*sort the posts in the content_screen screen in ascending order by reversing the layout and setting the stack of the contents to
         start from the end*/
         if(mSorting.equals("Ascending")){
             mLayoutManager = new LinearLayoutManager(this);
             mLayoutManager.setReverseLayout(true);
             mLayoutManager.setStackFromEnd(true);
-            /*sort the posts in the content screen in descending order by not reversing the layout and not setting the stack of the contents to
+            /*sort the posts in the content_screen screen in descending order by not reversing the layout and not setting the stack of the contents to
         start from the end*/
         }else if(mSorting.equals("Descending")){
             mLayoutManager = new LinearLayoutManager(this);
@@ -136,7 +137,7 @@ public class content extends AppCompatActivity {
         }
 
         /*assigning java RecyclerView instance to xml item and setting to fixed size so
-        that width or height does not change based on the content in it
+        that width or height does not change based on the content_screen in it
          */
         viewRecycler = findViewById(R.id.recyclerView);
         viewRecycler.setHasFixedSize(true);
@@ -155,19 +156,18 @@ public class content extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Floating action button reference
-        /*Once user has clicked the postButton and input their data in the add_post screen, this data will be displayed in the content screen by
+        /*Once user_model has clicked the postButton and input their data in the add_post_screen screen, this data will be displayed in the content_screen screen by
         calling DisplayPosts method*/
-        //followed tutorial when implementing recyclerAdapter, https://www.youtube.com/watch?v=vD6Y_dVWJ5c
         FloatingActionButton postButton = findViewById(R.id.float_post);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(content.this, add_post.class));
+                startActivity(new Intent(content_screen.this, add_post_screen.class));
             }
         });
 
         /*followed tutorial when implementing search facility to filter data based on category
-        https://www.youtube.com/watch?v=sbOdwk4C_9s&t=1051s*/
+        https://www.youtube.com/watch?v=sbOdwk4C_9s&t=1051s */
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,40 +183,40 @@ public class content extends AppCompatActivity {
     //used https://www.youtube.com/watch?v=6Od5PqDktGo&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh&index=5 as guidance
     private void saveToken(String token) {
         String email = mAuth.getCurrentUser().getEmail();
-        User user = new User(email, token);
+        user_model user_model = new user_model(email, token);
 
         //stores token and email address in users node in Firebase RealTime Database
         DatabaseReference userTokenRef = FirebaseDatabase.getInstance().getReference("users");
 
-        //retrieves unique id of currently logged in user
+        //retrieves unique id of currently logged in user_model
         userTokenRef.child(mAuth.getCurrentUser().getUid())
-                .setValue(user);
+                .setValue(user_model);
     }
 
     /* DisplayPosts method calls recyclerview adapter to retrieve data from Firebase database and input into the cardview defined
     within post_view.xml
     followed */
     private void DisplayPosts(String searchBoxInput) {
-        //database query to return results within recyclerview based on the category searched by the user
+        //database query to return results within recyclerview based on the category searched by the user_model
         Query categoryQuery = databaseReference.orderByChild("category").startAt(searchBoxInput).endAt(searchBoxInput);
         //RecyclerOptions set the options that the RecyclerAdapter will use to retrieve the data from the database based on the query defined above, categoryQuery
-        FirebaseRecyclerOptions<post> options = new FirebaseRecyclerOptions.Builder<post>()
-                .setQuery(categoryQuery, post.class)
+        FirebaseRecyclerOptions<post_model> options = new FirebaseRecyclerOptions.Builder<post_model>()
+                .setQuery(categoryQuery, post_model.class)
                 .build();
 
 
 
-        /*RecyclerAdapter uses the post class and the getter and setter methods defined within to set the viewHolder data to the
+        /*RecyclerAdapter uses the post_model class and the getter and setter methods defined within to set the viewHolder data to the
         data retrieved from the database*/
         /* RecyclerAdapter is used to bind the data retrieved from the database for use by the PostViewHolder class to display it in the defined view*/
-        FirebaseRecyclerAdapter<post, PostViewHolder> adapter = new FirebaseRecyclerAdapter<post, PostViewHolder>(options) {
+        FirebaseRecyclerAdapter<post_model, PostViewHolder> adapter = new FirebaseRecyclerAdapter<post_model, PostViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final PostViewHolder holder, final int position, @NonNull final post model)
+            protected void onBindViewHolder(@NonNull final PostViewHolder holder, final int position, @NonNull final post_model model)
             {
-                //gets position of post user is interacting with from firebase database
+                //gets position of post_model user_model is interacting with from firebase database
                 final String PostKey = getRef(position).getKey();
 
-                //gets and displays the relevant data within the reyclerview item from model class that links to firebase database content
+                //gets and displays the relevant data within the reyclerview item from model class that links to firebase database content_screen
                 holder.post_Text.setText(model.getPost());
                 holder.category_Text.setText(model.getCategory());
                 holder.date_Text.setText(model.getDate());
@@ -225,11 +225,11 @@ public class content extends AppCompatActivity {
                 //holder.post_image(getApplicationContext(), model.getPostImage());
                 holder.setLikeButton(PostKey);
 
-                //used https://developer.android.com/training/sharing/send website in creation of share button functionality
+                //used https://developer.android.com/training/sharing/send in creation of share button functionality
                 holder.shareButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //string that is share gets the firebase database Users Post child 'post' of the selected post item
+                        //string that is share gets the firebase database Users Post child 'post_model' of the selected post_model item
                         String message = model.post;
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
@@ -240,34 +240,34 @@ public class content extends AppCompatActivity {
                 });
 
                 /*
-                onClickListener - when user clicks on post_Text they are sent to edit_delete_post screen.
-                PostKey used to retrieve data of specific post the user has selected to edit/delete.
+                onClickListener - when user_model clicks on post_Text they are sent to edit_delete_post screen.
+                PostKey used to retrieve data of specific post_model the user_model has selected to edit/delete.
                  */
                 holder.post_Text.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent postIntent = new Intent(content.this, edit_delete_post.class);
+                        Intent postIntent = new Intent(content_screen.this, edit_delete_post.class);
                         postIntent.putExtra("PostKey", PostKey);
                         startActivity(postIntent);
                     }
                 });
 
                 /*
-                onClickListener - when user clicks on commentButton they are sent to commentScreen screen.
-                PostKey used to retrieve data of specific post the user has selected to comment on.
+                onClickListener - when user_model clicks on commentButton they are sent to comment_screen screen.
+                PostKey used to retrieve data of specific post_model the user_model has selected to comment on.
                  */
                 holder.commentButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent commentIntent = new Intent(content.this, commentScreen.class);
+                        Intent commentIntent = new Intent(content_screen.this, comment_screen.class);
                         commentIntent.putExtra("PostKey", PostKey);
                         startActivity(commentIntent);
                     }
                 });
 
                  /*
-                onClickListener - when user clicks on likeButton, the method will check if the button has already been liked and if it has, it will be unliked and vice versa.
-                PostKey used to retrieve data of specific post the user has selected to like.
+                onClickListener - when user_model clicks on likeButton, the method will check if the button has already been liked and if it has, it will be unliked and vice versa.
+                PostKey used to retrieve data of specific post_model the user_model has selected to like.
                 used tutorial from, https://www.youtube.com/watch?v=111GZQ0WsME&index=39&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_ in the creation of this onClickListener
                  */
                 holder.likeButton.setOnClickListener(new View.OnClickListener() {
@@ -302,13 +302,13 @@ public class content extends AppCompatActivity {
                 });
 
                 /*
-                onClickListener - when user clicks on reportButton they are sent to reportScreen screen.
-                PostKey used to retrieve data of specific post the user has selected to report on.
+                onClickListener - when user_model clicks on reportButton they are sent to report_screen screen.
+                PostKey used to retrieve data of specific post_model the user_model has selected to report on.
                  */
                 holder.reportButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent reportIntent = new Intent(content.this, reportScreen.class);
+                        Intent reportIntent = new Intent(content_screen.this, report_screen.class);
                         reportIntent.putExtra("PostKey", PostKey);
                         startActivity(reportIntent);
                     }
@@ -374,7 +374,7 @@ public class content extends AppCompatActivity {
         }
 
         /*method to set the count on the number of likes based on number of users clicking on the like button
-        and also change the like button to be filled or unfilled based on whether it has been liked or unliked by the current user*/
+        and also change the like button to be filled or unfilled based on whether it has been liked or unliked by the current user_model*/
         //used tutorial from, https://www.youtube.com/watch?v=111GZQ0WsME&index=39&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_, in the implementation of this method
         public void setLikeButton(final String PostKey)
         {
@@ -383,20 +383,20 @@ public class content extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.child(PostKey).hasChild(currentUserId))
                     {
-                        //collects the number of likes on the post from the firebase database Post Key
+                        //collects the number of likes on the post_model from the firebase database Post Key
                         likeCounter = (int) dataSnapshot.child(PostKey).getChildrenCount();
-                        //sets the like button to the dark heart to indicate the post being liked
+                        //sets the like button to the dark heart to indicate the post_model being liked
                         likeButton.setImageResource(R.mipmap.ic_like);
-                        //sets the likeCounter integer value to a string to be displayed to the user
+                        //sets the likeCounter integer value to a string to be displayed to the user_model
                         numberOfLikes.setText(Integer.toString(likeCounter));
                     }
                     else
                     {
-                        //collects the number of likes on the post from the firebase database Post Key
+                        //collects the number of likes on the post_model from the firebase database Post Key
                         likeCounter = (int) dataSnapshot.child(PostKey).getChildrenCount();
-                        //sets the like button to the dark heart to indicate the post being liked
+                        //sets the like button to the dark heart to indicate the post_model being liked
                         likeButton.setImageResource(R.mipmap.ic_unlike);
-                        //sets the likeCounter integer value to a string to be displayed to the user
+                        //sets the likeCounter integer value to a string to be displayed to the user_model
                         numberOfLikes.setText(Integer.toString(likeCounter));
                     }
                 }
@@ -410,6 +410,7 @@ public class content extends AppCompatActivity {
     }
 
     //create menu items
+    //followed https://www.youtube.com/playlist?list=PLc2rvfiptPSRCMzAoxGQ2dF4G6zqDvo_v in the creation of the actionBar menu toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mMenuInflater = getMenuInflater();
@@ -438,12 +439,12 @@ public class content extends AppCompatActivity {
         }
     }
 
-    //method to take user to the google maps activity
+    //method to take user_model to the google maps activity
     private void openChurchLocator() {
-        startActivity(new Intent(content.this, GoogleMapsActivity.class));
+        startActivity(new Intent(content_screen.this, google_maps_activity.class));
     }
 
-    //method to take user to YouVersion App once they click on the Bible Icon
+    //method to take user_model to YouVersion App once they click on the Bible Icon
     //used https://developer.android.com/training/basics/intents/sending.html as guidance in creating this method
     private void bibleLink() {
         //package name for YouVersion Bible App
@@ -451,7 +452,7 @@ public class content extends AppCompatActivity {
         String app_name = "com.sirma.mobile.bible.android";
         Intent openBibleApp = getPackageManager().getLaunchIntentForPackage(app_name);
 
-        //method to check if user has YouVersion Bibe App installed on device and open it if they do
+        //method to check if user_model has YouVersion Bibe App installed on device and open it if they do
         //if not then it will give them the option to go the the play store to install it
         if(openBibleApp == null) {
             openBibleApp = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id="+app_name));
@@ -460,14 +461,15 @@ public class content extends AppCompatActivity {
     }
 
     //Sign out method taken directly from FirebaseAuth methods
+    //followed https://firebase.google.com/docs/auth/android/password-auth in adding this method
     public void signOut(){
         mAuth.signOut();
-        startActivity(new Intent(this, log_in.class));
+        startActivity(new Intent(this, log_in_screen.class));
         finish();
     }
 
-    //sort content based on date in ascending or descending order
-    //followed youtube tutorial https://www.youtube.com/watch?v=fmkjH7tIyao for sorting content in recyclerview
+    //sort content_screen based on date in ascending or descending order
+    //followed youtube tutorial https://www.youtube.com/watch?v=fmkjH7tIyao for sorting posts on in recyclerview on content_screen
     public void sort(){
         String[] sortOptions = {"Ascending", "Descending"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

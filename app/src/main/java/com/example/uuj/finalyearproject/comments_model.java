@@ -3,7 +3,7 @@ package com.example.uuj.finalyearproject;
 //followed tutorial on youtube in producing this class, https://www.youtube.com/watch?v=hX5867tnXFk&index=43&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_
 
 //model class used to retrieve the data from the database and set it to the referenced variables for use by the RecyclerAdapter method
-public class comments {
+public class comments_model {
 
     //class variables referenced in Firebase Database
     public String comment;
@@ -11,12 +11,12 @@ public class comments {
     public String time;
 
     //default constructor
-    public comments(){
+    public comments_model(){
 
     }
 
-    //post constructor class
-    public comments(String comment, String date, String time) {
+    //post_model constructor class
+    public comments_model(String comment, String date, String time) {
         this.comment = comment;
         this.date = date;
         this.time = time;

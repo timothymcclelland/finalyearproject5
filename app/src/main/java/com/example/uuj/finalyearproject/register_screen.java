@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Register extends AppCompatActivity {
+public class register_screen extends AppCompatActivity {
 
     //Class member variables
     private TextView loginText;
@@ -32,7 +32,7 @@ public class Register extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
+        setContentView(R.layout.register_screen);
 
         //Referencing Java to XML resources
         loginText = findViewById(R.id.textViewSignin);
@@ -43,7 +43,7 @@ public class Register extends AppCompatActivity {
         //reference to Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
 
-        //register button runs RegisterUser method
+        //register_screen button runs RegisterUser method
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,19 +53,19 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        //loginText textview links to log_in activity
+        //loginText textview links to log_in_screen activity
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(v == loginText)
                 startActivity(new Intent(getApplicationContext(),
-                        log_in.class));
+                        log_in_screen.class));
             }
         });
     }
 
-    //code taken from https://medium.com/@peterekeneeze/add-firebase-authentication-to-your-app-in-7minutes-c13df58994bd
-    //RegisterUser method creates a user account in Firebase authentication with the email and password they enter
+    //code taken from https://medium.com/@peterekeneeze/add-firebase-authentication-to-your-app-in-7minutes-c13df58994bd and altered for my application
+    //RegisterUser method creates a user_model account in Firebase authentication with the email and password they enter
     public void RegisterUser(){
         String Email = email.getText().toString().trim();
         String Password = password.getText().toString().trim();
@@ -79,7 +79,7 @@ public class Register extends AppCompatActivity {
             Toast.makeText(this, "Password Required", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            //method to create User with email and password in Firebase Authentication system
+            //method to create user_model with email and password in Firebase Authentication system
             mAuth.createUserWithEmailAndPassword(Email, Password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -87,15 +87,15 @@ public class Register extends AppCompatActivity {
                             try {
                                 //check if successful
                                 if (task.isSuccessful()) {
-                                    //User is successfully registered and logged in
+                                    //user_model is successfully registered and logged in
                                     //start Profile Activity here
-                                    Toast.makeText(Register.this, "Registration successful",
+                                    Toast.makeText(register_screen.this, "Registration successful",
                                             Toast.LENGTH_SHORT).show();
                                     finish();
-                                    startActivity(new Intent(getApplicationContext(), content.class));
+                                    startActivity(new Intent(getApplicationContext(), content_screen.class));
                                 } else {
-                                    //User unsuccessful in registering, message displayed
-                                    Toast.makeText(Register.this, "Unable to register, please try again",
+                                    //user_model unsuccessful in registering, message displayed
+                                    Toast.makeText(register_screen.this, "Unable to register_screen, please try again",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {

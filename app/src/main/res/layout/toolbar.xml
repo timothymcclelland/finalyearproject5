@@ -1,11 +1,13 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
+<!--followed https://www.youtube.com/playlist?list=PLc2rvfiptPSRCMzAoxGQ2dF4G6zqDvo_v in the creation of the actionBar menu toolbar-->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentTop="true">
 
-        <!-- toolbar shown in content screen created inside Relative Layout.
+        <!-- toolbar shown in content_screen screen created inside Relative Layout.
         Toolbar items linked to menu/toolbar_menu.xml -->
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"

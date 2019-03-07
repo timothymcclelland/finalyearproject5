@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".content">
+    tools:context=".content_screen">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
 
         </RelativeLayout>
 
-        <!--Search bar edit text space to allow user to search for posts based on the post category-->
+        <!--Search bar edit text space to allow user_model to search for posts based on the post_model category-->
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:hint="@string/searchHintText"
             android:layout_below="@id/toolbar_layout"/>
 
-        <!--Search button used for filter method in content.java-->
+        <!--Search button used for filter method in content_screen.java-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             android:layout_margin="5dp"
             android:inputType="text"/>
 
-        <!--recyclerview for user posts-->
+        <!--recyclerview for user_model posts-->
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -52,7 +52,7 @@
             android:layout_below="@id/searchButton">
         </android.support.v7.widget.RecyclerView>
 
-        <!--floating action button to add post -->
+        <!--floating action button to add post_model -->
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/float_post"
             android:layout_width="wrap_content"

@@ -1,7 +1,10 @@
-/*followed the following tutorials in the creation of this java activity
+/*followed the following tutorials in the creation of this java class
 https://www.youtube.com/watch?v=Jnsrcbe9MCQ&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=41
 https://www.youtube.com/watch?v=oE-BObhBn2k&index=42&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_
 https://www.youtube.com/watch?v=hX5867tnXFk&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=43
+https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
+https://www.youtube.com/watch?v=tOn5HsQPhUY
+
  */
 
 package com.example.uuj.finalyearproject;
@@ -21,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//firebase imports
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,20 +34,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//java imports
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-//firebase imports
-
-public class commentScreen extends AppCompatActivity {
-
-    /*followed tutorials from:
-    https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
-    https://www.youtube.com/watch?v=tOn5HsQPhUY
-    https://www.youtube.com/watch?v=hX5867tnXFk&index=43&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_
-    https://www.youtube.com/watch?v=8ZHFV69GmlM&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=40
-    in the creation of this class
-    */
+public class comment_screen extends AppCompatActivity {
 
     //Class member variables
     private RecyclerView CommentsRecyclerView;
@@ -60,24 +55,24 @@ public class commentScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment_screen);
+        setContentView(R.layout.comment_screen);
 
-        //used to get position of specific post that a user has selected to comment on
+        //used to get position of specific post_model that a user_model has selected to comment on
         PostKey = getIntent().getExtras().get("PostKey").toString();
 
-        //methods below used to get current user ID from the Firebase Authentication system
+        //methods below used to get current user_model ID from the Firebase Authentication system
         mAuth = FirebaseAuth.getInstance();
         current_UserID = mAuth.getCurrentUser().getUid();
 
-        /*Referencing database variables to Firebase Realtime Database children "User Post Reports" which
-         will contain all users' posts and their comments for each post*/
+        /*Referencing database variables to Firebase Realtime Database children "user_model Post Reports" which
+         will contain all users' posts and their comments_model for each post_model*/
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Users Posts").child(PostKey).child("Post Comments");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
 
         /*assigning java RecyclerView instance to xml item and setting to fixed size so
-        that width or height does not change based on the content in it and setting the stack of the contents to
+        that width or height does not change based on the content_screen in it and setting the stack of the contents to
         start from the end
-        Also sort the comments in the commentScreen screen in ascending order by reversing the layout
+        Also sort the comments_model in the comment_screen screen in ascending order by reversing the layout
          */
         CommentsRecyclerView = findViewById(R.id.commentRecyclerView);
         CommentsRecyclerView.setHasFixedSize(true);
@@ -86,8 +81,7 @@ public class commentScreen extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         CommentsRecyclerView.setLayoutManager(linearLayoutManager);
 
-        //Referencing Java to XML variables in activity_comment_screen.xml
-        postCommentText = findViewById(R.id.comment_text);
+        //Referencing Java to XML variables in comment_screen.xmlpostCommentText = findViewById(R.id.comment_text);
         postCommentButton = findViewById(R.id.post_comment_button);
 
         //onClickListener method called to send data to the Firebase Realtime database
@@ -123,16 +117,16 @@ public class commentScreen extends AppCompatActivity {
     {
         super.onStart();
         //RecyclerOptions set the options that the RecyclerAdapter will use to retrieve the data from the database
-        FirebaseRecyclerOptions<comments> options = new FirebaseRecyclerOptions.Builder<comments>()
-                .setQuery(commentsRef, comments.class)
+        FirebaseRecyclerOptions<comments_model> options = new FirebaseRecyclerOptions.Builder<comments_model>()
+                .setQuery(commentsRef, comments_model.class)
                 .build();
 
-          /*RecyclerAdapter uses the comments class and the getter and setter methods defined within to set the viewHolder data to the
+          /*RecyclerAdapter uses the comments_model class and the getter and setter methods defined within to set the viewHolder data to the
         data retrieved from the database*/
         /* RecyclerAdapter is used to bind the data retrieved from the database for use by the CommentsViewHolder class to display it in the defined view*/
-        FirebaseRecyclerAdapter<comments, CommentsViewHolder> adapter = new FirebaseRecyclerAdapter<comments, CommentsViewHolder>(options) {
+        FirebaseRecyclerAdapter<comments_model, CommentsViewHolder> adapter = new FirebaseRecyclerAdapter<comments_model, CommentsViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull CommentsViewHolder holder, int position, @NonNull comments model)
+            protected void onBindViewHolder(@NonNull CommentsViewHolder holder, int position, @NonNull comments_model model)
             {
                 holder.comment_Text.setText(model.getComment());
                 holder.date_Text.setText(model.getDate());
@@ -181,20 +175,20 @@ public class commentScreen extends AppCompatActivity {
         String comment = postCommentText.getText().toString();
 
          /*Toast message that displays if comment editText field is
-         left empty when user tries to add a comment*/
+         left empty when user_model tries to add a comment*/
         if(TextUtils.isEmpty(comment))
         {
             Toast.makeText(this, "Please input a comment", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            //code below used to create date attribute in referenced child(randomly created when post to database is made)
+            //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
             //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
             Calendar calendarDate = Calendar.getInstance();
             SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
             String date = currentDate.format(calendarDate.getTime());
 
-            //code below used to create date attribute in referenced child(randomly created when post to database is made)
+            //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
             //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
             Calendar calendarTime = Calendar.getInstance();
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
@@ -208,7 +202,7 @@ public class commentScreen extends AppCompatActivity {
             newComment.child("comment").setValue(comment);
             newComment.child("date").setValue(date);
             newComment.child("time").setValue(time);
-            newComment.child("user ID").setValue(current_UserID);
+            newComment.child("user_model ID").setValue(current_UserID);
         }
     }
 }

@@ -7,6 +7,7 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
+    <!--followed https://www.youtube.com/watch?v=6fVhmtzwvfk&list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj&index=2 tutorial in adding these permissions-->
     <!--permissions for google maps activity-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -38,25 +39,26 @@
 
         <!--app screens-->
         <activity
-            android:name=".GoogleMapsActivity"
+            android:name=".google_maps_activity"
             android:label="@string/title_activity_google_maps"></activity>
-        <activity android:name=".reportScreen" />
+        <activity android:name=".report_screen" />
         <activity android:name=".edit_delete_post" />
-        <activity android:name=".commentScreen" />
-        <activity android:name=".log_in">
+        <activity android:name=".comment_screen" />
+        <activity android:name=".log_in_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".content" />
-        <activity android:name=".Register" />
-        <activity android:name=".reset" />
-        <activity android:name=".add_post" />
+        <activity android:name=".content_screen" />
+        <activity android:name=".register_screen" />
+        <activity android:name=".reset_password_screen" />
+        <activity android:name=".add_post_screen" />
 
+        <!--followed https://www.youtube.com/playlist?list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh tutorial in adding this service-->
         <!--required to operate the firebase messaging service for the notifications-->
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name=".my_firebase_messaging_service">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

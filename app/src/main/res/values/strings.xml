@@ -30,7 +30,7 @@
     <string name="dialog_post_hint">Post</string>
     <string name="report_button_text">Submit Report</string>
     <string name="hint_report_information">Report Information</string>
-    <string name="report_instruction_text">Please provide reason for reporting user/comment along with information to be included in your report.</string>
+    <string name="report_instruction_text">Please provide reason for reporting user_model/comment along with information to be included in your report.</string>
     <string name="post_category">Category of Post</string>
     <string name="searchButtonText">Search</string>
     <string name="searchHintText">Filter by category</string>

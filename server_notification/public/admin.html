@@ -16,7 +16,7 @@ https://www.youtube.com/watch?v=tAN244LVW-s&list=PLk7v1Z2rk4hgNu5zXbGctiCWYebxjd
     </head>
     
     <body class="h-100">
-        <!--Screen user will see once they have logged in successfully.-->
+        <!--Screen user_model will see once they have logged in successfully.-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
@@ -69,7 +69,7 @@ https://www.youtube.com/watch?v=tAN244LVW-s&list=PLk7v1Z2rk4hgNu5zXbGctiCWYebxjd
         <script src="app.js"></script>
 
         <!--script to read users from Firebase RealTime Database
-        Button click - Send, will send the notification to the selected user devices.
+        Button click - Send, will send the notification to the selected user_model devices.
         Uses firebase cloud messaging.
         Use of legacy server key to authorise the project from which the notification will be being sent-->
         <script>
@@ -130,10 +130,10 @@ https://www.youtube.com/watch?v=tAN244LVW-s&list=PLk7v1Z2rk4hgNu5zXbGctiCWYebxjd
         </script>
 
         <!--Logout Button with corresponding Firebase logout method
-        Firebase Authentication methods to identify if user is already logged in or not-->
+        Firebase Authentication methods to identify if user_model is already logged in or not-->
         <script>
-            firebase.auth().onAuthStateChanged(function(user){
-                if(!user){
+            firebase.auth().onAuthStateChanged(function(user_model){
+                if(!user_model){
                     window.location.href = "index.html";
                 }
             });

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--followed https://www.youtube.com/watch?v=oE-BObhBn2k&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=42 in the creation of this xml layout-->
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -14,7 +17,7 @@
         android:textColor="@color/colorAccent"
         android:text="@string/commentsScreenTitle" />
 
-    <!--comments recyclerview -->
+    <!--comments_model recyclerview -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/commentRecyclerView"
         android:layout_margin="5dp"
@@ -25,7 +28,7 @@
         android:layout_marginTop="14dp">
     </android.support.v7.widget.RecyclerView>
 
-    <!-- EditText for user to enter comment text-->
+    <!-- EditText for user_model to enter comment text-->
     <EditText
         android:id="@+id/comment_text"
         android:layout_width="match_parent"
@@ -37,7 +40,7 @@
         android:hint="@string/commentHint"
         />
 
-    <!--Clickable 'post comment' icon, send icon used-->
+    <!--Clickable 'post_model comment' icon, send icon used-->
     <ImageButton
         android:id="@+id/post_comment_button"
         android:layout_width="40dp"

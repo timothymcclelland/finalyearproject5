@@ -19,7 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class log_in extends AppCompatActivity {
+public class log_in_screen extends AppCompatActivity {
 
     //Class member variables
     private TextView registerText;
@@ -34,7 +34,7 @@ public class log_in extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.log_in);
+        setContentView(R.layout.log_in_screen);
 
         //Firebase authentication instance called to enable login and anonymous sign in methods to connect with authentication system
         mAuth = FirebaseAuth.getInstance();
@@ -47,11 +47,11 @@ public class log_in extends AppCompatActivity {
         registerText = findViewById(R.id.textViewSignup);
         forgotPasswordText = findViewById(R.id.forgotPassword);
 
-        //registerText textview links to Register activity
+        //registerText textview links to register_screen activity
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(log_in.this, Register.class);
+                Intent myIntent = new Intent(log_in_screen.this, register_screen.class);
                 startActivity(myIntent);
             }
         });
@@ -76,18 +76,18 @@ public class log_in extends AppCompatActivity {
              }
         });
 
-        //forgotPasswordText textview links to reset activity
+        //forgotPasswordText textview links to reset_password_screen activity
         forgotPasswordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent2 = new Intent(log_in.this, reset.class);
+                Intent myIntent2 = new Intent(log_in_screen.this, reset_password_screen.class);
                 startActivity(myIntent2);
             }
         });
     }
 
     //code taken from https://medium.com/@peterekeneeze/add-firebase-authentication-to-your-app-in-7minutes-c13df58994bd
-    //method used to log in user with email and password
+    //method used to log in user_model with email and password
     public void LoginUser(){
         String Email = emailText.getText().toString().trim();
         String Password = passwordText.getText().toString().trim();
@@ -103,19 +103,19 @@ public class log_in extends AppCompatActivity {
             Toast.makeText(this, "Password Required", Toast.LENGTH_SHORT).show();
         }
         else {
-            //method to allow user to sign in to application with email and password that is stored in Firebase Authentication system
+            //method to allow user_model to sign in to application with email and password that is stored in Firebase Authentication system
             mAuth.signInWithEmailAndPassword(Email, Password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             try {
-                                //Checks if sign in was successful and gets the users ID, then sends the user to content screen
+                                //Checks if sign in was successful and gets the users ID, then sends the user_model to content_screen screen
                                 if (task.isSuccessful()) {
                                     startActivity(new Intent(getApplicationContext(),
-                                            content.class));
+                                            content_screen.class));
                                 } else {
-                                    //Displays error message to user if their credentials are incorrect or inadequate
-                                    Toast.makeText(log_in.this, "Unable to login. Please try again or reset password",
+                                    //Displays error message to user_model if their credentials are incorrect or inadequate
+                                    Toast.makeText(log_in_screen.this, "Unable to login. Please try again or reset_password_screen password",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
@@ -127,7 +127,7 @@ public class log_in extends AppCompatActivity {
     }
 
     //code taken from https://firebase.google.com/docs/auth/android/anonymous-auth?utm_source=studio
-    //method used to sign in user with a randomly generated user ID
+    //method used to sign in user_model with a randomly generated user_model ID
     private void signInAnonymously() {
         // [START signin_anonymously]
         mAuth.signInAnonymously()
@@ -135,13 +135,13 @@ public class log_in extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            // Sign in success, update UI with the signed-in user_model's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             startActivity(new Intent(getApplicationContext(),
-                                    content.class));
+                                    content_screen.class));
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(log_in.this, "Authentication failed.",
+                            // If sign in fails, display a message to the user_model.
+                            Toast.makeText(log_in_screen.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

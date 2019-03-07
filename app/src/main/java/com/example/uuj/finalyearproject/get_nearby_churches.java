@@ -3,14 +3,17 @@ package com.example.uuj.finalyearproject;
 //android imports
 import android.os.AsyncTask;
 
+//google imports
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+//json imports
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+//java imports
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,11 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-//google imports
-//json imports
-//java imports
-
-public class GetNearbyChurches extends AsyncTask<Object, String, String>
+public class get_nearby_churches extends AsyncTask<Object, String, String>
 {
     /*used https://www.youtube.com/playlist?list=PLxefhmF0pcPlGUW8tyyOJ8-uF7Nk2VpSj &
     https://www.youtube.com/watch?v=oOVRNxPtfeQ&list=PLF0BIlN2vd8und4ajF-bdFI3jWyPTXxB5
@@ -43,14 +42,14 @@ public class GetNearbyChurches extends AsyncTask<Object, String, String>
     StringBuilder stringBuilder;
     String data;
 
-    //empty constructor required for GoogleMapsActivity.java to call this class
-    public GetNearbyChurches(GoogleMapsActivity googleMapsActivity) {
+    //empty constructor required for google_maps_activity.java to call this class
+    public get_nearby_churches(google_maps_activity googlemapsactivity) {
     }
 
     /*method used to open the connection to the google maps search in the background
     and search google maps based on the url (which includes the users location and data requested), that is to be read by the bufferedReader and then turned into a string.
-    This string data will then be used by the onPostExecute method to process the data and return the results which will then be processed and presented to the user
-    within the GoogleMapsActivity.java findNearbyChurches method*/
+    This string data will then be used by the onPostExecute method to process the data and return the results which will then be processed and presented to the user_model
+    within the google_maps_activity.java findNearbyChurches method*/
     @Override
     protected String doInBackground(Object... objects) {
 

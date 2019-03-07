@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".log_in">
+    tools:context=".log_in_screen">
 
     <!-- Two Relative layouts used within Linear Layout to create professional page structure -->
     <RelativeLayout
@@ -61,7 +61,7 @@
             android:paddingBottom="15dp"
             android:textColorHint="@color/colorAccent" />
 
-        <!--Links to LoginUser method in log_in.java-->
+        <!--Links to LoginUser method in log_in_screen.java-->
         <Button
             android:id="@+id/buttonLogin"
             android:background="@color/colorButton"
@@ -86,7 +86,7 @@
             android:textColor="@color/colorAccent"
             android:clickable="true" />
 
-        <!--Button links to signInAnonymously method in log_in.java-->
+        <!--Button links to signInAnonymously method in log_in_screen.java-->
         <Button
             android:id="@+id/buttonAnonymous"
             android:background="@color/colorButtonTwo"
@@ -99,7 +99,7 @@
             android:textAllCaps="false"
             android:textColor="@color/buttonTextColor" />
 
-        <!--text link to register activity-->
+        <!--text link to register_screen activity-->
         <TextView
             android:id="@+id/textViewSignup"
             android:layout_width="match_parent"
