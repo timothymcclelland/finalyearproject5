@@ -90,11 +90,11 @@ public class edit_delete_post extends AppCompatActivity {
 
                 if(dataSnapshot.exists())
                 {
-                    final String post = dataSnapshot.child("post_model").getValue().toString();
+                    final String post = dataSnapshot.child("post").getValue().toString();
                     final String category = dataSnapshot.child("category").getValue().toString();
                     //code below commented out as unable to get image storage and download functionality working
                     //image = dataSnapshot.child("image").getValue().toString();
-                    userID = dataSnapshot.child("user_model id").getValue().toString();
+                    userID = dataSnapshot.child("uid").getValue().toString();
 
                     //code below commented out as unable to get image storage and download functionality working
                     //Picasso.get(edit_delete_post.this).load(image).into(editPostImage);
@@ -173,7 +173,7 @@ public class edit_delete_post extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 databaseReference.child("category").setValue(editSpinner.getSelectedItem().toString());
-                databaseReference.child("post_model").setValue(editPost.getText().toString());
+                databaseReference.child("post").setValue(editPost.getText().toString());
                 databaseReference.child("time").setValue(time);
                 databaseReference.child("date").setValue(date);
                 Toast.makeText(edit_delete_post.this, "Post Updated", Toast.LENGTH_SHORT).show();

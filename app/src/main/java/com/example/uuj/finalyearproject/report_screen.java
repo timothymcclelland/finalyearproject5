@@ -1,4 +1,4 @@
-//used same principles as reset_password_screen.java and comment_screen.java classes in the creation of this java class
+//used same principles as reset_password_screen.java and comments_screen.java classes in the creation of this java class
 
 package com.example.uuj.finalyearproject;
 

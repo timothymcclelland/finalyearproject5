@@ -43,7 +43,7 @@
             android:label="@string/title_activity_google_maps"></activity>
         <activity android:name=".report_screen" />
         <activity android:name=".edit_delete_post" />
-        <activity android:name=".comment_screen" />
+        <activity android:name=".comments_screen" />
         <activity android:name=".log_in_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

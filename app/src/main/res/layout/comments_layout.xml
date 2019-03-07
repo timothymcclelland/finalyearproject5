@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--Layout for each comment recyclerview item on comment_screen-->
+    <!--Layout for each comment recyclerview item on comments_screen-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

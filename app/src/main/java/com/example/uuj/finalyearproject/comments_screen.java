@@ -38,7 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class comment_screen extends AppCompatActivity {
+public class comments_screen extends AppCompatActivity {
 
     //Class member variables
     private RecyclerView CommentsRecyclerView;
@@ -55,7 +55,7 @@ public class comment_screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.comment_screen);
+        setContentView(R.layout.comments_screen);
 
         //used to get position of specific post_model that a user_model has selected to comment on
         PostKey = getIntent().getExtras().get("PostKey").toString();
@@ -72,7 +72,7 @@ public class comment_screen extends AppCompatActivity {
         /*assigning java RecyclerView instance to xml item and setting to fixed size so
         that width or height does not change based on the content_screen in it and setting the stack of the contents to
         start from the end
-        Also sort the comments_model in the comment_screen screen in ascending order by reversing the layout
+        Also sort the comments_model in the comments_screen screen in ascending order by reversing the layout
          */
         CommentsRecyclerView = findViewById(R.id.commentRecyclerView);
         CommentsRecyclerView.setHasFixedSize(true);
@@ -81,7 +81,7 @@ public class comment_screen extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         CommentsRecyclerView.setLayoutManager(linearLayoutManager);
 
-        //Referencing Java to XML variables in comment_screen.xmlpostCommentText = findViewById(R.id.comment_text);
+        //Referencing Java to XML variables in comments_screen.xmlpostCommentText = findViewById(R.id.comment_text);
         postCommentButton = findViewById(R.id.post_comment_button);
 
         //onClickListener method called to send data to the Firebase Realtime database

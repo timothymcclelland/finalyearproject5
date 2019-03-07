@@ -253,13 +253,13 @@ public class content_screen extends AppCompatActivity {
                 });
 
                 /*
-                onClickListener - when user_model clicks on commentButton they are sent to comment_screen screen.
+                onClickListener - when user_model clicks on commentButton they are sent to comments_screen screen.
                 PostKey used to retrieve data of specific post_model the user_model has selected to comment on.
                  */
                 holder.commentButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent commentIntent = new Intent(content_screen.this, comment_screen.class);
+                        Intent commentIntent = new Intent(content_screen.this, comments_screen.class);
                         commentIntent.putExtra("PostKey", PostKey);
                         startActivity(commentIntent);
                     }
