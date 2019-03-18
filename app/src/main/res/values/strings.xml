@@ -45,6 +45,7 @@
     <string name="church_search">Find a church...</string>
     <string name="find_churches">Find Nearby Churches</string>
     <string name="google_places_api_key">AIzaSyBv-FCpO2fabbdVwBGjyls8NWM-gh-ZPwE</string>
+    <string name="post_text_hint">Enter Post Text</string>
 
     <!-- string array used for report reason spinner values -->
     <string-array name="report_reason_array">

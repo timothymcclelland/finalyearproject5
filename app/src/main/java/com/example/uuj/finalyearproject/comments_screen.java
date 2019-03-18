@@ -81,7 +81,8 @@ public class comments_screen extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         CommentsRecyclerView.setLayoutManager(linearLayoutManager);
 
-        //Referencing Java to XML variables in comments_screen.xmlpostCommentText = findViewById(R.id.comment_text);
+        //Referencing Java to XML variables in comments_screen.xml
+        postCommentText = findViewById(R.id.comment_text);
         postCommentButton = findViewById(R.id.post_comment_button);
 
         //onClickListener method called to send data to the Firebase Realtime database
@@ -202,7 +203,7 @@ public class comments_screen extends AppCompatActivity {
             newComment.child("comment").setValue(comment);
             newComment.child("date").setValue(date);
             newComment.child("time").setValue(time);
-            newComment.child("user_model ID").setValue(current_UserID);
+            newComment.child("user_ID").setValue(current_UserID);
         }
     }
 }

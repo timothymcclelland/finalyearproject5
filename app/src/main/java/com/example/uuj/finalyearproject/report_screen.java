@@ -60,11 +60,12 @@ public class report_screen extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        //Referencing Java to XML variables in report_screen    report_information = (EditText) findViewById(R.id.editTextReportInformation);
+        //Referencing Java to XML variables in report_screen
+        report_information = (EditText) findViewById(R.id.editTextReportInformation);
         buttonReport = (Button) findViewById(R.id.report_button);
 
         /*Referencing database variable to Firebase Realtime Database child "user_model Post Reports" which will contain all user_model's reports for each comment*/
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("user_model Post Reports").child(PostKey).child("Post Reports");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("User Post Reports").child(PostKey).child("Post Reports");
 
         //onClickListener method called to send data to the Firebase Realtime database
         buttonReport.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +106,7 @@ public class report_screen extends AppCompatActivity {
                     newReport.child("report reason").setValue(reportReasonSelected);
                     newReport.child("time").setValue(time);
                     newReport.child("date").setValue(date);
-                    newReport.child("user_model id").setValue(currentUserID);
+                    newReport.child("user_id").setValue(currentUserID);
 
                     //once OnClick method is completed, user_model will be taken back to the content_screen activity screen
                     startActivity(new Intent(report_screen.this, content_screen.class));
