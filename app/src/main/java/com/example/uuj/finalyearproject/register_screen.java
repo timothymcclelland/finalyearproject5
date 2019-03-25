@@ -65,7 +65,7 @@ public class register_screen extends AppCompatActivity {
     }
 
     //code taken from https://medium.com/@peterekeneeze/add-firebase-authentication-to-your-app-in-7minutes-c13df58994bd and altered for my application
-    //RegisterUser method creates a user_model account in Firebase authentication with the email and password they enter
+    //RegisterUser method creates a user account in Firebase authentication with the email and password they enter
     public void RegisterUser(){
         String Email = email.getText().toString().trim();
         String Password = password.getText().toString().trim();
@@ -79,7 +79,7 @@ public class register_screen extends AppCompatActivity {
             Toast.makeText(this, "Password Required", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            //method to create user_model with email and password in Firebase Authentication system
+            //method to create user with email and password in Firebase Authentication system
             mAuth.createUserWithEmailAndPassword(Email, Password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -87,14 +87,14 @@ public class register_screen extends AppCompatActivity {
                             try {
                                 //check if successful
                                 if (task.isSuccessful()) {
-                                    //user_model is successfully registered and logged in
+                                    //user is successfully registered and logged in
                                     //start Profile Activity here
                                     Toast.makeText(register_screen.this, "Registration successful",
                                             Toast.LENGTH_SHORT).show();
                                     finish();
                                     startActivity(new Intent(getApplicationContext(), content_screen.class));
                                 } else {
-                                    //user_model unsuccessful in registering, message displayed
+                                    //user unsuccessful in registering, message displayed
                                     Toast.makeText(register_screen.this, "Unable to register_screen, please try again",
                                             Toast.LENGTH_SHORT).show();
                                 }

@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!--Search editText space for user_model to search for their own church, links to onClick method in google_maps_activity.java-->
+    <!--Search editText space for user to search for their own church, links to onClick method in google_maps_activity.java-->
     <EditText
         android:id="@+id/location_search"
         android:layout_width="320dp"

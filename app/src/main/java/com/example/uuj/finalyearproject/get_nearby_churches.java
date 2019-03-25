@@ -48,7 +48,7 @@ public class get_nearby_churches extends AsyncTask<Object, String, String>
 
     /*method used to open the connection to the google maps search in the background
     and search google maps based on the url (which includes the users location and data requested), that is to be read by the bufferedReader and then turned into a string.
-    This string data will then be used by the onPostExecute method to process the data and return the results which will then be processed and presented to the user_model
+    This string data will then be used by the onPostExecute method to process the data and return the results which will then be processed and presented to the user
     within the google_maps_activity.java findNearbyChurches method*/
     @Override
     protected String doInBackground(Object... objects) {

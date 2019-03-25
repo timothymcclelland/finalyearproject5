@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- xml layout of the post_model pulled from firebase database to show in recyclerview on content_screen/java screen-->
+<!-- xml layout of the post pulled from firebase database to show in recyclerview on content_screen/java screen-->
 
 <!-- followed https://www.youtube.com/watch?v=Ac4TUMJqfMY&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=22 in the creation of this xml layout-->
 
@@ -33,7 +33,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_alignParentLeft="true"/>
 
-            <!--Display category of post_model-->
+            <!--Display category of post-->
             <TextView
                 android:id="@+id/post_category"
                 android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Display date of post_model -->
+            <!-- Display date of post -->
             <TextView
                 android:id="@+id/post_date"
                 android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                 android:layout_margin="5dp"
                 android:textSize="12sp" />
 
-            <!--Display time of post_model-->
+            <!--Display time of post-->
             <TextView
                 android:id="@+id/post_time"
                 android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
 
         </LinearLayout>
 
-        <!--Display post_model text-->
+        <!--Display post text-->
         <TextView
             android:id="@+id/post_text"
             android:layout_width="match_parent"
@@ -86,7 +86,7 @@
             android:textSize="14sp" />
 
         <!--ImageView commented out as unable to get image storage and download functionality working
-        <!-used to display post_model image
+        <!-used to display post image
 
             <ImageView
                 android:id:="@+id/post_image"

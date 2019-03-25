@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--used to instruct user_model to input text that they want to post_model-->
+    <!--used to instruct user to input text that they want to post-->
     <TextView
         android:layout_margin="15dp"
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
 
     <!--Image Button commented out as unable to get image storage and download functionality working
 
-    <!-used to select image to add for post_model
+    <!-used to select image to add for post
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -37,7 +37,7 @@
 
     -->
 
-    <!-- container for post_model text-->
+    <!-- container for post text-->
     <EditText
         android:layout_margin="15dp"
         android:id="@+id/postEditText"
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!--submits post_model to database and should also appear in content_screen activity screen-->
+    <!--submits post to database and should also appear in content_screen activity screen-->
     <Button
         android:layout_margin="15dp"
         android:layout_width="wrap_content"

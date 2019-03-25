@@ -57,22 +57,22 @@ public class comments_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comments_screen);
 
-        //used to get position of specific post_model that a user_model has selected to comment on
+        //used to get position of specific post that a user has selected to comment on
         PostKey = getIntent().getExtras().get("PostKey").toString();
 
-        //methods below used to get current user_model ID from the Firebase Authentication system
+        //methods below used to get current user ID from the Firebase Authentication system
         mAuth = FirebaseAuth.getInstance();
         current_UserID = mAuth.getCurrentUser().getUid();
 
-        /*Referencing database variables to Firebase Realtime Database children "user_model Post Reports" which
-         will contain all users' posts and their comments_model for each post_model*/
+        /*Referencing database variables to Firebase Realtime Database children "user Post Reports" which
+         will contain all users' posts and their comments for each post*/
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Users Posts").child(PostKey).child("Post Comments");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
 
         /*assigning java RecyclerView instance to xml item and setting to fixed size so
         that width or height does not change based on the content_screen in it and setting the stack of the contents to
         start from the end
-        Also sort the comments_model in the comments_screen screen in ascending order by reversing the layout
+        Also sort the comments in the comments_screen screen in ascending order by reversing the layout
          */
         CommentsRecyclerView = findViewById(R.id.commentRecyclerView);
         CommentsRecyclerView.setHasFixedSize(true);
@@ -176,20 +176,20 @@ public class comments_screen extends AppCompatActivity {
         String comment = postCommentText.getText().toString();
 
          /*Toast message that displays if comment editText field is
-         left empty when user_model tries to add a comment*/
+         left empty when user tries to add a comment*/
         if(TextUtils.isEmpty(comment))
         {
             Toast.makeText(this, "Please input a comment", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
+            //code below used to create date attribute in referenced child(randomly created when post to database is made)
             //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
             Calendar calendarDate = Calendar.getInstance();
             SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
             String date = currentDate.format(calendarDate.getTime());
 
-            //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
+            //code below used to create date attribute in referenced child(randomly created when post to database is made)
             //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
             Calendar calendarTime = Calendar.getInstance();
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");

@@ -59,7 +59,7 @@
                 android:paddingBottom="15dp"
                 android:textColorHint="@color/colorAccent" />
 
-            <!-- register_screen Button links to RegisterUser method which registers the user_model -->
+            <!-- register_screen Button links to RegisterUser method which registers the user -->
             <Button
                 android:id="@+id/buttonRegister"
                 android:background="@color/colorButton"

@@ -45,11 +45,11 @@ public class report_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_screen);
 
-        //methods below used to get current user_model ID from the Firebase Authentication system
+        //methods below used to get current user ID from the Firebase Authentication system
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
 
-        //used to get position of specific post_model that a user_model has selected to report on
+        //used to get position of specific post that a user has selected to report on
         PostKey = getIntent().getExtras().get("PostKey").toString();
 
         //Spinner used to select reason of report
@@ -64,7 +64,7 @@ public class report_screen extends AppCompatActivity {
         report_information = (EditText) findViewById(R.id.editTextReportInformation);
         buttonReport = (Button) findViewById(R.id.report_button);
 
-        /*Referencing database variable to Firebase Realtime Database child "user_model Post Reports" which will contain all user_model's reports for each comment*/
+        /*Referencing database variable to Firebase Realtime Database child "User Post Reports" which will contain all user's reports for each comment*/
         databaseReference = FirebaseDatabase.getInstance().getReference().child("User Post Reports").child(PostKey).child("Post Reports");
 
         //onClickListener method called to send data to the Firebase Realtime database
@@ -72,13 +72,13 @@ public class report_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
+                //code below used to create date attribute in referenced child(randomly created when post to database is made)
                 //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
                 Calendar calendarDate = Calendar.getInstance();
                 SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
                 date = currentDate.format(calendarDate.getTime());
 
-                //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
+                //code below used to create date attribute in referenced child(randomly created when post to database is made)
                 //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
                 Calendar calendarTime = Calendar.getInstance();
                 SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
@@ -91,7 +91,7 @@ public class report_screen extends AppCompatActivity {
                 String reportReasonSelected = spinner.getSelectedItem().toString();
 
                  /*Toast message that displays if report_information_content editText field is
-                 left empty when user_model tries to submit a report*/
+                 left empty when user tries to submit a report*/
                 if(TextUtils.isEmpty(report_information_content))
                 {
                     Toast.makeText(report_screen.this, "Enter report information", Toast.LENGTH_SHORT).show();
@@ -108,7 +108,7 @@ public class report_screen extends AppCompatActivity {
                     newReport.child("date").setValue(date);
                     newReport.child("user_id").setValue(currentUserID);
 
-                    //once OnClick method is completed, user_model will be taken back to the content_screen activity screen
+                    //once OnClick method is completed, user will be taken back to the content_screen activity screen
                     startActivity(new Intent(report_screen.this, content_screen.class));
                 }
             }

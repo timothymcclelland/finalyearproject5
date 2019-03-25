@@ -29,12 +29,12 @@ public class post_model {
         this.category = category;
     }
 
-    //getter method for post_model variable
+    //getter method for post variable
     public String getPost() {
         return post;
     }
 
-    //setter method for post_model variable
+    //setter method for post variable
     public void setPost(String post) {
         this.post = post;
     }

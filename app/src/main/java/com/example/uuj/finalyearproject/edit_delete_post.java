@@ -60,15 +60,15 @@ public class edit_delete_post extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_delete_post);
 
-        //methods below used to get current user_model ID from the Firebase Authentication system
+        //methods below used to get current user ID from the Firebase Authentication system
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
 
-        //used to get position of specific post_model that a user_model has selected to edit/delete
+        //used to get position of specific post that a user has selected to edit/delete
         PostKey = getIntent().getExtras().get("PostKey").toString();
 
         /*Referencing database variable to Firebase Realtime Database child "Users Posts" which will contain all the information needed for the
-        specific post_model that the user_model has selected to either edit or delete*/
+        specific post that the user has selected to either edit or delete*/
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts").child(PostKey);
 
         //Referencing Java to XML variables in edit_delete_post.xml//code below commented out as unable to get image storage and download functionality working
@@ -79,11 +79,11 @@ public class edit_delete_post extends AppCompatActivity {
         deleteButton = findViewById(R.id.deletePostButton);
 
         /*Edit and Delete buttons set to invisible initially so that
-         only those posted the post_model originally can edit or delete it*/
+         only those posted the post originally can edit or delete it*/
         editButton.setVisibility(View.INVISIBLE);
         deleteButton.setVisibility(View.INVISIBLE);
 
-        //method to retrieve data of post_model that user_model that has selected to edit or delete
+        //method to retrieve data of post that user that has selected to edit or delete
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot){
@@ -101,8 +101,8 @@ public class edit_delete_post extends AppCompatActivity {
                     editPostContent.setText(post);
                     editPostCategory.setText(category);
 
-                    /* method to check if the currentUserID equals the UserID of the post_model.
-                    Then sets buttons to visible to allow user_model to edit or delete post_model*/
+                    /* method to check if the currentUserID equals the UserID of the post.
+                    Then sets buttons to visible to allow user to edit or delete post*/
                     if(currentUserID.equals(userID))
                     {
                         editButton.setVisibility(View.VISIBLE);
@@ -128,9 +128,9 @@ public class edit_delete_post extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //delete post_model from database method
+                //delete post from database method
                 databaseReference.removeValue();
-                //once OnClick method is completed, user_model will be taken back to the content_screen activity screen
+                //once OnClick method is completed, user will be taken back to the content_screen activity screen
                 Intent deletePostIntent = new Intent(edit_delete_post.this, content_screen.class);
                 deletePostIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(deletePostIntent);
@@ -141,7 +141,7 @@ public class edit_delete_post extends AppCompatActivity {
 
     private void editPost(String post)
     {
-        //Alert dialog box appears when user_model selects edit button to allow user_model to edit their post_model
+        //Alert dialog box appears when user selects edit button to allow user to edit their post
         AlertDialog.Builder builder = new AlertDialog.Builder(edit_delete_post.this);
         //Referencing Java to XML variables in edit_delete_post_dialog_post_dialog.xml
         View mView = getLayoutInflater().inflate(R.layout.edit_delete_post_dialog, null);
@@ -155,19 +155,19 @@ public class edit_delete_post extends AppCompatActivity {
         editSpinner.setAdapter(adapter);
         // Get the layout inflater
 
-        //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
+        //code below used to create date attribute in referenced child(randomly created when post to database is made)
         //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
         Calendar calendarDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
         final String date = currentDate.format(calendarDate.getTime());
 
-        //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
+        //code below used to create date attribute in referenced child(randomly created when post to database is made)
         //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
         Calendar calendarTime = Calendar.getInstance();
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
         final String time = currentTime.format(calendarTime.getTime());
 
-        //onClickListener method called when user_model selects "Update" to send data to the Firebase Realtime database
+        //onClickListener method called when user selects "Update" to send data to the Firebase Realtime database
         //method to update image has not included due to complexity
         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             @Override
@@ -179,7 +179,7 @@ public class edit_delete_post extends AppCompatActivity {
                 Toast.makeText(edit_delete_post.this, "Post Updated", Toast.LENGTH_SHORT).show();
             }
         });
-        //onClickListener method called when user_model selects "Cancel" to close the dialog box
+        //onClickListener method called when user selects "Cancel" to close the dialog box
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

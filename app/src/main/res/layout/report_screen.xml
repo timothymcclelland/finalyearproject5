@@ -38,7 +38,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
-            <!-- Instructions for user_model regarding resetting of their password -->
+            <!-- Instructions for user regarding resetting of their password -->
             <TextView
                 android:id="@+id/report_instruction"
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:id="@+id/report_reason_spinner">
             </Spinner>
 
-            <!-- EditText for user_model to enter report information-->
+            <!-- EditText for user to enter report information-->
             <EditText
                 android:id="@+id/editTextReportInformation"
                 android:layout_width="match_parent"

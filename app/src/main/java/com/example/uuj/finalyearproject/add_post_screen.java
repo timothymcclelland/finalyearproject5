@@ -62,14 +62,14 @@ public class add_post_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_post_screen);
 
-        //methods below used to get current user_model ID from the Firebase Authentication system
+        //methods below used to get current user ID from the Firebase Authentication system
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
 
         //code below commented as unable to get image storage functionality working
         //add_image = findViewById(R.id.add_image);
 
-        //Spinner used to select category of post_model
+        //Spinner used to select category of post
         spinner = findViewById(R.id.category_spinner);
         //spinner uses category array specified in strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category_array, android.R.layout.simple_spinner_dropdown_item);
@@ -81,7 +81,7 @@ public class add_post_screen extends AppCompatActivity {
         addPost = findViewById(R.id.postEditText);
         buttonPost = findViewById(R.id.postButton);
 
-        /*Referencing database variable to Firebase Realtime Database child "Users Posts" which will contain all user_model's posts*/
+        /*Referencing database variable to Firebase Realtime Database child "Users Posts" which will contain all user's posts*/
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users Posts");
 
         //storage reference commented as unable to get image storage functionality working
@@ -101,13 +101,13 @@ public class add_post_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
+                //code below used to create date attribute in referenced child(randomly created when post to database is made)
                 //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
                 Calendar calendarDate = Calendar.getInstance();
                 SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
                 date = currentDate.format(calendarDate.getTime());
 
-                //code below used to create date attribute in referenced child(randomly created when post_model to database is made)
+                //code below used to create date attribute in referenced child(randomly created when post to database is made)
                 //code below taken from https://www.youtube.com/watch?v=LBiii5baeas&list=PLxefhmF0pcPnTQ2oyMffo6QbWtztXu1W_&index=21
                 Calendar calendarTime = Calendar.getInstance();
                 SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
@@ -152,15 +152,15 @@ public class add_post_screen extends AppCompatActivity {
                 });*/
 
                 /*Toast message that displays if post_content editText field is
-                 left empty when user_model tries to add a new post_model*/
+                 left empty when user tries to add a new post*/
                 if(TextUtils.isEmpty(post_content))
                 {
-                    Toast.makeText(add_post_screen.this, "Enter post_model text", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(add_post_screen.this, "Enter post text", Toast.LENGTH_SHORT).show();
                 }
                 //code below commented out below commented out as unable to get image storage and download functionality working
                 /*else if (ImageUri == null)
                 {
-                    Toast.makeText(add_post_screen.this, "Please select a post_model image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(add_post_screen.this, "Please select a post image", Toast.LENGTH_SHORT).show();
                 }*/
                 else{
                     //used https://www.youtube.com/watch?v=tOn5HsQPhUY as basis of how I should send my data to my Firebase database
@@ -168,7 +168,7 @@ public class add_post_screen extends AppCompatActivity {
                     DatabaseReference newPost = databaseReference.push();
 
                     //Creating children in referenced Firebase database child and set the value that will appear in the database
-                    newPost.child("post_model").setValue(post_content);
+                    newPost.child("post").setValue(post_content);
                     newPost.child("category").setValue(categorySelected);
                     newPost.child("time").setValue(time);
                     newPost.child("date").setValue(date);
@@ -176,7 +176,7 @@ public class add_post_screen extends AppCompatActivity {
                     //newPost.child("image").setValue(downloadURL);
                     newPost.child("uid").setValue(currentUserID);
 
-                    //once OnClick method is completed, user_model will be taken back to the content_screen activity screen
+                    //once OnClick method is completed, user will be taken back to the content_screen activity screen
                     startActivity(new Intent(add_post_screen.this, content_screen.class));
                 }
             }

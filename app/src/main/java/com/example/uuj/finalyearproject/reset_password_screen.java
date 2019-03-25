@@ -48,25 +48,25 @@ public class reset_password_screen extends AppCompatActivity {
                 //converts EditText to string
                 String email = edtEmail.getText().toString().trim();
 
-                //checks if EditText is empty and displays a message if it is to make user_model aware
+                //checks if EditText is empty and displays a message if it is to make user aware
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Email Required", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                //method to send reset_password_screen password link to user_model
+                //method to send reset_password_screen password link to user
                 mAuth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                //checks if email has been sent to user_model and displays a message to let the user_model know
+                                //checks if email has been sent to user and displays a message to let the user know
                                 if (task.isSuccessful()) {
                                     Toast.makeText(reset_password_screen.this, "Check email to reset_password_screen your password!", Toast.LENGTH_SHORT).show();
                                     finish();
-                                    //once task has completed successfully, user_model is sent back to log_in_screen activity screen to attempt to login with their new password
+                                    //once task has completed successfully, user is sent back to log_in_screen activity screen to attempt to login with their new password
                                     startActivity(new Intent(getApplicationContext(), log_in_screen.class));
                                 } else {
-                                    //message displayed if reset_password_screen email has not sent successfully. This may relate to wrong email being entered or user_model not being
+                                    //message displayed if reset_password_screen email has not sent successfully. This may relate to wrong email being entered or user not being
                                     // connected to the internet
                                     Toast.makeText(reset_password_screen.this, "Fail to send reset_password_screen password email!", Toast.LENGTH_SHORT).show();
                                 }

@@ -1,11 +1,11 @@
-<!--Layout of dialog box that appears when user_model selects to edit their post-->
+<!--Layout of dialog box that appears when user selects to edit their post-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <!--Text to instruct what user_model can do via the dialog box e.g. "Edit Post"-->
+    <!--Text to instruct what user can do via the dialog box e.g. "Edit Post"-->
     <TextView
         android:id="@+id/dialog_text"
         android:inputType="textEmailAddress"
@@ -18,7 +18,7 @@
         android:text="@string/dialog_text" />
 
     <!--Image Button commented out as unable to get image storage and download functionality working-->
-    <!--ImageView containing current post_model image
+    <!--ImageView containing current post image
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -27,8 +27,8 @@
         android:src="@mipmap/ic_add_image"
         android:adjustViewBounds="true"/>-->
 
-    <!--Edit Text containing current post_model chosen to edited.
-    user_model can then edit this to update their post_model-->
+    <!--Edit Text containing current post chosen to edited.
+    user can then edit this to update their post-->
     <EditText
         android:id="@+id/post_edit_text"
         android:layout_width="match_parent"

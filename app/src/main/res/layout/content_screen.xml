@@ -24,7 +24,7 @@
 
         </RelativeLayout>
 
-        <!--Search bar edit text space to allow user_model to search for posts based on the post_model category-->
+        <!--Search bar edit text space to allow user to search for posts based on the post category-->
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             android:layout_margin="5dp"
             android:inputType="text"/>
 
-        <!--recyclerview for user_model posts-->
+        <!--recyclerview for user posts-->
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -52,7 +52,7 @@
             android:layout_below="@id/searchButton">
         </android.support.v7.widget.RecyclerView>
 
-        <!--floating action button to add post_model -->
+        <!--floating action button to add post -->
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/float_post"
             android:layout_width="wrap_content"
