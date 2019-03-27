@@ -1,52 +1,52 @@
 <!--Layout of dialog box that appears when user selects to edit their post-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+android:orientation="vertical"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content">
 
-    <!--Text to instruct what user can do via the dialog box e.g. "Edit Post"-->
-    <TextView
-        android:id="@+id/dialog_text"
-        android:inputType="textEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/dialog_text" />
+<!--Text to instruct what user can do via the dialog box e.g. "Edit Post"-->
+<TextView
+    android:id="@+id/dialog_text"
+    android:inputType="textEmailAddress"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="4dp"
+    android:text="@string/dialog_text" />
 
-    <!--Image Button commented out as unable to get image storage and download functionality working-->
-    <!--ImageView containing current post image
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/edit_delete_post_image"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_add_image"
-        android:adjustViewBounds="true"/>-->
+<!--Image Button commented out as unable to get image storage and download functionality working-->
+<!--ImageView containing current post image
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:id="@+id/edit_delete_post_image"
+    android:scaleType="centerCrop"
+    android:src="@mipmap/ic_add_image"
+    android:adjustViewBounds="true"/>-->
 
-    <!--Edit Text containing current post chosen to edited.
-    user can then edit this to update their post-->
-    <EditText
-        android:id="@+id/post_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="@string/dialog_post_hint" />
-    
-    <!--Spinner uses category_array string resource.
-    Same spinner used in add_post_screen-->
-    <Spinner
-        android:id="@+id/post_edit_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="16dp" />
+<!--Edit Text containing current post chosen to edited.
+user can then edit this to update their post-->
+<EditText
+    android:id="@+id/post_edit_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="4dp"
+    android:hint="@string/dialog_post_hint" />
+
+<!--Spinner uses category_array string resource.
+Same spinner used in add_post_screen-->
+<Spinner
+    android:id="@+id/post_edit_category"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="16dp" />
 </LinearLayout>

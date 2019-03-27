@@ -43,7 +43,7 @@ public class register_screen extends AppCompatActivity {
         //reference to Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
 
-        //register_screen button runs RegisterUser method
+        //register button runs RegisterUser method
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +95,7 @@ public class register_screen extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(), content_screen.class));
                                 } else {
                                     //user unsuccessful in registering, message displayed
-                                    Toast.makeText(register_screen.this, "Unable to register_screen, please try again",
+                                    Toast.makeText(register_screen.this, "Unable to register, please try again",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {

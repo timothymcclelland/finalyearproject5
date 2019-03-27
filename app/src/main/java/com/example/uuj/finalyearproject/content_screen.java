@@ -122,7 +122,7 @@ public class content_screen extends AppCompatActivity {
         searchButton = findViewById(R.id.searchButton);
         searchInputText = findViewById(R.id.searchEditText);
 
-        /*sort the posts in the content_screen screen in ascending order by reversing the layout and setting the stack of the contents to
+        /*sort the posts in the content screen in ascending order by reversing the layout and setting the stack of the contents to
         start from the end*/
         if(mSorting.equals("Ascending")){
             mLayoutManager = new LinearLayoutManager(this);
@@ -137,7 +137,7 @@ public class content_screen extends AppCompatActivity {
         }
 
         /*assigning java RecyclerView instance to xml item and setting to fixed size so
-        that width or height does not change based on the content_screen in it
+        that width or height does not change based on the content in it
          */
         viewRecycler = findViewById(R.id.recyclerView);
         viewRecycler.setHasFixedSize(true);
@@ -156,7 +156,7 @@ public class content_screen extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Floating action button reference
-        /*Once user has clicked the postButton and input their data in the add_post_screen screen, this data will be displayed in the content_screen screen by
+        /*Once user has clicked the postButton and input their data in the add_post_screen screen, this data will be displayed in the content screen by
         calling DisplayPosts method*/
         FloatingActionButton postButton = findViewById(R.id.float_post);
         postButton.setOnClickListener(new View.OnClickListener() {
@@ -216,7 +216,7 @@ public class content_screen extends AppCompatActivity {
                 //gets position of post user is interacting with from firebase database
                 final String PostKey = getRef(position).getKey();
 
-                //gets and displays the relevant data within the reyclerview item from model class that links to firebase database content_screen
+                //gets and displays the relevant data within the reyclerview item from model class that links to firebase database content
                 holder.post_Text.setText(model.getPost());
                 holder.category_Text.setText(model.getCategory());
                 holder.date_Text.setText(model.getDate());
@@ -468,7 +468,7 @@ public class content_screen extends AppCompatActivity {
         finish();
     }
 
-    //sort content_screen based on date in ascending or descending order
+    //sort content based on date in ascending or descending order
     //followed youtube tutorial https://www.youtube.com/watch?v=fmkjH7tIyao for sorting posts on in recyclerview on content_screen
     public void sort(){
         String[] sortOptions = {"Ascending", "Descending"};

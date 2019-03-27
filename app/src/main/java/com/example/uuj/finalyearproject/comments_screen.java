@@ -72,7 +72,7 @@ public class comments_screen extends AppCompatActivity {
         /*assigning java RecyclerView instance to xml item and setting to fixed size so
         that width or height does not change based on the content_screen in it and setting the stack of the contents to
         start from the end
-        Also sort the comments in the comments_screen screen in ascending order by reversing the layout
+        Also sort the comments in the comments screen in ascending order by reversing the layout
          */
         CommentsRecyclerView = findViewById(R.id.commentRecyclerView);
         CommentsRecyclerView.setHasFixedSize(true);

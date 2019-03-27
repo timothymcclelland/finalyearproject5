@@ -77,7 +77,7 @@ public class add_post_screen extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        //Referencing Java to XML variables in add_post_screen.xmleen.xml
+        //Referencing Java to XML variables in add_post_screen.xml
         addPost = findViewById(R.id.postEditText);
         buttonPost = findViewById(R.id.postButton);
 
